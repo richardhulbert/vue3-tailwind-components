@@ -1,0 +1,98 @@
+<script setup>
+import {computed, ref} from "vue";
+import {faker} from '@faker-js/faker';
+import {TwTable,TwButton} from "./components/";
+import TwPaginator from "@/components/paginator/TwPaginator.vue";
+
+
+const numOfProducts = ref(20)
+const products = ref([]);
+
+let records = ref([])
+let pageSize = ref(10)
+let currentPage = ref(1)
+
+let numOfPages = computed(()=>{
+ return  Math.ceil(records.value.length/pageSize.value)
+})
+
+
+const headings = [
+
+
+    {
+      name: 'Product Name',
+      real: 'name'
+    },
+    {
+    name: 'Product Code',
+    real: 'code'
+  },
+    {
+      name: 'Product link',
+      real: 'link'
+    },
+]
+
+
+function paginate(page){
+  let start = (page-1)*pageSize.value
+  currentPage.value=page
+  products.value = records.value.slice(start,pageSize.value+start)
+}
+
+function createProducts() {
+
+  for (let i = 0; i < numOfProducts.value; i++) {
+    let product = {
+      code: faker.random.alpha(10),
+      name: faker.name.firstName(),
+      link: faker.internet.url()
+    }
+    records.value.push(product)
+  }
+  products.value = records.value.slice(0,pageSize.value)
+}
+
+function clearProducts(){
+  records.value=[];
+  products.value=[];
+
+}
+
+
+
+</script>
+<template>
+  <div class="container">
+    <h1 class="text-3xl p-3">Welcome to the Vue tailwind component project</h1>
+  <div class="m-4 flex">
+    <div class="flex-col mx-3">
+      <label class=" text-gray-400 text" for="productCount">Number of product to create</label>
+      <input id="productCount" class="border p-1 ml-3" type="number" v-model="numOfProducts">
+      <label class=" ml-2 text-gray-400 text" for="pageSize">Page size</label>
+      <input id="pageSize" class="border p-1 ml-3" type="number" v-model="pageSize">
+    </div>
+    <div class="flex-col">
+      <tw-button @click="createProducts(0)"  color="secondary" >Create</tw-button>
+    </div>
+    <div class="flex-col">
+      <tw-button @click="clearProducts" color="primary" outline class="ml-3 ">Clear</tw-button>
+    </div>
+  </div>
+    <div class="  flex-row ml-3 text-gray-500">{{records.length}} Records</div>
+    <div class=" ml-2  w-full">
+      <tw-table hover :headings="headings" :items="products">
+        <template v-slot:link="row">
+          <a :href="row.item.link">{{row.item.link}}</a>
+        </template>
+      </tw-table>
+      <tw-paginator @paginate="paginate" :current-page="currentPage" :num-of-pages="numOfPages" class="mt-2"></tw-paginator>
+    </div>
+  </div>
+
+</template>
+
+<style scoped>
+
+</style>
