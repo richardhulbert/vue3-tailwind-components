@@ -2,14 +2,14 @@
   <table  class="border-collapse table-auto w-full text-sm">
     <thead :class="headingClass" class=" text-gray-800">
     <tr>
-      <th class="p-2 font-normal" v-for="h in headings">{{ h.name }}</th>
+      <th class="p-2 font-normal" v-for="h in headings">{{ h.label }}</th>
     </tr>
     </thead>
     <tbody class="text-gray-600">
     <tr v-for="(item,index) in items" :key="index" :class="rowStripe(index)" >
       <td :class="boarderClass" class=" p-2" v-for="cell in headings">
-        <slot :name="cell.real" :item="item">
-          {{ item[cell.real] }}
+        <slot :name="cell.field" :item="item">
+          {{ item[cell.field] }}
         </slot>
       </td>
     </tr>
@@ -31,42 +31,46 @@ export default {
       type: Boolean,
       default: true
     },
-    headingColor: {
-      type: String,
-      default: "bg-slate-200"
-    },
-    borderColor: {
-      type: String,
-      default: "border-slate-200"
-    },
-    alternateRowColor: {
-      type: String,
-      default: "bg-slate-100"
+    striped: {
+      type: Boolean,
+      default: false
     },
     hover: {
       type: Boolean,
-      default: true
+      default: false
     },
-    rowHoverColor: {
+    headingColor: {
       type: String,
-      default: "hover:bg-slate-50"
+      default: "slate"
+    },
+    borderColor: {
+      type: String,
+      default: "slate"
+    },
+    stripeColor: {
+      type: String,
+      default: "slate"
+    },
+
+    hoverColor: {
+      type: String,
+      default: "slate"
     },
 
   },
   computed: {
     headingClass() {
-      return this.headingColor
+      return 'bg-'+this.headingColor+'-200'
     },
     boarderClass() {
-      return this.border ? 'border ' + this.borderColor : '';
+      return this.border ? 'border border-' + this.borderColor+'-200' : '';
     },
-
-
   },
   methods: {
     rowStripe(ndx) {
-      let h = this.hover ?' '+this.rowHoverColor:''
-      return ndx % 2 !== 0 ? this.alternateRowColor+h: ''+h;
+      let h = this.hover ?' hover:bg-'+this.hoverColor+'-100':''
+      if(this.striped) return ndx % 2 !== 0 ? 'bg-'+this.stripeColor+'-100 '+h: ''+h;
+      return h
     }
   },
 }

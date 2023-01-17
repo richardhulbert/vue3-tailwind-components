@@ -1,9 +1,9 @@
 # vue3-tailwind-components
 This is a simple set of Vue 3, Tailwind based components. At the moment these consist of:
-* Button
-* Table
-* Paginator
-* Search box
+* [Button](./src/components/button/README.md)
+* [Table](./src/components/table/README.md)
+* [Paginator](./src/components/paginator/README.md)
+
 
 
 I will be extending them as I need more Vue 3 Tailwind components. To use them you can 

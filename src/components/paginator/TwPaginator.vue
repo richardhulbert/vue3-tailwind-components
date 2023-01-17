@@ -2,19 +2,19 @@
 
   <nav aria-label="Pagination" >
     <ul class="inline-flex -space-x-px">
-      <tw-pagintor-button @click="decrement" :disabled="currentPage<=1" button-position="first"  ><slot name="first" >Previous</slot></tw-pagintor-button>
-      <tw-pagintor-button v-for="index in numOfPages" :key="index" @click="paginate(index)" :selected="index===currentPage" >{{index}}</tw-pagintor-button>
-      <tw-pagintor-button @click="increment" :disabled="currentPage>=numOfPages" button-position="last"  ><slot name="last" >Next</slot></tw-pagintor-button>
+      <tw-paginator-button :color="color" @click="decrement" :disabled="currentPage<=1" button-position="first"  ><slot name="first" >Previous</slot></tw-paginator-button>
+      <tw-paginator-button :color="color" v-for="index in numOfPages" :key="index" @click="paginate(index)" :selected="index===currentPage" >{{index}}</tw-paginator-button>
+      <tw-paginator-button :color="color" @click="increment" :disabled="currentPage>=numOfPages" button-position="last"  ><slot name="last" >Next</slot></tw-paginator-button>
     </ul>
   </nav>
 
 </template>
 
 <script>
-import TwPagintorButton from "@/components/paginator/TwPagintorButton.vue";
+import TwPaginatorButton from "@/components/paginator/TwPaginatorButton.vue";
 
 export default {
-  components: {TwPagintorButton},
+  components: {TwPaginatorButton: TwPaginatorButton},
 
   props: {
     numOfPages: {
@@ -24,8 +24,11 @@ export default {
     currentPage: {
       type: Number,
       default: 0
-    }
-
+    },
+    color: {
+      type: String,
+      default: 'slate'
+    },
 
   },
   methods: {
