@@ -3,6 +3,7 @@ This is a simple set of Vue 3, Tailwind based components. At the moment these co
 * [Button](./src/components/button/README.md)
 * [Table](./src/components/table/README.md)
 * [Paginator](./src/components/paginator/README.md)
+* [Switch](./src/components/switch/README.md)
 
 
 
@@ -58,13 +59,11 @@ theme: {
 
 ```
 
-You can then use do something like this 
+You can then do something like this: 
 ```vue
 <tw-button @click="clearProducts" color="primary" ouutline class="ml-3 ">Clear</tw-button>`
 ```
 This is useful in the situation where you want to change the colour of a lot of buttons in one go.
-
-
 
 
 ## Running this project locally

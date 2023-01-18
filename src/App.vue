@@ -1,9 +1,8 @@
 <script setup>
 import {computed, ref} from "vue";
 import {faker} from '@faker-js/faker';
-import {TwTable,TwButton} from "./components/";
-import TwPaginator from "@/components/paginator/TwPaginator.vue";
-import TwSwitch from "@/components/switch/TwSwitch.vue";
+import {TwTable,TwButton,TwPaginator,TwSwitch} from "./components/";
+
 
 
 const numOfProducts = ref(20)
@@ -13,6 +12,7 @@ let records = ref([])
 let pageSize = ref(10)
 let currentPage = ref(1)
 let striped = ref(false)
+let hover = ref(false)
 
 let numOfPages = computed(()=>{
  return  Math.ceil(records.value.length/pageSize.value)
@@ -88,14 +88,13 @@ function clearProducts(){
       <tw-button @click="clearProducts" color="primary" outline class="ml-3 ">Clear</tw-button>
     </div>
   </div>
-    <div class="flex-row">
-<!--      <div class="flex-col">-->
-<!--        <tw-switch >Striped</tw-switch>-->
-<!--      </div>-->
+    <div class="flex p-3 justify-start bg-slate-100">
+      <tw-switch v-model="striped">Striped?</tw-switch>
+      <tw-switch v-model="hover">Hover?</tw-switch>
     </div>
-    <div class="  flex-row ml-3 text-gray-500">{{records.length}} Records</div>
+    <div class=" flex-row ml-3 text-gray-500">{{records.length}} Records</div>
     <div class=" ml-2  w-full">
-      <tw-table  hover hover-color="amber" :headings="headings" :items="products">
+      <tw-table  :hover="hover" hover-color="amber" :striped="striped" :headings="headings" :items="products">
         <template v-slot:link="row">
           <a :href="row.item.link">{{row.item.link}}</a>
         </template>

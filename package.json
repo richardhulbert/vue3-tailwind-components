@@ -1,14 +1,24 @@
 {
-  "name": "@richardhulbert/vue3-tailwind-components",
+  "name": "vue3-tailwind-components",
   "version": "0.0.1",
-  "private": false,
+  "description": "A library of Vue 3 components that use Tailwind",
+  "license": "MIT",
+  "repository": "richardhulbert/vue3-tailwind-components",
+  "files": ["dist"],
+  "main": "./dist/vue3-tailwind-components.umd.js",
+  "module": "./dist/vue3-tailwind-componentses.js",
+  "exports": {
+    ".": {
+      "import": "./dist/vue3-tailwind-components.js",
+      "require": "./dist/vue3-tailwind-components.umd.js"
+    }
+  },
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview"
   },
   "dependencies": {
-    "@mertefecerit/vuetable": "file:../client-side-vue-datatable",
     "vue": "^3.2.45"
   },
   "devDependencies": {
