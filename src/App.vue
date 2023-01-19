@@ -1,7 +1,7 @@
 <script setup>
 import {computed, ref} from "vue";
 import {faker} from '@faker-js/faker';
-import {TwTable,TwButton,TwPaginator,TwSwitch} from "./components/";
+import {TwTable,TwButton,TwPaginator,TwSwitch,TwIcon} from "./components/";
 
 
 
@@ -68,8 +68,6 @@ function clearProducts(){
 
 }
 
-
-
 </script>
 <template>
   <div class="container">
@@ -82,10 +80,10 @@ function clearProducts(){
       <input id="pageSize" class="border p-1 ml-3" type="number" v-model="pageSize">
     </div>
     <div class="flex-col">
-      <tw-button @click="createProducts(0)"  color="secondary" >Create</tw-button>
+      <tw-button @click="createProducts(0)"  color="secondary" ><tw-icon  icon="plus" class="mr-2" ></tw-icon>Create</tw-button>
     </div>
     <div class="flex-col">
-      <tw-button @click="clearProducts" color="primary" outline class="ml-3 ">Clear</tw-button>
+      <tw-button @click="clearProducts" color="primary" outline class="ml-3 "><tw-icon icon="trash" class="mr-2"></tw-icon>Clear</tw-button>
     </div>
   </div>
     <div class="flex p-3 justify-start bg-slate-100">

@@ -4,7 +4,9 @@
   "description": "A library of Vue 3 components that use Tailwind",
   "license": "MIT",
   "repository": "richardhulbert/vue3-tailwind-components",
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "main": "./dist/vue3-tailwind-components.umd.js",
   "module": "./dist/vue3-tailwind-componentses.js",
   "exports": {
@@ -19,6 +21,11 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^6.2.1",
+    "@fortawesome/free-brands-svg-icons": "^6.2.1",
+    "@fortawesome/free-regular-svg-icons": "^6.2.1",
+    "@fortawesome/free-solid-svg-icons": "^6.2.1",
+    "@fortawesome/vue-fontawesome": "^3.0.2",
     "vue": "^3.2.45"
   },
   "devDependencies": {

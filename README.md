@@ -4,6 +4,7 @@ This is a simple set of Vue 3, Tailwind based components. At the moment these co
 * [Table](./src/components/table/README.md)
 * [Paginator](./src/components/paginator/README.md)
 * [Switch](./src/components/switch/README.md)
+* [Icons](./src/components/icons/README.md)
 
 
 
