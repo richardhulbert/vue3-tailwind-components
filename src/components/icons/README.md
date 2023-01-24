@@ -16,7 +16,7 @@ This is the equivalent of doing this in HTML
 You can further style the icon in all the usual Tailwind ways:
 
 ```vue
-<tw-icon icon="user" class="bg-slate-200 ml-2"></tw-icon>
+<tw-icon icon="user" class="bg-primary-200 ml-2"></tw-icon>
 ```
 
 Additionally, you can add animations to the icon:

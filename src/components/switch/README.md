@@ -10,5 +10,5 @@ This component has 3 settable properties:
 | Property |  Type   | Required | default | notes                                                           |
 |:---------|:-------:|:--------:|:-------:|:----------------------------------------------------------------|
 | v-model  | Boolean |   yes    |  false  | The base color using a color defined in the base Tailwind theme |
-| color    | Boolean |    no    | 'slate' | Whether the button has an outline style                         |
+| color    | Boolean |    no    | 'primary' | Whether the button has an outline style                         |
 

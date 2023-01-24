@@ -7,23 +7,27 @@ module.exports = {
   ],
   safelist: [
     {
-      pattern: /bg-(\w+)-(\d00)/,
+      pattern: /bg-(primary|secondary|warning|success|danger|info)-(\d00)/,
       variants:  ['hover', 'focus'],
     },
     {
-      pattern: /border-(\w+)-(\d00)/,
+      pattern: /border-(primary|secondary|warning|success|danger|info)-(\d00)/,
     },
     {
-      pattern: /text-(\w+)-(\d00)/,
+      pattern: /text-(primary|secondary|warning|success|danger|info)-(\d00)/,
     },
   ],
   theme: {
     extend: {
       colors:{
-        primary:colors.cyan,
-        secondary:colors.lime
+        primary:colors.slate,
+        secondary:colors.lime,
+        warning:colors.amber,
+        success:colors.green,
+        danger:colors.red,
+        info:colors.indigo
       }
     },
   },
-  plugins: [],
+  plugins: [require("tailwindcss-animate")],
 }

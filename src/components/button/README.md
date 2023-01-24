@@ -9,7 +9,8 @@ This component has 3 settable properties:
 
 | Property |  Type   | Required | default | notes                                                           |
 |:---------|:-------:|:--------:|:-------:|:----------------------------------------------------------------|
-| color    | String  |    no    | `slate` | The base color using a color defined in the base Tailwind theme |
+| color    | String  |    no    | `primary` | The base color using a color defined in the base Tailwind theme |
 | outline  | Boolean |    no    |  false  | Whether the button has an outline style                         |
 | corners  | Boolean |    no    |  false  | Whether you want rectangular buttons                            |
+| size     | String  |    no    |  'md'   | The size of the button - sm , md or lg                          |
 

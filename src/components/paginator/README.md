@@ -11,7 +11,7 @@ a `paginate` event with the new page number each time a pagination link is click
 |:-------------|:------:|:--------:|:--------:|:--------------------------------------------------------------------------------------------|
 | current-page | Number |   true   |    0     | The current page number as displayed                                                        |
 | num-of-pages | Number |   true   |    0     | The number of pages to display                                                              |
-| color        | String |  false   |  slate   | The color scheme to be used for the display. Remember that you are setting a Tailwind class |
+| color        | String |  false   |  primary   | The color scheme to be used for the display. Remember that you are setting a Tailwind class |
 
 ## Events
 

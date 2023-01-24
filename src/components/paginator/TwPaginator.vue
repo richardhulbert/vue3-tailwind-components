@@ -27,7 +27,7 @@ export default {
     },
     color: {
       type: String,
-      default: 'slate'
+      default: 'primary'
     },
 
   },

@@ -14,7 +14,7 @@ export default {
     },
     color: {
       type: String,
-      default: 'slate'
+      default: 'primary'
     },
     selected: {
       type: Boolean,

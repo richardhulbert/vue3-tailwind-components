@@ -67,6 +67,6 @@ Here we are processing the `link` column (field) such that it is a link (rather 
 | items        |  Array  |   yes    |   []    | This is the data that will be rendered in your table            |
 | striped      | Boolean |    no    |  false  | Whether the table has striped rows                              |
 | hover        | Boolean |    no    |  false  | Whether rows highlight when you hover over them                 |
-| header-color | String  |    no    | `slate` | The base color using a color defined in the base Tailwind theme |
-| stripe-color | String  |    no    | `slate` | The color of the striped row if `striped` is set to true        |
-| hover-color  | String  |    no    | `slate` | The color of the hovered row                                    |
+| header-color | String  |    no    | `primary` | The base color using a color defined in the base Tailwind theme |
+| stripe-color | String  |    no    | `primary` | The color of the striped row if `striped` is set to true        |
+| hover-color  | String  |    no    | `primary` | The color of the hovered row                                    |

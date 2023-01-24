@@ -41,20 +41,20 @@ export default {
     },
     headingColor: {
       type: String,
-      default: "slate"
+      default: "primary"
     },
     borderColor: {
       type: String,
-      default: "slate"
+      default: "primary"
     },
     stripeColor: {
       type: String,
-      default: "slate"
+      default: "primary"
     },
 
     hoverColor: {
       type: String,
-      default: "slate"
+      default: "primary"
     },
 
   },
