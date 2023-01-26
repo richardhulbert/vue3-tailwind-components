@@ -1,7 +1,7 @@
 <script setup>
 import {computed, ref} from "vue";
 import {faker} from '@faker-js/faker';
-import {TwTable, TwButton, TwPaginator, TwSwitch, TwIcon,TwModal} from "./components/";
+import {TwTable, TwButton, TwPaginator, TwSwitch, TwIcon,TwModal,TwSelect} from "./components/";
 
 
 
@@ -14,18 +14,19 @@ let currentPage = ref(1)
 let striped = ref(false)
 let hover = ref(false)
 let modalShow = ref(false)
+let accentColor = ref('')
 
 let numOfPages = computed(() => {
   return Math.ceil(records.value.length / pageSize.value)
 })
 
 const colors = [
-  'primary',
-  'secondary',
-  'warning',
-  'success',
-  'danger',
-  'info'
+  {label:'Primary',value:'primary'},
+  {label:'Secondary',value:'secondary'},
+  {label:'Warning',value:'warning'},
+  {label:'Success',value:'success'},
+  {label:'Danger',value:'danger'},
+  {label:'Info',value:'info'}
 ]
 
 
@@ -95,25 +96,26 @@ function clearProducts() {
       </div>
     </div>
     <div class="flex p-3 justify-start bg-slate-100">
-      <tw-switch v-model="striped" size="md">Striped?</tw-switch>
-      <tw-switch v-model="hover">Hover?</tw-switch>
+      <tw-switch :color="accentColor" v-model="striped" size="md">Striped?</tw-switch>
+      <tw-switch :color="accentColor" v-model="hover">Hover?</tw-switch>
+      <tw-select label="Select a color" class="w-60" v-model="accentColor" :color="accentColor" :items="colors"></tw-select>
     </div>
     <div class=" flex-row ml-3 text-slate-500">{{ records.length }} Records</div>
     <div class=" ml-2  w-full">
-      <tw-table :hover="hover" hover-color="secondary" :striped="striped" :headings="headings" :items="products">
+      <tw-table :hover="hover" :heading-color="accentColor" :stripe-color="accentColor" :border-color="accentColor" :hover-color="accentColor" :striped="striped" :headings="headings" :items="products">
         <template v-slot:link="row">
           <a :href="row.item.link">{{ row.item.link }}</a>
         </template>
       </tw-table>
-      <tw-paginator @paginate="paginate" :current-page="currentPage" :num-of-pages="numOfPages"
+      <tw-paginator :color="accentColor" @paginate="paginate" :current-page="currentPage" :num-of-pages="numOfPages"
                     class="mt-2"></tw-paginator>
     </div>
     <section class=" p-4">
       <h1 class="my-2 text-2xl">Modal</h1>
       <div>
-        <tw-button @click="modalShow = true" outline>Show modal</tw-button>
+        <tw-button :color="accentColor" @click="modalShow = true" outline>Show modal</tw-button>
       </div>
-      <tw-modal v-model="modalShow" >
+      <tw-modal :color="accentColor" v-model="modalShow" >
        This is a modal that has a simple message
       </tw-modal>
     </section>

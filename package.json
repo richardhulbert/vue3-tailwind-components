@@ -1,6 +1,6 @@
 {
   "name": "vue3-tailwind-components",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A library of Vue 3 components that use Tailwind",
   "license": "MIT",
   "repository": "richardhulbert/vue3-tailwind-components",
@@ -26,6 +26,7 @@
     "@fortawesome/free-regular-svg-icons": "^6.2.1",
     "@fortawesome/free-solid-svg-icons": "^6.2.1",
     "@fortawesome/vue-fontawesome": "^3.0.2",
+    "lodash": "^4.17.21",
     "vue": "^3.2.45"
   },
   "devDependencies": {

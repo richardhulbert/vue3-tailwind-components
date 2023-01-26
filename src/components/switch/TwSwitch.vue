@@ -1,5 +1,5 @@
 <template>
-  <div class="flex cursor-pointer select-none items-center" @click="handleInput">
+  <div @keydown.enter="handleInput" tabindex="0"  class="flex cursor-pointer select-none items-center" @click="handleInput">
     <!--    this is needed so that tailwind doesnt strip these classes-->
     <div class="hidden h-3 w-3 h-7 w-7 h-5 w-5 w-10 w-14"></div>
     <div class="relative">
@@ -45,6 +45,9 @@ export default {
     handleInput() {
       this.checked = !this.checked
       this.$emit('update:modelValue', this.checked)
+    },
+    keyCheck(e){
+      console.log(e)
     }
   },
   watch: {

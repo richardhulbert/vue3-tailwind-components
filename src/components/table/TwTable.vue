@@ -68,7 +68,7 @@ export default {
   },
   methods: {
     rowStripe(ndx) {
-      let h = this.hover ?' hover:bg-'+this.hoverColor+'-100':''
+      let h = this.hover ?' hover:bg-'+this.hoverColor+'-300':''
       if(this.striped) return ndx % 2 !== 0 ? 'bg-'+this.stripeColor+'-100 '+h: ''+h;
       return h
     }

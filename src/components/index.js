@@ -4,5 +4,8 @@ export { default as TwPaginator} from './paginator/TwPaginator.vue'
 export { default as TwSwitch} from './switch/TwSwitch.vue'
 export { default as TwIcon} from './icons/TwIcon.vue'
 export {default as TwModal} from './modal/TwModal.vue'
+export {default as TwOption} from './select/TwOption.vue'
+export {default as TwSelect} from './select/TwSelect.vue'
+
 
 

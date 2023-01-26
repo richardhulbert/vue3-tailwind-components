@@ -109,7 +109,6 @@ export default {
   watch: {
     modelValue: {
       handler(neval) {
-        console.log('watching modelValue', neval)
         this.showing = neval
       },
       // force eager callback execution
