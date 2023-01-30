@@ -6,6 +6,8 @@ export { default as TwIcon} from './icons/TwIcon.vue'
 export {default as TwModal} from './modal/TwModal.vue'
 export {default as TwOption} from './select/TwOption.vue'
 export {default as TwSelect} from './select/TwSelect.vue'
+export {default as TwInput} from './input/TwInput.vue'
+
 
 
 

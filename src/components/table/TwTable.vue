@@ -6,7 +6,7 @@
     </tr>
     </thead>
     <tbody class="text-gray-600">
-    <tr v-for="(item,index) in items" :key="index" :class="rowStripe(index)" >
+    <tr v-for="(item,index) in items" :key="index" :class="rowClass(index)" class="transition-colors" >
       <td :class="boarderClass" class=" p-2" v-for="cell in headings">
         <slot :name="cell.field" :item="item">
           {{ item[cell.field] }}
@@ -67,7 +67,7 @@ export default {
     },
   },
   methods: {
-    rowStripe(ndx) {
+    rowClass(ndx) {
       let h = this.hover ?' hover:bg-'+this.hoverColor+'-300':''
       if(this.striped) return ndx % 2 !== 0 ? 'bg-'+this.stripeColor+'-100 '+h: ''+h;
       return h

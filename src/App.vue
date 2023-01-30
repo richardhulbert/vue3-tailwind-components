@@ -1,8 +1,7 @@
 <script setup>
 import {computed, ref} from "vue";
 import {faker} from '@faker-js/faker';
-import {TwTable, TwButton, TwPaginator, TwSwitch, TwIcon,TwModal,TwSelect} from "./components/";
-
+import {TwTable, TwButton, TwPaginator, TwSwitch, TwIcon, TwModal, TwSelect, TwInput} from "./components/";
 
 
 const numOfProducts = ref(20)
@@ -14,19 +13,24 @@ let currentPage = ref(1)
 let striped = ref(false)
 let hover = ref(false)
 let modalShow = ref(false)
-let accentColor = ref('')
+let accentColor = ref('primary')
+let inputVal = ref('hello')
+let inputError = ref('')
+let inputDisabled = ref(false)
+
+
 
 let numOfPages = computed(() => {
   return Math.ceil(records.value.length / pageSize.value)
 })
 
 const colors = [
-  {label:'Primary',value:'primary'},
-  {label:'Secondary',value:'secondary'},
-  {label:'Warning',value:'warning'},
-  {label:'Success',value:'success'},
-  {label:'Danger',value:'danger'},
-  {label:'Info',value:'info'}
+  {label: 'Primary', value: 'primary'},
+  {label: 'Secondary', value: 'secondary'},
+  {label: 'Warning', value: 'warning'},
+  {label: 'Success', value: 'success'},
+  {label: 'Danger', value: 'danger'},
+  {label: 'Info', value: 'info'}
 ]
 
 
@@ -89,20 +93,22 @@ function clearProducts() {
         </tw-button>
       </div>
       <div class="flex-col">
-        <tw-button @click="clearProducts" color="primary" outline class="ml-3 ">
+        <tw-button :disabled="records.length===0" @click="clearProducts" color="primary" outline class="ml-3 ">
           <tw-icon icon="trash" class="mr-2"></tw-icon>
           Clear
         </tw-button>
       </div>
     </div>
     <div class="flex p-3 justify-start bg-slate-100">
-      <tw-switch :color="accentColor" v-model="striped" size="md">Striped?</tw-switch>
-      <tw-switch :color="accentColor" v-model="hover">Hover?</tw-switch>
-      <tw-select label="Select a color" class="w-60" v-model="accentColor" :color="accentColor" :items="colors"></tw-select>
+      <tw-switch :disabled="records.length===0" :color="accentColor" v-model="striped" >Striped?</tw-switch>
+      <tw-switch :disabled="records.length===0" :color="accentColor" v-model="hover">Hover?</tw-switch>
+      <tw-select :disabled="records.length===0" label="Select a color" class="w-60" v-model="accentColor" :color="accentColor"
+                 :items="colors"></tw-select>
     </div>
     <div class=" flex-row ml-3 text-slate-500">{{ records.length }} Records</div>
     <div class=" ml-2  w-full">
-      <tw-table :hover="hover" :heading-color="accentColor" :stripe-color="accentColor" :border-color="accentColor" :hover-color="accentColor" :striped="striped" :headings="headings" :items="products">
+      <tw-table :hover="hover" :heading-color="accentColor" :stripe-color="accentColor" :border-color="accentColor"
+                :hover-color="accentColor" :striped="striped" :headings="headings" :items="products">
         <template v-slot:link="row">
           <a :href="row.item.link">{{ row.item.link }}</a>
         </template>
@@ -115,9 +121,25 @@ function clearProducts() {
       <div>
         <tw-button :color="accentColor" @click="modalShow = true" outline>Show modal</tw-button>
       </div>
-      <tw-modal :color="accentColor" v-model="modalShow" >
-       This is a modal that has a simple message
+      <tw-modal :color="accentColor" v-model="modalShow">
+        This is a modal that has a simple message
       </tw-modal>
+    </section>
+    <section class="p-3 ">
+      <hr>
+      <h1 class="my-4 text-2xl">Input</h1>
+      <div class="grid grid-cols-2 gap-4">
+        <div>
+
+          <tw-input type="search" :disabled="inputDisabled" icon="magnifying-glass" :error="inputError" :color="accentColor" description="This is a basic input box" class="w-1/2 my-2"
+                    form-name-and-id="text-input" v-model="inputVal">Test input</tw-input>
+        </div>
+        <div>
+          <div class="ml-1 text-sm text-slate-500">The value of the input is : <b>{{ inputVal }}</b></div>
+          <tw-switch  color="info" v-model="inputDisabled" size="sm">Disable input</tw-switch>
+          <tw-input placeholder="Add an error to the Test input" color="danger" v-model="inputError"> </tw-input>
+        </div>
+      </div>
     </section>
   </div>
 

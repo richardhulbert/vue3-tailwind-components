@@ -1,5 +1,5 @@
 <template>
-  <button :class="bgcolor" class=" transition-colors ease-in  font-light border"><slot></slot></button>
+  <button :disabled="disabled" :class="bgcolor" class=" transition-colors ease-in  font-light border disabled:cursor-not-allowed"><slot></slot></button>
 </template>
 
 <script>
@@ -16,6 +16,10 @@ export default {
     corners: {
       type: Boolean,
       default: false
+    },
+    disabled:{
+      type:Boolean,
+      default:false
     },
     size : {
       type:String,
@@ -38,10 +42,11 @@ export default {
       }
     },
     bgcolor() {
+      let op = this.disabled? ' opacity-50':''
       let cls = 'bg-'+this.color+'-500 hover:bg-'+this.color+'-700 text-white border-'+this.color+'-500'
       if(this.outline) cls = 'border-'+this.color+'-500 hover:bg-'+this.color+'-500 text-'+this.color+'-500 hover:text-white border'
       if(!this.corners) cls += ' rounded '
-      return cls + this.sizeClass
+      return cls + this.sizeClass +op
     }
   },
 

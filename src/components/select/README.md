@@ -23,11 +23,12 @@ the label of the select to the model
 ```
 ## Properties
 
-| Property         |  Type  | Required |  default  | notes                                                                               |
-|:-----------------|:------:|:--------:|:---------:|:------------------------------------------------------------------------------------|
-| v-model          | String |   yes    |    ''     | The value of the select                                                             |
-| items            | Array  |   yes    |    []     | The items that will be shown as options each items must contain a label and a value |
-| color            | String |    no    | 'primary' | The theme color of the select box and options                                       |
-| label            | String |    no    |    ''     | Text of the select button if no value has been set                                  |
-| form-name-and-id | String |    no    |    ''     | Sets the id and name of the hidden select (for use in forms)                        |
+| Property         |  Type   | Required |    default    | notes                                                                               |
+|:-----------------|:-------:|:--------:|:-------------:|:------------------------------------------------------------------------------------|
+| v-model          | String  |   yes    |      ''       | The value of the select                                                             |
+| items            |  Array  |   yes    |      []       | The items that will be shown as options each items must contain a label and a value |
+| color            | String  |    no    |   'primary'   | The theme color of the select box and options                                       |
+| label            | String  |    no    |      ''       | Text of the select button if no value has been set                                  |
+| disabled         | Boolean |    no    |     false     | The select is disabled when set to true                                             |
+| form-name-and-id | String  |    no    | random string | Sets the id and name of the hidden select (for use in forms)                        |
 

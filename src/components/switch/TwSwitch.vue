@@ -1,10 +1,10 @@
 <template>
-  <div @keydown.enter="handleInput" tabindex="0"  class="flex cursor-pointer select-none items-center" @click="handleInput">
+  <div @keydown.enter="handleInput" tabindex="0" :class="topClass" class="flex  select-none items-center" @click="handleInput">
     <!--    this is needed so that tailwind doesnt strip these classes-->
-    <div class="hidden h-3 w-3 h-7 w-7 h-5 w-5 w-10 w-14"></div>
+    <div class=" hidden h-3 w-3 w-6 h-7 w-7 h-5 w-5 w-10 w-14"></div>
     <div class="relative">
-      <input type="checkbox" class="sr-only " :value="checked"/>
-      <div :class="backClass" class=" rounded-full shadow-inner"></div>
+      <input :disabled="disabled" :id="formNameAndId" :name="formNameAndId" type="checkbox" class="sr-only " :value="checked"/>
+      <div :class="backClass" class="rounded-full shadow-inner"></div>
       <div :class="knobClass"
            class="dot border border-primary-200  absolute top-0  transition  rounded-full bg-white"></div>
     </div>
@@ -33,6 +33,14 @@ export default {
         // The value must match one of these strings
         return ['sm', 'md', 'lg'].includes(value)
       }
+    },
+    disabled:{
+      type:Boolean,
+      default:false
+    },
+    formNameAndId:{
+      type:String,
+      default:(Math.random() + 1).toString(36).substring(5)
     }
   },
   data() {
@@ -43,11 +51,11 @@ export default {
   methods: {
 
     handleInput() {
-      this.checked = !this.checked
-      this.$emit('update:modelValue', this.checked)
-    },
-    keyCheck(e){
-      console.log(e)
+      if(!this.disabled){
+        this.checked = !this.checked
+        this.$emit('update:modelValue', this.checked)
+      }
+
     }
   },
   watch: {
@@ -69,15 +77,20 @@ export default {
 
       }
     },
+    topClass(){
+      return this.disabled?'cursor-not-allowed': 'cursor-pointer'
+    },
     backClass() {
       let s = ' h-'+this.baseSize + ' w-'+(this.baseSize*2)
-      if (this.checked) return 'bg-' + this.color + '-500' + s
-      return 'bg-' + this.color + '-200'+s
+      let op = this.disabled ? ' opacity-50 ':''
+      if (this.checked) return 'bg-' + this.color + '-500' + s +op
+
+      return 'bg-' + this.color + '-300 '+s +op
     },
     knobClass() {
       let s = ' h-'+this.baseSize+ ' w-'+this.baseSize
-      if (this.checked) return 'translate-x-full'+s
-      return 'left-0'+s
+      if (this.checked) return 'translate-x-full '+s
+      return ' left-0 '+s
     },
     labelClass(){
       return 'text-'+this.color+'-500 text-'+this.size

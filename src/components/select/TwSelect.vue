@@ -3,8 +3,8 @@
     <select class="hidden" :name="formNameAndId" :id="formNameAndId" :value="calculatedValue">
       <option v-for="(item,index) in items" :key="index" :value="item.value">{{item.label}}</option>
     </select>
-    <button @click="toggleSelect" type="button"
-          :class="buttonClass"  class=" w-full flex gap-2 rounded-lg border bg-white px-4 py-2 text-center text-sm font-medium  shadow-sm transition-all focus:ring focus:ring-gray-100 disabled:cursor-not-allowed disabled:border-gray-100 disabled:bg-gray-50 disabled:text-gray-400">
+    <button :disabled="disabled" @click="toggleSelect" type="button"
+          :class="buttonClass"  class=" w-full flex gap-2 rounded-lg border bg-white px-4 py-2 text-center text-sm font-medium  shadow-sm transition-all  disabled:cursor-not-allowed ">
       <span class="text-left flex-1 ">{{ dLabel }}</span>
       <tw-icon :class="chevronClass" class="transition-transform" icon="chevron-down"></tw-icon>
     </button>
@@ -37,6 +37,10 @@ export default {
       type: String,
       default: ''
     },
+    disabled: {
+      type: Boolean,
+      default: false
+    },
     color: {
       type: String,
       default: "primary"
@@ -47,7 +51,7 @@ export default {
     },
     formNameAndId:{
       type:String,
-      default:''
+      default:(Math.random() + 1).toString(36).substring(5)
     }
   },
   data() {
@@ -109,7 +113,7 @@ export default {
     },
     modelValue: {
       handler(newVal) {
-        // get the index fr
+        // get the index from items
         this.selectedItemIndex = _.findIndex(this.items,['value',newVal])
         if(this.selectedItemIndex>=0){
           this.dLabel = this.items[ this.selectedItemIndex].label
@@ -130,7 +134,8 @@ export default {
       return (this.items.length>0 && this.selectedItemIndex>-1) ?this.items[this.selectedItemIndex].value:''
     },
     buttonClass(){
-      return 'border-'+this.color+'-500 hover:bg-'+this.color+'-100 text-'+this.color+'-700'
+      let op = this.disabled? ' opacity-50 ':''
+      return 'border-'+this.color+'-500 hover:bg-'+this.color+'-100 text-'+this.color+'-700'+op
     }
   },
 
