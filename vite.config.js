@@ -10,7 +10,7 @@ export default defineConfig({
   build: {
     lib: {
       entry: path.resolve(__dirname, 'src/components/index.js'),
-      name: 'MyLib',
+      name: 'Vue3TWComp',
       fileName: (format) => `vue3-tailwind-components.${format}.js`,
     },
     rollupOptions: {

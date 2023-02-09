@@ -36,7 +36,7 @@ export default {
         case 'sm': return ' text-xs py-1 px-4 '
         case 'md': return ' text-sm py-2 px-6 '
         case 'lg': return ' text-lg py-4 px-8 '
-        case 'round': return ' text-sm p-1 rounded-full'
+        case 'round': return ' text-sm px-4 py-1 rounded-full'
         default: return ' text-sm py-2 px-6 '
 
       }

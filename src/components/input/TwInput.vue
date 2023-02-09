@@ -1,16 +1,18 @@
 <template>
-<div class="relative">
+<div class=" ">
 <!--  <div class="hidden focus:border-info-700"></div>-->
-  <label  :for="formNameAndId" class="my-1">
+
+  <label  :for="formNameAndId" :class="labelClass" class="my-1">
     <slot></slot>
   </label>
+  <div class="relative">
   <div v-show="hasIcon" :class="iconClass" class="absolute py-1 px-2  left-0 pointer-events-none rounded-l border-t border-l border-b" v-if="hasIcon">
     <tw-icon :icon="icon"></tw-icon>
   </div>
-  <input  v-model="inputVal" :placeholder="placeholder" :class="inputClass" class="w-full border focus:shadow-inner py-1 px-2 rounded  outline-none disabled:cursor-not-allowed" :type="type" :disabled="disabled"/>
+  <input @input="handleChange"  v-model="inputVal" :placeholder="placeholder" :class="inputClass" class="w-full border focus:shadow-inner py-1 px-2 rounded  outline-none disabled:cursor-not-allowed" :type="type" :disabled="disabled"/>
   <div v-if="hasError" class="m-1 text-sm text-danger-500">{{error}}</div>
   <div v-else :class="descriptionClass" class="m-1 text-sm">{{description}}</div>
-
+  </div>
 </div>
 </template>
 
@@ -24,6 +26,9 @@ export default {
     color: {
       type: String,
       default: "primary"
+    },
+    modelValue:{
+      type: String
     },
     disabled:{
       type:Boolean,
@@ -69,6 +74,10 @@ export default {
         ].includes(propValue)
       },
       default:'text'
+    },
+    labelPosition:{
+      type:String,
+      default:'block'
     }
   },
   data() {
@@ -77,6 +86,9 @@ export default {
     }
   },
   methods: {
+    handleChange(){
+      this.$emit('update:modelValue',this.inputVal)
+    }
 
   },
   watch: {
@@ -85,12 +97,6 @@ export default {
         this.inputVal = neval
       },
       // force eager callback execution
-      immediate: true
-    },
-    inputVal:{
-      handler(neval) {
-        this.$emit('update:modelValue',this.inputVal)
-      },
       immediate: true
     }
   },
@@ -115,6 +121,9 @@ export default {
     descriptionClass(){
       let c = this.error? this.errorColor + '-300' :this.color+'-500';
       return 'text-'+c
+    },
+    labelClass(){
+      return 'text-'+this.color+'-500'
     }
   },
 }
