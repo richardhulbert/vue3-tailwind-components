@@ -1,6 +1,7 @@
 # vue3-tailwind-components
 This is a simple set of Vue 3, Tailwind based components. At the moment these consist of:
 * [Button](./src/components/button/README.md)
+* [Badge](./src/components/badge/README.md)
 * [Table](./src/components/table/README.md)
 * [Paginator](./src/components/paginator/README.md)
 * [Icons](./src/components/icons/README.md)
