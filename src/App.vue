@@ -1,8 +1,8 @@
 <script setup>
 import {computed, ref} from "vue";
 import {faker} from '@faker-js/faker';
-import {TwTable, TwButton, TwPaginator, TwSwitch, TwIcon, TwModal, TwSelect, TwInput} from "./components/";
-import TwBadge from "@/components/badge/TwBadge.vue";
+import {TwTable, TwButton, TwPaginator, TwSwitch, TwIcon, TwModal, TwSelect, TwInput,TwBadge} from "./components/";
+import TwRollout from "@/components/rollout/TwRollout.vue";
 
 
 const numOfProducts = ref(20)
@@ -20,6 +20,7 @@ let inputError = ref('');
 let inputDisabled = ref(false);
 let buttonOutline = ref(false);
 let buttonSquare = ref(false);
+let showRollout= ref(false);
 
 
 let numOfPages = computed(() => {
@@ -78,6 +79,10 @@ function clearProducts() {
 
 function closeModal() {
     modalShow.value = false
+}
+
+function rolloutShow(){
+    showRollout.value = true
 }
 
 </script>
@@ -212,6 +217,30 @@ function closeModal() {
                     Medium
                 </tw-badge>
                 <tw-badge swatch="#990012">#990012</tw-badge>
+            </div>
+        </section>
+        <section class="p-3 ">
+            <hr>
+            <h1 class="my-4 text-2xl">Rollouts</h1>
+            <div class="flex flex-wrap   gap-16">
+                <tw-button :color="accentColor" @click="rolloutShow">Show Rollout</tw-button>
+
+                <tw-rollout width="w-10/12" :color="accentColor" v-model="showRollout">
+                    <div class="m-8 p-8 bg-white">
+                        <tw-table :hover="hover" :heading-color="accentColor" :stripe-color="accentColor"
+                                  :border-color="accentColor"
+                                  :hover-color="accentColor" :striped="striped" :headings="headings" :items="products">
+                            <template v-slot:link="row">
+                                <a :href="row.item.link">{{ row.item.link }}</a>
+                            </template>
+                        </tw-table>
+                        <tw-paginator :color="accentColor" @paginate="paginate" :current-page="currentPage"
+                                      :num-of-pages="numOfPages"
+                                      class="mt-2"></tw-paginator>
+                    </div>
+
+
+                </tw-rollout>
             </div>
         </section>
 

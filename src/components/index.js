@@ -8,6 +8,7 @@ export {default as TwOption} from './select/TwOption.vue'
 export {default as TwSelect} from './select/TwSelect.vue'
 export {default as TwInput} from './input/TwInput.vue'
 export {default as TwBadge} from './badge/TwBadge.vue'
+export {default as TwRollout} from './rollout/TwRollout.vue'
 // export {default as tw_classes} from './classes'
 
 

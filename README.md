@@ -6,6 +6,7 @@ This is a simple set of Vue 3, Tailwind based components. At the moment these co
 * [Paginator](./src/components/paginator/README.md)
 * [Icons](./src/components/icons/README.md)
 * [Modal](./src/components/modal/README.md)
+* [Rollout](./src/components/rollout/README.md)
 * Form elements
 * * [Select](./src/components/select/README.md)
 * * [Input](./src/components/input/README.md)
