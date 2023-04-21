@@ -1,6 +1,6 @@
 <template>
     <div :class="transformClass" class="absolute transition-transform duration-300 top-0 left-0 right-0 bottom-0" >
-<div class="fixed inset-0 z-9 backdrop-blur-sm"  @click="closeDialog"></div>
+<div git class="fixed inset-0 z-9 backdrop-blur-sm"  @click="closeDialog"></div>
 
         <div :class="compClass" class="absolute min-h-screen h-fit">
             <tw-icon @click="closeDialog" set="regular" :class="closeButtonClass"
