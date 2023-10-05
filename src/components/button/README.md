@@ -1,6 +1,6 @@
 # Button
 
-This component has 3 settable properties:
+This component has 5 settable properties:
 
 ```vue
 <tw-button color="amber" outline corners></tw-button>

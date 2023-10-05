@@ -3,7 +3,6 @@
 This component rolls out from the left hand side, providing a container for other components.
 
 ```vue
-
 <tw-rollout color="amber" width="w-1/2" v-model="someBolean" > ... </tw-rollout>
 ```
 ## Properties
