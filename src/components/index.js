@@ -9,8 +9,9 @@ export {default as TwSelect} from './select/TwSelect.vue'
 export {default as TwInput} from './input/TwInput.vue'
 export {default as TwBadge} from './badge/TwBadge.vue'
 export {default as TwRollout} from './rollout/TwRollout.vue'
-export {default as TwDropDown} from './dropdown/TwDropdown.vue'
-export {default as TwDropDownItem} from './dropdown/TwDropdownItem.vue'
+export {default as TwDropdown} from './dropdown/TwDropdown.vue'
+export {default as TwNotification} from './notification/TwNotification.vue'
+
 
 // export {default as tw_classes} from './classes'
 

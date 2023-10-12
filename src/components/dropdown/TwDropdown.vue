@@ -1,7 +1,7 @@
 <template>
   <div v-click-outside="hideMenu">
     <div  class="flex justify-left">
-      <tw-button @click="showMenu" :color="color" outline>{{ label }}
+      <tw-button @click="showMenu" :color="color" outline :menu="!outline" >{{ label }}
         <tw-icon class="ml-2" icon="caret-down"></tw-icon>
       </tw-button>
     </div>
@@ -41,6 +41,10 @@ export default defineComponent({
       type: Array,
       default: [
       ]
+    },
+    outline:{
+      type:Boolean,
+      default:false
     }
   },
   data() {

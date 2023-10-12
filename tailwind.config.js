@@ -14,7 +14,10 @@ module.exports = {
       pattern: /border-(primary|secondary|warning|success|danger|info)-(\d00)/,
     },
     {
-      pattern: /text-(primary|secondary|warning|success|danger|info)-(\d00)/,
+      pattern: /text-(\w+)-(\d00)/
+    },
+    {
+      pattern: /placeholder-(\w+)-(\d00)/,
     },
   ],
   theme: {

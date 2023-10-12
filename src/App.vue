@@ -1,9 +1,8 @@
 <script setup>
 import {computed, ref} from "vue";
 import {faker} from '@faker-js/faker';
-import {TwTable, TwButton, TwPaginator, TwSwitch, TwIcon, TwModal, TwSelect, TwInput, TwBadge} from "./components/";
-import TwRollout from "@/components/rollout/TwRollout.vue";
-import TwDropdown from "@/components/dropdown/TwDropdown.vue";
+import {TwTable, TwButton, TwPaginator, TwSwitch, TwIcon, TwModal, TwSelect, TwInput, TwBadge,TwRollout,TwDropdown, TwNotification} from "./components/";
+
 
 
 const numOfProducts = ref(20)
@@ -23,6 +22,10 @@ let buttonOutline = ref(false);
 let buttonSquare = ref(false);
 let showRollout = ref(false);
 let dropDownResult = ref("")
+let showNotification= ref(false)
+let notificationMessage=ref("Message sent")
+let notificationPosition=ref('center')
+let notificationLifetime=ref(6)
 
 let numOfPages = computed(() => {
     return Math.ceil(records.value.length / pageSize.value)
@@ -47,6 +50,16 @@ const menuItems =[
 const dropdownItems = [
   {"label": "Branches", "icon":"code-branch", "action": "list_branches"},
   {"label": "User", "icon":"users", "action":"list_users"}
+]
+
+const notificationPositions =[
+  {label: 'Center', value: 'center'},
+  {label: 'Top Center', value: 'top-center'},
+  {label: 'Top Left', value: 'top-left'},
+  {label: 'Top Right', value: 'top-right'},
+  {label: 'Bottom Center', value: 'bottom-center'},
+  {label: 'Bottom Left', value: 'bottom-left'},
+  {label: 'Bottom Right', value: 'bottom-right'},
 ]
 
 
@@ -101,6 +114,12 @@ function rolloutShow() {
 function showDropdownResult(action){
   dropDownResult.value = "You selected "+ action;
 }
+
+function notify(){
+  showNotification.value=true
+}
+
+
 
 </script>
 <template>
@@ -175,7 +194,7 @@ function showDropdownResult(action){
                 <h1 class="my-2 text-2xl">Rollouts</h1>
                 <tw-button outline :color="accentColor" @click="rolloutShow">Show Rollout</tw-button>
 
-                <tw-rollout width="w-10/12" :color="accentColor" v-model="showRollout">
+                <tw-rollout z-index="50" width="w-10/12" :color="accentColor" v-model="showRollout">
                     <div class="m-8 p-8 bg-white">
                         <tw-table :hover="hover" :heading-color="accentColor" :stripe-color="accentColor"
                                   :border-color="accentColor"
@@ -192,12 +211,25 @@ function showDropdownResult(action){
             </div>
             <div class="flex-col">
                 <h1 class="my-2 text-2xl">Dropdown</h1>
-                <tw-dropdown @selected="showDropdownResult" :items="dropdownItems" :color="accentColor"></tw-dropdown>
+                <tw-dropdown @selected="showDropdownResult" :items="dropdownItems" :color="accentColor" ></tw-dropdown>
             </div>
             <div class="flex-col">
-
               <p class="text-primary-500 mt-6">{{dropDownResult}}</p>
             </div>
+          <div class="">
+            <h1 class=" relative my-2 text-2xl">Notification</h1>
+            <div class="flex">
+              <tw-button :color="accentColor" size="sm" @click="notify" outline>Notify</tw-button>
+              <tw-input :color="accentColor" description="The message for the notification" class="ml-2" v-model="notificationMessage" label="message"></tw-input>
+
+            </div>
+            <div class="flex content-center  mt-2">
+              <tw-select class="w-48"  v-model="notificationPosition" :color="accentColor" :items="notificationPositions"></tw-select>
+              <tw-input description="Seconds" v-model="notificationLifetime" class="ml-2 w-20" type="number"></tw-input>
+            </div>
+
+            <tw-notification :lifetime="notificationLifetime" :position="notificationPosition" :color="accentColor" :message="notificationMessage" v-model="showNotification"></tw-notification>
+          </div>
         </section>
         <section class="p-4">
             <h1 class="my-4 text-2xl">Buttons</h1>
@@ -239,7 +271,7 @@ function showDropdownResult(action){
 
                     <tw-input type="search" :disabled="inputDisabled" icon="magnifying-glass" :error="inputError"
                               :color="accentColor" description="This is a basic input box"
-                              form-name-and-id="text-input" v-model="inputVal">Test input
+                              form-name-and-id="text-input" v-model="inputVal" placeholder="enter some text...">Test input
                     </tw-input>
                 </div>
                 <div>

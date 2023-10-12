@@ -8,6 +8,7 @@ This is a simple set of Vue 3, Tailwind based components. At the moment these co
 * [Modal](./src/components/modal/README.md)
 * [Rollout](./src/components/rollout/README.md)
 * [Dropdown](./src/components/dropdown/README.md)
+* [Notication (Toast)](./src/components/notification/README.md)
 * Form elements
 * * [Select](./src/components/select/README.md)
 * * [Input](./src/components/input/README.md)
@@ -92,6 +93,9 @@ safelist: [
     },
     {
       pattern: /text-(\w+)-(\d00)/,
+    },
+    {
+        pattern: /placeholder-(\w+)-(\d00)/,
     },
   ],
 ...

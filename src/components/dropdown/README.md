@@ -7,11 +7,12 @@ This component has 3 settable properties:
 ```
 ## Properties
 
-| Property |  Type  | Required |  default  | notes                                 |
-|:---------|:------:|:--------:|:---------:|:--------------------------------------|
-| label    | String |    no    |  `Menu`   | the text in the selector button       |
-| color    | String |    no    | 'primary' | The base color for the component      |
-| items    | Array  |    no    |    []     | The items to be displayed in the menu |
+| Property |  Type   | Required |  default  | notes                                           |
+|:---------|:-------:|:--------:|:---------:|:------------------------------------------------|
+| label    | String  |    no    |  `Menu`   | the text in the selector button                 |
+| color    | String  |    no    | 'primary' | The base color for the component                |
+| items    |  Array  |    no    |    []     | The items to be displayed in the menu           |
+| outline  | Boolean |    no    |   false   | if you want a border around the button selector |
 
 ### Items structure
 Each item in the array will have the following properties:

@@ -1,5 +1,5 @@
 <template>
-  <button :disabled="disabled" :class="bgcolor" class=" transition-colors ease-in  font-light border disabled:cursor-not-allowed"><slot></slot></button>
+  <button :disabled="disabled" :class="bgcolor" class=" transition-colors ease-in  font-light  disabled:cursor-not-allowed"><slot></slot></button>
 </template>
 
 <script>
@@ -12,6 +12,10 @@ export default {
     outline: {
       type: Boolean,
       default: false
+    },
+    menu:{
+      type:Boolean,
+      default:false
     },
     corners: {
       type: Boolean,
@@ -44,11 +48,20 @@ export default {
     bgcolor() {
       let op = this.disabled? ' opacity-50':''
       let cls = 'bg-'+this.color+'-500 hover:bg-'+this.color+'-700 text-white border-'+this.color+'-500'
-      if(this.outline) cls = 'border-'+this.color+'-500 hover:bg-'+this.color+'-500 text-'+this.color+'-500 hover:text-white border'
+      if(this.outline){
+        if(this.menu){
+          cls = 'hover:bg-'+this.color+'-500 text-'+this.color+'-500 hover:text-white'
+        }else{
+          cls = 'border-'+this.color+'-500 hover:bg-'+this.color+'-500 text-'+this.color+'-500 hover:text-white border'
+        }
+
+      }
+
       if(!this.corners) cls += ' rounded '
       return cls + this.sizeClass +op
     }
   },
+
 
 
 }
