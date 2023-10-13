@@ -11,6 +11,7 @@ export {default as TwBadge} from './badge/TwBadge.vue'
 export {default as TwRollout} from './rollout/TwRollout.vue'
 export {default as TwDropdown} from './dropdown/TwDropdown.vue'
 export {default as TwNotification} from './notification/TwNotification.vue'
+export {default as TwTextarea} from './textarea/TwTextarea.vue'
 
 
 // export {default as tw_classes} from './classes'

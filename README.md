@@ -12,6 +12,7 @@ This is a simple set of Vue 3, Tailwind based components. At the moment these co
 * Form elements
 * * [Select](./src/components/select/README.md)
 * * [Input](./src/components/input/README.md)
+* * [Textarea](./src/components/textarea/README.md)
 * * [Switch](./src/components/switch/README.md)
 
 ## Installation
@@ -44,6 +45,9 @@ module.exports = {
         },
         {
             pattern: /text-(primary|secondary|warning|success|danger|info)-(\d00)/,
+        },
+        {
+            pattern: /placeholder-(\w+)-(\d00)/,
         },
     ],
     theme: {

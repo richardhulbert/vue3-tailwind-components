@@ -1,7 +1,7 @@
 <template>
-<div class=" ">
+
 <!--  <div class="hidden focus:border-info-700"></div>-->
-<div class="placeholder-secondary-300"></div>
+
   <label  :for="formNameAndId" :class="labelClass" class="my-1">
     <slot></slot>
   </label>
@@ -13,7 +13,7 @@
   <div v-if="hasError" class="m-1 text-sm text-danger-500">{{error}}</div>
   <div v-else :class="descriptionClass" class="m-1 text-sm">{{description}}</div>
   </div>
-</div>
+
 </template>
 
 <script>
