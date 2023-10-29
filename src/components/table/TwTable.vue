@@ -56,6 +56,14 @@ export default {
       type: String,
       default: "primary"
     },
+    selectedIndex:{
+      type:Number,
+      default:-1
+    },
+    selectColor:{
+      type:String,
+      default:'primary'
+    }
 
   },
   computed: {
@@ -69,7 +77,9 @@ export default {
   methods: {
     rowClass(ndx) {
       let h = this.hover ?' hover:bg-'+this.hoverColor+'-300':''
-      if(this.striped) return ndx % 2 !== 0 ? 'bg-'+this.stripeColor+'-100 '+h: ''+h;
+      if(this.selectedIndex === ndx) h = ' bg-'+this.selectColor+'-300'
+      if(this.striped && this.selectedIndex !== ndx) return ndx % 2 !== 0 ? 'bg-'+this.stripeColor+'-100 '+h: ''+h;
+
       return h
     }
   },

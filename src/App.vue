@@ -1,5 +1,6 @@
 <script setup>
 import {computed, ref} from "vue";
+import _ from 'lodash'
 import {faker} from '@faker-js/faker';
 import {
   TwTable,
@@ -40,6 +41,7 @@ let notificationMessage = ref("Message sent")
 let notificationPosition = ref('center')
 let notificationLifetime = ref(6)
 let textareaValue = ref('');
+let selectedRow = ref(-1)
 
 let numOfPages = computed(() => {
   return Math.ceil(records.value.length / pageSize.value)
@@ -90,11 +92,16 @@ const headings = [
     label: 'Product link',
     field: 'link'
   },
+  {
+    label: 'Action',
+    field:'id'
+  }
 ]
 
 
 function paginate(page) {
   let start = (page - 1) * pageSize.value
+  selectedRow.value=-1;
   currentPage.value = page
   products.value = records.value.slice(start, pageSize.value + start)
 }
@@ -104,7 +111,8 @@ function createProducts() {
     let product = {
       code: faker.random.alpha(10),
       name: faker.name.firstName(),
-      link: faker.internet.url()
+      link: faker.internet.url(),
+      id:i
     }
     records.value.push(product)
   }
@@ -131,6 +139,10 @@ function showDropdownResult(action) {
 
 function notify() {
   showNotification.value = true
+}
+
+function selectRow(id){
+  selectedRow.value= _.findIndex(products.value,['id',id])
 }
 
 
@@ -182,10 +194,14 @@ function notify() {
       <div class=" ml-2  w-full">
         <tw-table :hover="hover" :heading-color="accentColor" :stripe-color="accentColor"
                   :border-color="accentColor"
-                  :hover-color="accentColor" :striped="striped" :headings="headings" :items="products">
+                  :hover-color="accentColor" :striped="striped" :headings="headings" :items="products" :selected-index="selectedRow">
           <template v-slot:link="row">
             <a :href="row.item.link">{{ row.item.link }}</a>
           </template>
+          <template v-slot:id="row">
+            <tw-button @click="selectRow(row.item.id)" size="sm">select</tw-button>
+          </template>
+
         </tw-table>
         <tw-paginator :color="accentColor" @paginate="paginate" :current-page="currentPage"
                       :num-of-pages="numOfPages"

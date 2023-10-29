@@ -1,7 +1,8 @@
  # Table
  
 This component displays tabular results using Tailwind table classes. It allows you to change the header color, Whether it 
-is striped and what color those stripes might be and whether rows are highlighted when hovered over.
+is striped and what color those stripes might be and whether rows are highlighted when hovered over. You can also show a selected row by setting the ```selected-index``` property to the index
+of the selected row as well as ```select-color``` to color the selected row
 
 It requires that you pass it two elements: the records and the header.
 
@@ -61,12 +62,14 @@ Here we are processing the `link` column (field) such that it is a link (rather 
 
 ## Properties
 
-| Property     |  Type   | Required | default | notes                                                           |
-|:-------------|:-------:|:--------:|:-------:|:----------------------------------------------------------------|
-| headings     |  Array  |   yes    |   []    | This defines the columns in the table                           |
-| items        |  Array  |   yes    |   []    | This is the data that will be rendered in your table            |
-| striped      | Boolean |    no    |  false  | Whether the table has striped rows                              |
-| hover        | Boolean |    no    |  false  | Whether rows highlight when you hover over them                 |
-| header-color | String  |    no    | `primary` | The base color using a color defined in the base Tailwind theme |
-| stripe-color | String  |    no    | `primary` | The color of the striped row if `striped` is set to true        |
-| hover-color  | String  |    no    | `primary` | The color of the hovered row                                    |
+| Property       |  Type   | Required |  default  | notes                                                           |
+|:---------------|:-------:|:--------:|:---------:|:----------------------------------------------------------------|
+| headings       |  Array  |   yes    |    []     | This defines the columns in the table                           |
+| items          |  Array  |   yes    |    []     | This is the data that will be rendered in your table            |
+| striped        | Boolean |    no    |   false   | Whether the table has striped rows                              |
+| hover          | Boolean |    no    |   false   | Whether rows highlight when you hover over them                 |
+| selected-index | Number  |    no    |    -1     | The index of the row                                            |
+| header-color   | String  |    no    | 'primary' | The base color using a color defined in the base Tailwind theme |
+| stripe-color   | String  |    no    | 'primary' | The color of the striped row if `striped` is set to true        |
+| hover-color    | String  |    no    | 'primary' | The color of the hovered row                                    |
+| select-color   | String  |    no    | 'primary' | The color of a row if selected                                  |

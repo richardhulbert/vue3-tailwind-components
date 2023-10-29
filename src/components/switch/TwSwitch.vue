@@ -54,6 +54,8 @@ export default {
       if(!this.disabled){
         this.checked = !this.checked
         this.$emit('update:modelValue', this.checked)
+        this.$emit('changed', this.checked)
+
       }
 
     }
