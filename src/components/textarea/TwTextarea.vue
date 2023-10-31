@@ -46,6 +46,7 @@ export default {
   methods: {
     handleChange(){
       this.$emit('update:modelValue',this.inputVal)
+      this.$emit('changed',this.inputVal)
     }
 
   },

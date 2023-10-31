@@ -22,3 +22,6 @@ There is an error passed the color scheme changes to the errorColor
 | error            | String  |    no    |      ''       | An error (such as a validation error) to be shown            |
 | placeholder      | String  |    no    |      ''       | Any placeholder text you want to show                        |
 
+## Events
+
+```@changed``` this event sends the value of the component

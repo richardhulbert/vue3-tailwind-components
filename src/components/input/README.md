@@ -35,3 +35,6 @@ You can add an icon to the left hand side of the input by passing a string (a fo
 | error            | String  |    no    |      ''       | An error (such as a validation error) to be shown            |
 | placeholder      | String  |    no    |      ''       | Any placeholder text you want to show                        |
 
+## Events
+
+```@changed``` this event sends the value of the component

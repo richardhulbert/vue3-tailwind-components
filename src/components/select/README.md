@@ -32,3 +32,6 @@ the label of the select to the model
 | disabled         | Boolean |    no    |     false     | The select is disabled when set to true                                             |
 | form-name-and-id | String  |    no    | random string | Sets the id and name of the hidden select (for use in forms)                        |
 
+## Events
+
+```@changed``` this event sends the value of the component

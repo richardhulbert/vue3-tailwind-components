@@ -16,4 +16,4 @@ This component has 3 settable properties:
 
 ## Events
 
-```@change``` this event sends the state of the component (as a Boolean) 
+```@changed``` this event sends the state of the component (as a Boolean) 

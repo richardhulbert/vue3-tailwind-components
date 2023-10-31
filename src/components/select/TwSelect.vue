@@ -101,7 +101,10 @@ export default {
       this.selectedItemIndex = index
       this.dLabel = this.items[index].label
       this.toggleSelect()
-      if(this.selectedItemIndex>=0)  this.$emit('update:modelValue',this.items[index].value)
+      if(this.selectedItemIndex>=0) {
+        this.$emit('update:modelValue',this.items[index].value)
+        this.$emit('changed',this.items[index].value)
+      }
     },
     highlightItem(index) {
       this.selectedItemIndex = index
