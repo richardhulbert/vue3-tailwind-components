@@ -38,7 +38,7 @@ module.exports = {
     safelist: [
         {
             pattern: /bg-(primary|secondary|warning|success|danger|info)-(\d00)/,
-            variants:  ['hover', 'focus'],
+            variants:  ['hover', 'focus','file'],
         },
         {
             pattern: /border-(primary|secondary|warning|success|danger|info)-(\d00)/,

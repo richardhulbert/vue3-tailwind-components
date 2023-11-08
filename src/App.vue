@@ -42,6 +42,7 @@ let notificationPosition = ref('center')
 let notificationLifetime = ref(6)
 let textareaValue = ref('');
 let selectedRow = ref(-1)
+let fileInfo=ref('')
 
 let numOfPages = computed(() => {
   return Math.ceil(records.value.length / pageSize.value)
@@ -143,6 +144,10 @@ function notify() {
 
 function selectRow(id){
   selectedRow.value= _.findIndex(products.value,['id',id])
+}
+
+function handleChangedFile(file){
+  fileInfo.value = 'file:'+file.name+' size:'+file.size+' type:'+file.type
 }
 
 
@@ -311,6 +316,13 @@ function selectRow(id){
           <tw-switch color="info" v-model="inputDisabled" size="sm">Disable input</tw-switch>
           <tw-input placeholder="Add an error to the Test input" color="danger"
                     v-model="inputError"></tw-input>
+        </div>
+        <div>
+          <tw-input @changed="handleChangedFile" type="file"  :color="accentColor"></tw-input>
+        </div>
+
+        <div>
+          <p>{{fileInfo}}</p>
         </div>
       </div>
     </section>

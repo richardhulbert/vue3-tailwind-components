@@ -86,9 +86,22 @@ export default {
     }
   },
   methods: {
-    handleChange(){
-      this.$emit('update:modelValue',this.inputVal)
-      this.$emit('changed',this.inputVal)
+    handleChange($event){
+      if(this.type==='file'){
+        const target = $event.target;
+
+        if (target && target.files) {
+          let file = target.files[0]
+          this.$emit('changed',file)
+        }
+      }else{
+        this.$emit('update:modelValue',this.inputVal)
+        this.$emit('changed',this.inputVal)
+      }
+
+
+
+
     }
 
   },
@@ -106,7 +119,8 @@ export default {
       let c = this.error? this.errorColor:this.color;
       let lm = this.hasIcon? ' pl-8 ':''
       let op = this.disabled? ' opacity-50':''
-      return 'border-'+c+'-500  text-'+c+'-500' +lm +op +' placeholder:italic placeholder-'+this.color+'-300'
+      let f = this.type==='file'? ' file:bg-'+this.color+'-300 file:text-sm file:border-0 file:rounded file:text-'+this.color+'-700':''
+      return 'border-'+c+'-500  text-'+c+'-500' +lm +op +' placeholder:italic placeholder-'+this.color+'-300' +f
     },
     hasError(){
       return this.error.length>0

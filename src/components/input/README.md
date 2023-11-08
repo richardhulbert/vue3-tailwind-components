@@ -17,14 +17,18 @@ This is a basic input component it supports the following input types:
 You can add a `description` as a property and a label in the default slot. Errors are passed (as a string) to the `error` property. When
 There is an error passed the color scheme changes to the errorColor
 
-You can add an icon to the left hand side of the input by passing a string (a font awesome name with out the fa-) to the `icon` property. 
+You can add an icon to the left hand side of the input by passing a string (a font awesome name without the fa-) to the `icon` property. 
 
- 
+### Files
+
+When using this component as a file selector the ```@changed``` event will send the selected file. There is no need nor reason to use
+```v-model``` as two-way binding is not possible as you cannot set the file.
+
 ## Properties
 
 | Property         |  Type   | Required |    default    | notes                                                        |
 |:-----------------|:-------:|:--------:|:-------------:|:-------------------------------------------------------------|
-| v-model          | Boolean |   yes    |     false     | The value of the input                                       |
+| v-model          | string  |    no    |     false     | The value of the input                                       |
 | type             | String  |    no    |    'text'     | The type of input                                            |
 | color            | String  |    no    |   'primary'   | The color scheme of the Input                                |
 | error-color      | String  |    no    |   'danger'    | The color scheme when there is an error present              |
@@ -37,4 +41,4 @@ You can add an icon to the left hand side of the input by passing a string (a fo
 
 ## Events
 
-```@changed``` this event sends the value of the component
+```@changed``` this event, fired by a change in the input, sends the value of the component as a string or file (if the type of the component is set to file)
