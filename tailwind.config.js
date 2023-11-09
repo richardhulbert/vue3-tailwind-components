@@ -14,7 +14,8 @@ module.exports = {
       pattern: /border-(primary|secondary|warning|success|danger|info)-(\d00)/,
     },
     {
-      pattern: /text-(\w+)-(\d00)/
+      pattern: /text-(\w+)-(\d00)/,
+      variants:['file']
     },
     {
       pattern: /placeholder-(\w+)-(\d00)/,

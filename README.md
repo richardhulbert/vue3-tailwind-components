@@ -45,6 +45,7 @@ module.exports = {
         },
         {
             pattern: /text-(primary|secondary|warning|success|danger|info)-(\d00)/,
+            variants:['file']
         },
         {
             pattern: /placeholder-(\w+)-(\d00)/,

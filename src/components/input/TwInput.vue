@@ -9,7 +9,7 @@
   <div v-show="hasIcon" :class="iconClass" class="absolute py-1 px-2  left-0 pointer-events-none rounded-l border-t border-l border-b" v-if="hasIcon">
     <tw-icon :icon="icon"></tw-icon>
   </div>
-  <input @input="handleChange" :name="formNameAndId" :id="formNameAndId"  v-model="inputVal" :placeholder="placeholder" :class="inputClass" class="w-full border focus:shadow-inner py-1 px-2 rounded  outline-none disabled:cursor-not-allowed" :type="type" :disabled="disabled"/>
+  <input @input="handleChange" :name="formNameAndId" :id="formNameAndId"  v-model="inputVal" :placeholder="placeholder" :class="inputClass" class="w-full border focus:shadow-inner py-1 px-2 rounded  outline-none disabled:cursor-not-allowed" :type="type" :disabled="disabled" :accept="accept"/>
   <div v-if="hasError" class="m-1 text-sm text-danger-500">{{error}}</div>
   <div v-else :class="descriptionClass" class="m-1 text-sm">{{description}}</div>
   </div>
@@ -78,6 +78,10 @@ export default {
     labelPosition:{
       type:String,
       default:'block'
+    },
+    accept:{
+      type:String,
+      default:''
     }
   },
   data() {
