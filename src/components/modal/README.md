@@ -41,3 +41,6 @@ and the footer slot
 | hide-close       | Boolean |    no    |   false   | This hides the close button                       |
 | hide-footer      | Boolean |    no    |   false   | This hides the footer section of the modal        |
 
+## Events
+
+`@closed` This is fired when the modal is closed

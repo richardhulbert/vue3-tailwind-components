@@ -119,6 +119,7 @@ export default {
     closeDialog() {
       this.showing = false
       this.$emit('update:modelValue', false)
+      this.$emit('closed')
     }
   },
 }
