@@ -159,6 +159,8 @@ function handleChangedFile(file){
       <h1 class="my-2 text-2xl">Color control</h1>
       <tw-select label="Select a color" class="w-60" v-model="accentColor" :color="accentColor"
                  :items="colors"></tw-select>
+
+
     </section>
     <section class=" p-4">
       <h1 class="my-2 text-2xl">Table</h1>
