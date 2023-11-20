@@ -256,14 +256,14 @@ function handleChangedFile(file){
         <h1 class=" relative my-2 text-2xl">Notification</h1>
         <div class="flex">
           <tw-button :color="accentColor" size="sm" @click="notify" outline>Notify</tw-button>
-          <tw-input :color="accentColor" description="The message for the notification" class="ml-2"
-                    v-model="notificationMessage" label="message"></tw-input>
+          <tw-input :color="accentColor" description="The message for the notification"
+                    v-model="notificationMessage" ></tw-input>
 
         </div>
         <div class="flex content-center  mt-2">
           <tw-select class="w-48" v-model="notificationPosition" :color="accentColor"
                      :items="notificationPositions"></tw-select>
-          <tw-input description="Seconds" v-model="notificationLifetime" class="ml-2 w-20" type="number"></tw-input>
+          <tw-input description="Seconds" v-model="notificationLifetime" type="number"></tw-input>
         </div>
 
         <tw-notification :lifetime="notificationLifetime" :position="notificationPosition" :color="accentColor"
@@ -294,7 +294,7 @@ function handleChangedFile(file){
           </tw-button>
         </div>
         <div>
-          <tw-button :color="accentColor" :outline="buttonOutline" :corners="buttonSquare" size="round">
+          <tw-button :color="accentColor" :outline="buttonOutline" :corners="buttonSquare" >
             Rounded button
           </tw-button>
         </div>
