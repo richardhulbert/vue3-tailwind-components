@@ -19,6 +19,9 @@
 <script>
 import {TwIcon} from "@/components";
 export default {
+  emits:{
+    changed:null
+  },
   components: {
     TwIcon,
   },
@@ -28,7 +31,7 @@ export default {
       default: "primary"
     },
     modelValue:{
-      type: String
+
     },
     disabled:{
       type:Boolean,
