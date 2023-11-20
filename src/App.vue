@@ -15,8 +15,7 @@ import {
   TwRollout,
   TwDropdown,
   TwNotification,
-  TwTextarea,
-  TwColorPicker
+  TwTextarea
 } from "./components/";
 
 
@@ -43,12 +42,15 @@ let notificationPosition = ref('center')
 let notificationLifetime = ref(6)
 let textareaValue = ref('');
 let selectedRow = ref(-1)
-let fileInfo=ref('')
+let fileInfo = ref('')
 
 let numOfPages = computed(() => {
   return Math.ceil(records.value.length / pageSize.value)
 })
 
+const buttonVariant = computed(() => {
+  return buttonSquare.value ? 'square' : ''
+})
 const colors = [
   {label: 'Primary', value: 'primary'},
   {label: 'Secondary', value: 'secondary'},
@@ -96,14 +98,14 @@ const headings = [
   },
   {
     label: 'Action',
-    field:'id'
+    field: 'id'
   }
 ]
 
 
 function paginate(page) {
   let start = (page - 1) * pageSize.value
-  selectedRow.value=-1;
+  selectedRow.value = -1;
   currentPage.value = page
   products.value = records.value.slice(start, pageSize.value + start)
 }
@@ -114,7 +116,7 @@ function createProducts() {
       code: faker.random.alpha(10),
       name: faker.name.firstName(),
       link: faker.internet.url(),
-      id:i
+      id: i
     }
     records.value.push(product)
   }
@@ -143,12 +145,12 @@ function notify() {
   showNotification.value = true
 }
 
-function selectRow(id){
-  selectedRow.value= _.findIndex(products.value,['id',id])
+function selectRow(id) {
+  selectedRow.value = _.findIndex(products.value, ['id', id])
 }
 
-function handleChangedFile(file){
-  fileInfo.value = 'file:'+file.name+' size:'+file.size+' type:'+file.type
+function handleChangedFile(file) {
+  fileInfo.value = 'file:' + file.name + ' size:' + file.size + ' type:' + file.type
 }
 
 
@@ -160,9 +162,6 @@ function handleChangedFile(file){
       <h1 class="my-2 text-2xl">Color control</h1>
       <tw-select label="Select a color" class="w-60" v-model="accentColor" :color="accentColor"
                  :items="colors"></tw-select>
-<div class="mt-2">
-  <tw-color-picker  :colors="_.map(colors,'value')" :variants="[100,200,300,400,500,700]" v-model="accentColor"></tw-color-picker>
-</div>
 
     </section>
     <section class=" p-4">
@@ -204,7 +203,8 @@ function handleChangedFile(file){
       <div class=" ml-2  w-full">
         <tw-table :hover="hover" :heading-color="accentColor" :stripe-color="accentColor"
                   :border-color="accentColor"
-                  :hover-color="accentColor" :striped="striped" :headings="headings" :items="products" :selected-index="selectedRow">
+                  :hover-color="accentColor" :striped="striped" :headings="headings" :items="products"
+                  :selected-index="selectedRow">
           <template v-slot:link="row">
             <a :href="row.item.link">{{ row.item.link }}</a>
           </template>
@@ -259,14 +259,14 @@ function handleChangedFile(file){
         <h1 class=" relative my-2 text-2xl">Notification</h1>
         <div class="flex">
           <tw-button :color="accentColor" size="sm" @click="notify" outline>Notify</tw-button>
-          <tw-input :color="accentColor" description="The message for the notification" class="ml-2"
-                    v-model="notificationMessage" label="message"></tw-input>
+          <tw-input :color="accentColor" description="The message for the notification"
+                    v-model="notificationMessage"></tw-input>
 
         </div>
         <div class="flex content-center  mt-2">
           <tw-select class="w-48" v-model="notificationPosition" :color="accentColor"
                      :items="notificationPositions"></tw-select>
-          <tw-input description="Seconds" v-model="notificationLifetime" class="ml-2 w-20" type="number"></tw-input>
+          <tw-input description="Seconds" v-model="notificationLifetime" type="number"></tw-input>
         </div>
 
         <tw-notification :lifetime="notificationLifetime" :position="notificationPosition" :color="accentColor"
@@ -282,22 +282,22 @@ function handleChangedFile(file){
       </div>
       <div class="flex w-full justify-between py-2 ">
         <div>
-          <tw-button :color="accentColor" :outline="buttonOutline" :corners="buttonSquare" size="sm"> Small
+          <tw-button :color="accentColor" :outline="buttonOutline" :variant="buttonVariant" size="sm"> Small
             button
           </tw-button>
         </div>
         <div>
-          <tw-button :color="accentColor" :outline="buttonOutline" :corners="buttonSquare" size="md"> Medium
+          <tw-button :color="accentColor" :outline="buttonOutline" :variant="buttonVariant" size="md"> Medium
             button
           </tw-button>
         </div>
         <div>
-          <tw-button :color="accentColor" :outline="buttonOutline" :corners="buttonSquare" size="lg"> large
+          <tw-button :color="accentColor" :outline="buttonOutline" :variant="buttonVariant" size="lg"> large
             button
           </tw-button>
         </div>
         <div>
-          <tw-button :color="accentColor" :outline="buttonOutline" :corners="buttonSquare" size="round">
+          <tw-button :color="accentColor" :outline="buttonOutline" variant="rounded" >
             Rounded button
           </tw-button>
         </div>
@@ -323,11 +323,11 @@ function handleChangedFile(file){
                     v-model="inputError"></tw-input>
         </div>
         <div>
-          <tw-input @changed="handleChangedFile" type="file"  :color="accentColor"></tw-input>
+          <tw-input @changed="handleChangedFile" type="file" :color="accentColor"></tw-input>
         </div>
 
         <div>
-          <p>{{fileInfo}}</p>
+          <p>{{ fileInfo }}</p>
         </div>
       </div>
     </section>
