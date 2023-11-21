@@ -127,7 +127,7 @@ export default {
       let lm = this.hasIcon? ' pl-8 ':''
       let op = this.disabled? ' opacity-50':''
       let f = this.type==='file'? ' file:bg-'+this.color+'-300 file:text-sm file:border-0 file:rounded file:text-'+this.color+'-700':''
-      return 'border-'+c+'-500  text-'+c+'-500' +lm +op +' placeholder:italic placeholder-'+this.color+'-300' +f
+      return 'border-'+c+'-500  text-'+c+'-500' +lm +op +' placeholder:italic placeholder-'+this.color+'-300 dark:bg-'+this.color+'-900 dark:text-'+this.color+'-100' +f
     },
     hasError(){
       return this.error.length>0
@@ -145,7 +145,7 @@ export default {
       return 'text-'+c
     },
     labelClass(){
-      return 'text-'+this.color+'-500'
+      return 'text-'+this.color+'-500 dark:text-'+this.color+'-100'
     }
   },
 }

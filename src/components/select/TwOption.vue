@@ -24,8 +24,8 @@ export default {
   },
   computed: {
     buttonClass() {
-      let selected = this.selected?'bg-'+this.color+'-200':''
-      return "text-"+this.color+'-700 hover:bg-'+this.color+'-100 '+selected
+      let selected = this.selected?' bg-'+this.color+'-500 dark:text-'+this.color+'-300 dark:bg-'+this.color+'-700':''
+      return "text-"+this.color+'-700 hover:bg-'+this.color+'-100 dark:hover:bg-'+this.color+'-700 dark:text-'+this.color+'-100'+selected
     }
   },
   methods: {

@@ -1,6 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 const colors = require('tailwindcss/colors')
 module.exports = {
+  darkMode: 'class',
   content: [
     "./index.html",
     "./src/**/*.{js,ts,jsx,vue}",
@@ -8,14 +9,15 @@ module.exports = {
   safelist: [
     {
       pattern: /bg-(primary|secondary|warning|success|danger|info)-(\d00)/,
-      variants:  ['hover', 'focus', 'file'],
+      variants:  ['hover', 'focus', 'file','dark', 'dark:hover'],
     },
     {
       pattern: /border-(primary|secondary|warning|success|danger|info)-(\d00)/,
+      variants:  ['dark', 'dark:hover'],
     },
     {
       pattern: /text-(\w+)-(\d00)/,
-      variants:['file']
+      variants:['file','dark']
     },
     {
       pattern: /placeholder-(\w+)-(\d00)/,

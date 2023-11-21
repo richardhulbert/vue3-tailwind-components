@@ -2,7 +2,7 @@
   <div v-if="showing">
     <div class="fixed inset-0 z-10 backdrop-blur-sm" :class="backgroundClass"></div>
     <div class="fixed inset-0 z-50 flex items-center justify-center sm:p-0  animate-in fade-in zoom-in">
-      <div :class="sizeClass" class=" overflow-hidden rounded-lg bg-white shadow-xl w-full ">
+      <div :class="modalClass" class=" overflow-hidden rounded-lg   shadow-xl w-full ">
 
         <div class="relative  ">
           <tw-icon v-if="!hideClose" @click="closeDialog" set="regular" :class="closeButtonClass"
@@ -80,16 +80,17 @@ export default {
     TwButton, TwIcon
   },
   computed: {
-    sizeClass() {
+    modalClass() {
+      let cls= ' bg-white dark:bg-'+this.color+'-900'
       switch (this.size) {
         case 'sm':
-          return ' md:w-1/3 '
+          return ' md:w-1/3 '+ cls
         case 'md':
-          return ' md:w-2/3 '
+          return ' md:w-2/3 '+ cls
         case 'lg':
-          return ' md:w-4/5  '
+          return ' md:w-4/5  '+ cls
         default:
-          return ' md:w-2/3 '
+          return ' md:w-2/3 '+ cls
 
       }
     },

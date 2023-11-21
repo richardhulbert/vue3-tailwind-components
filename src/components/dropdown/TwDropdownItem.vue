@@ -35,7 +35,7 @@ export default defineComponent({
       return this.icon.length>0;
     },
     itemClass(){
-      return 'text-'+this.color+'-500 hover:bg-'+this.color+'-200'
+      return 'text-'+this.color+'-500 dark:text-'+this.color+'-200 hover:bg-'+this.color+'-200 dark:hover:bg-'+this.color+'-500'
     }
   },
   methods: {

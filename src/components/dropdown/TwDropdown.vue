@@ -54,7 +54,7 @@ export default defineComponent({
   },
   computed: {
     panelBoarderClass() {
-      return 'border-' + this.color + '-300';
+      return 'border-' + this.color + '-300 dark:bg-'+this.color+'-900 dark:border-'+this.color+'-500';
     }
   },
   methods: {

@@ -1,6 +1,6 @@
 <template>
   <table  class="border-collapse table-auto w-full text-sm">
-    <thead :class="headingClass" class=" text-gray-800">
+    <thead :class="headingClass" class=" text-gray-800 ">
     <tr>
       <th class="p-2 font-normal" v-for="h in headings">{{ h.label }}</th>
     </tr>
@@ -71,16 +71,16 @@ export default {
       return 'bg-'+this.headingColor+'-200'
     },
     boarderClass() {
-      return this.border ? 'border border-' + this.borderColor+'-200' : '';
+      return this.border ? 'border border-' + this.borderColor+'-200 dark:border-'+this.borderColor+'-400': '';
     },
   },
   methods: {
     rowClass(ndx) {
       let h = this.hover ?' hover:bg-'+this.hoverColor+'-300':''
-      if(this.selectedIndex === ndx) h = ' bg-'+this.selectColor+'-300'
-      if(this.striped && this.selectedIndex !== ndx) return ndx % 2 !== 0 ? 'bg-'+this.stripeColor+'-100 '+h: ''+h;
+      if(this.selectedIndex === ndx) h = ' bg-'+this.selectColor+'-300 dark:bg-'+this.selectColor+'-500'
+      if(this.striped && this.selectedIndex !== ndx) return ndx % 2 !== 0 ? 'bg-'+this.stripeColor+'-100 dark:bg-'+this.stripeColor+'-900 dark:text-gray-200'+h: ' dark:text-gray-200 '+h;
 
-      return h
+      return h+' dark:text-gray-200'
     }
   },
 }

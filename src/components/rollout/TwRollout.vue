@@ -54,7 +54,7 @@ export default {
         compClass() {
             let zIndex = ' z-'+this.zIndex+ ' '
             let widthClass = this.width
-            let bgColor = ' bg-'+this.color+'-100 shadow-xl'
+            let bgColor = ' bg-'+this.color+'-100 shadow-xl dark:bg-'+this.color+'-900'
             return bgColor +zIndex +' '+widthClass
         },
         transformClass(){

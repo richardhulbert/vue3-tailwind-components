@@ -160,13 +160,13 @@ function handleChangedFile(file) {
     <h1 class="text-3xl p-3">Welcome to the Vue tailwind component project</h1>
     <section class=" p-4">
       <h1 class="my-2 text-2xl">Color control</h1>
-      <tw-select label="Select a color" class="w-60" v-model="accentColor" :color="accentColor"
+      <tw-select label="Select a color" class="w-80" v-model="accentColor" :color="accentColor"
                  :items="colors"></tw-select>
 
     </section>
     <section class=" p-4">
       <h1 class="my-2 text-2xl">Table</h1>
-      <div class=" flex flex-row gap-3  p-3 bg-slate-100">
+      <div class=" flex flex-row gap-3  p-3 bg-slate-100 dark:bg-slate-700">
         <div class="flex-col ">
           <tw-switch class="mt-6" :disabled="records.length===0" :color="accentColor" v-model="striped">
             Striped?
@@ -234,7 +234,7 @@ function handleChangedFile(file) {
         <tw-button outline :color="accentColor" @click="rolloutShow">Show Rollout</tw-button>
 
         <tw-rollout z-index="50" width="w-10/12" :color="accentColor" v-model="showRollout">
-          <div class="m-8 p-8 bg-white">
+          <div class="m-8 p-8 ">
             <tw-table :hover="hover" :heading-color="accentColor" :stripe-color="accentColor"
                       :border-color="accentColor"
                       :hover-color="accentColor" :striped="striped" :headings="headings" :items="products">
@@ -257,13 +257,13 @@ function handleChangedFile(file) {
       </div>
       <div class="">
         <h1 class=" relative my-2 text-2xl">Notification</h1>
-        <div class="flex">
+        <div class="flex gap-2">
           <tw-button :color="accentColor" size="sm" @click="notify" outline>Notify</tw-button>
           <tw-input :color="accentColor" description="The message for the notification"
                     v-model="notificationMessage"></tw-input>
 
         </div>
-        <div class="flex content-center  mt-2">
+        <div class="flex content-center  mt-2 gap-2">
           <tw-select class="w-48" v-model="notificationPosition" :color="accentColor"
                      :items="notificationPositions"></tw-select>
           <tw-input description="Seconds" v-model="notificationLifetime" type="number"></tw-input>
@@ -275,7 +275,7 @@ function handleChangedFile(file) {
     </section>
     <section class="p-4">
       <h1 class="my-4 text-2xl">Buttons</h1>
-      <div class="bg-slate-100 p-4 flex flex-row">
+      <div class="bg-slate-100 dark:bg-slate-700 p-4 flex flex-row">
 
         <tw-switch size="sm" v-model="buttonOutline">Outline?</tw-switch>
         <tw-switch size="sm" v-model="buttonSquare">Square buttons?</tw-switch>

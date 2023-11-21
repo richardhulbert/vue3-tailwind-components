@@ -64,7 +64,7 @@ export default {
       let c = this.error? this.errorColor:this.color;
 
       let op = this.disabled? ' opacity-50':''
-      return 'border-'+c+'-500  text-'+c+'-500'  +op +' placeholder:italic placeholder-'+this.color+'-300'
+      return 'border-'+c+'-500  text-'+c+'-500'  +op +' placeholder:italic placeholder-'+this.color+'-300 dark:bg-'+this.color+'-900 dark:text-'+this.color+'-100'
     },
     hasError(){
       return this.error.length>0
@@ -74,7 +74,7 @@ export default {
       return 'text-'+c
     },
     labelClass(){
-      return 'text-'+this.color+'-500'
+      return 'text-'+this.color+'-500 dark:text-'+this.color+'-100'
     }
   },
 
@@ -86,7 +86,7 @@ export default {
   <label  :for="formNameAndId" :class="labelClass" class="my-1">
     <slot></slot>
   </label>
-  <textarea @input="handleChange" :name="formNameAndId" :id="formNameAndId"  v-model="inputVal" :placeholder="placeholder" :class="inputClass"  class="w-full border focus:shadow-inner py-1 px-2 rounded  outline-none disabled:cursor-not-allowed">{{modelValue}}</textarea>
+  <textarea @input="handleChange" :name="formNameAndId" :id="formNameAndId"  v-model="inputVal" :placeholder="placeholder" :class="inputClass"  class="w-full border focus:shadow-inner py-1 px-2 rounded  outline-none  disabled:cursor-not-allowed">{{modelValue}}</textarea>
 </template>
 
 <style scoped>

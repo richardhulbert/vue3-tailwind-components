@@ -4,9 +4,9 @@
     <div class=" hidden h-3 w-3 w-6 h-7 w-7 h-5 w-5 w-10 w-14"></div>
     <div class="relative">
       <input :disabled="disabled" :id="formNameAndId" :name="formNameAndId" type="checkbox" class="sr-only " :value="checked"/>
-      <div :class="backClass" class="rounded-full shadow-inner"></div>
+      <div :class="backClass" class="rounded-full border shadow-inner"></div>
       <div :class="knobClass"
-           class="dot border border-primary-200  absolute top-0  transition  rounded-full bg-white"></div>
+           class="dot border   absolute top-0  transition  rounded-full "></div>
     </div>
     <div :class="labelClass" class="mx-2">
       <slot></slot>
@@ -87,12 +87,13 @@ export default {
       let op = this.disabled ? ' opacity-50 ':''
       if (this.checked) return 'bg-' + this.color + '-500' + s +op
 
-      return 'bg-' + this.color + '-300 '+s +op
+      return 'bg-white border-'+this.color+'-500  dark:border-'+this.color+'-200'+s +op
     },
     knobClass() {
       let s = ' h-'+this.baseSize+ ' w-'+this.baseSize
-      if (this.checked) return 'translate-x-full '+s
-      return ' left-0 '+s
+      if (this.checked) return 'translate-x-full bg-white dark:bg-'+this.color+'-700 border-'+this.color+'-200 '+s
+
+      return ' bg-'+this.color+'-200 border-'+this.color+'-500 dark:bg-'+this.color+'-700 left-0 dark:border-'+this.color+'-500'+s
     },
     labelClass(){
       return 'text-'+this.color+'-500 text-'+this.size
