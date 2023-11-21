@@ -43,6 +43,7 @@ let notificationLifetime = ref(6)
 let textareaValue = ref('');
 let selectedRow = ref(-1)
 let fileInfo = ref('')
+const darkTheme = ref(false)
 
 let numOfPages = computed(() => {
   return Math.ceil(records.value.length / pageSize.value)
@@ -153,6 +154,17 @@ function handleChangedFile(file) {
   fileInfo.value = 'file:' + file.name + ' size:' + file.size + ' type:' + file.type
 }
 
+function handleChangeTheme(){
+  if(darkTheme.value){
+    document.documentElement.classList.add('dark')
+
+  }else{
+    document.documentElement.classList.remove('dark')
+  }
+}
+
+
+
 
 </script>
 <template>
@@ -160,8 +172,12 @@ function handleChangedFile(file) {
     <h1 class="text-3xl p-3">Welcome to the Vue tailwind component project</h1>
     <section class=" p-4">
       <h1 class="my-2 text-2xl">Color control</h1>
-      <tw-select label="Select a color" class="w-80" v-model="accentColor" :color="accentColor"
-                 :items="colors"></tw-select>
+      <div class="flex gap-4">
+        <tw-select label="Select a color" class="w-80" v-model="accentColor" :color="accentColor"
+                   :items="colors"></tw-select>
+        <tw-switch @changed="handleChangeTheme" v-model="darkTheme" size="lg">Dark Mode</tw-switch>
+      </div>
+
 
     </section>
     <section class=" p-4">

@@ -68,15 +68,15 @@ export default {
   },
   computed: {
     headingClass() {
-      return 'bg-'+this.headingColor+'-200'
+      return 'bg-'+this.headingColor+'-200 dark:bg-'+this.headingColor+'-900 dark:text-'+this.headingColor+'-200'
     },
     boarderClass() {
-      return this.border ? 'border border-' + this.borderColor+'-200 dark:border-'+this.borderColor+'-400': '';
+      return this.border ? 'border border-' + this.borderColor+'-200 dark:border-'+this.borderColor+'-900': '';
     },
   },
   methods: {
     rowClass(ndx) {
-      let h = this.hover ?' hover:bg-'+this.hoverColor+'-300':''
+      let h = this.hover ?' hover:bg-'+this.hoverColor+'-300 dark:hover:bg-'+this.hoverColor+'-700':''
       if(this.selectedIndex === ndx) h = ' bg-'+this.selectColor+'-300 dark:bg-'+this.selectColor+'-500'
       if(this.striped && this.selectedIndex !== ndx) return ndx % 2 !== 0 ? 'bg-'+this.stripeColor+'-100 dark:bg-'+this.stripeColor+'-900 dark:text-gray-200'+h: ' dark:text-gray-200 '+h;
 

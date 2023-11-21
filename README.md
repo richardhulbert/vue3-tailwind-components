@@ -24,7 +24,9 @@ npm i vue3-tailwind-components --save
 
 Edit `tailwind.config.js` to look like this. Be especially careful to include this line
 `"./node_modules/vue3-tailwind-components/dist/vue3-tailwind-components.es.js"` it tells Tailwind to that we want to use
-classes that used in the components
+classes that are computed in the components.
+
+Here is a boilerplate tailwind config:
 
 ```javascript
 /** @type {import('tailwindcss').Config} */
@@ -38,14 +40,15 @@ module.exports = {
     safelist: [
         {
             pattern: /bg-(primary|secondary|warning|success|danger|info)-(\d00)/,
-            variants:  ['hover', 'focus','file'],
+            variants:  ['hover', 'focus', 'file','dark', 'dark:hover'],
         },
         {
             pattern: /border-(primary|secondary|warning|success|danger|info)-(\d00)/,
+            variants:  ['dark', 'dark:hover'],
         },
         {
             pattern: /text-(primary|secondary|warning|success|danger|info)-(\d00)/,
-            variants:['file']
+            variants:['file','dark']
         },
         {
             pattern: /placeholder-(\w+)-(\d00)/,
@@ -91,13 +94,15 @@ If you want to use every color that Tailwind supply in their default theme you c
 safelist: [
     {
       pattern: /bg-(\w+)-(\d00)/,
-      variants:  ['hover', 'focus'],
+        variants:  ['hover', 'focus', 'file','dark', 'dark:hover'],
     },
     {
       pattern: /border-(\w+)-(\d00)/,
+        variants:  ['dark', 'dark:hover'],
     },
     {
       pattern: /text-(\w+)-(\d00)/,
+        variants:['file','dark']
     },
     {
         pattern: /placeholder-(\w+)-(\d00)/,
@@ -109,7 +114,11 @@ safelist: [
 This tells Tailwind - Do not remove any color classes  for background, border or text (that is over 2000!) from the CSS.
 
 A more optimal solution is to use color aliases. Those who have used Bootstrap css will be familiar with color aliasing. 
-The advantage of this approach is that we can control the color of all components from one place. 
+The advantage of this approach is that we can control the color of all components from one place.
+
+### Dark mode
+
+All the components have dark mode styling. if that is your bag 
 
 
 Color aliases in `tailwind.config.js` like this:

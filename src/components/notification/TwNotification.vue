@@ -53,13 +53,10 @@ export default {
   },
   computed: {
     closeButtonClass() {
-      return 'text-' + this.color + '-500'
+      return 'text-' + this.color + '-500 dark:text-'+this.color+'-200'
     },
     notificationClass() {
-     return 'bg-' + this.color + '-200 text-' + this.color + '-700'+this.positionClass;
-
-
-
+     return 'bg-' + this.color + '-200 dark:bg-'+this.color+'-600 dark:text-'+this.color+'-200 text-' + this.color + '-700'+this.positionClass;
     },
     positionClass(){
       let pos = ''
@@ -100,7 +97,7 @@ export default {
 
 <template>
     <div v-if="modelValue" :class="notificationClass"
-         class="fixed flex  ml-2 h-fit rounded-lg shadow-lg opacity-95 animate-in zoom-in" role="alert">
+         class="fixed flex  ml-2 h-fit rounded-lg shadow-lg opacity-95  animate-in zoom-in" role="alert">
      <div  class="flex items-center  p-4  space-x-4 ">
        <tw-icon :icon="icon" beat-fade></tw-icon>
        <div class="pl-4 text-sm font-normal">{{ message }}</div>
