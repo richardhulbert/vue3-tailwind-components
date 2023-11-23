@@ -70,7 +70,8 @@ const menuItems = [
 
 const dropdownItems = [
   {"label": "Branches", "icon": "code-branch", "action": "list_branches"},
-  {"label": "User", "icon": "users", "action": "list_users"}
+  {"label": "User", "icon": "users", "action": "list_users"},
+  {"label": "No Icon",  "action": "list_users"}
 ]
 
 const notificationPositions = [
@@ -138,8 +139,8 @@ function rolloutShow() {
   showRollout.value = true
 }
 
-function showDropdownResult(action) {
-  dropDownResult.value = "You selected " + action;
+function showDropdownResult(item) {
+  dropDownResult.value = "You selected " +item.label ;
 }
 
 function notify() {

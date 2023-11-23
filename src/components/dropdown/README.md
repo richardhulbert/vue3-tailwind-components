@@ -29,4 +29,4 @@ an example with two menu items:
 ```
 
 ## Events
-The dropdown item has one event **selected** this passes the _action_ of a clicked menu item.
+The dropdown item has one event **selected** this passes the `item` object of a clicked menu item.

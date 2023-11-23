@@ -8,7 +8,7 @@
     <div v-show="showing" :class="panelBoarderClass"
          class=" min-w-fit bg-white absolute border rounded  mt-2 shadow-lg">
 
-      <tw-dropdown-item @selected="selected" :label="item.label" :icon="item.icon" :action="item.action" :color="color" v-for="(item,index) in items" :key="index"> </tw-dropdown-item>
+      <tw-dropdown-item @selected="selected"  :item="item" :color="color" v-for="(item,index) in items" :key="index"> </tw-dropdown-item>
 
     </div>
   </div>
