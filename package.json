@@ -1,6 +1,6 @@
 {
   "name": "vue3-tailwind-components",
-  "version": "0.1.8",
+  "version": "0.1.9",
   "description": "A library of Vue 3 components that use Tailwind",
   "keywords": [
     "vue3",
