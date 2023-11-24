@@ -353,7 +353,7 @@ function handleChangeTheme(){
       <h1 class="my-4 text-2xl">Text Area</h1>
       <div class="grid grid-cols-2 gap-4">
         <div>
-          <tw-textarea placeholder="a text area" :color="accentColor" v-model="textareaValue">A Textarea</tw-textarea>
+          <tw-textarea placeholder="a text area" :color="accentColor" v-model="textareaValue" description="This is a text area" :error="inputError">A Textarea</tw-textarea>
         </div>
         <div>
           <h4 class="text-primary-500 text-sm">The value of the text area</h4>
