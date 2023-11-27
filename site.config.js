@@ -5,13 +5,13 @@ import vue from '@vitejs/plugin-vue'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-    base:'./',
+    base:'',
     plugins: [
         vue(),
     ],
 
     build: {
-        outDir: './demo'
+        outDir: './demo',
     },
     resolve: {
         alias: {
