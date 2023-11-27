@@ -37,7 +37,7 @@ let buttonSquare = ref(false);
 let showRollout = ref(false);
 let dropDownResult = ref("")
 let showNotification = ref(false)
-let notificationMessage = ref("Message sent")
+let notificationMessage = ref("Message to send...")
 let notificationPosition = ref('center')
 let notificationLifetime = ref(6)
 let textareaValue = ref('');
@@ -71,7 +71,7 @@ const menuItems = [
 const dropdownItems = [
   {"label": "Branches", "icon": "code-branch", "action": "list_branches"},
   {"label": "User", "icon": "users", "action": "list_users"},
-  {"label": "No Icon",  "action": "list_users"}
+  {"label": "No Icon", "action": "list_users"}
 ]
 
 const notificationPositions = [
@@ -140,7 +140,7 @@ function rolloutShow() {
 }
 
 function showDropdownResult(item) {
-  dropDownResult.value = "You selected " +item.label ;
+  dropDownResult.value = "You selected " + item.label;
 }
 
 function notify() {
@@ -155,22 +155,25 @@ function handleChangedFile(file) {
   fileInfo.value = 'file:' + file.name + ' size:' + file.size + ' type:' + file.type
 }
 
-function handleChangeTheme(){
-  if(darkTheme.value){
+function handleChangeTheme() {
+  if (darkTheme.value) {
     document.documentElement.classList.add('dark')
 
-  }else{
+  } else {
     document.documentElement.classList.remove('dark')
   }
 }
 
 
-
-
 </script>
 <template>
   <div class="container">
-    <h1 class="text-3xl p-3">Welcome to the Vue tailwind component project</h1>
+    <h1 class="text-3xl p-3">Welcome to the Vue Tailwind Component Project</h1>
+    <div class="text-gray-700 dark:text-gray-100 p-4 bg-primary-100 dark:bg-primary-700 mt-2">
+      This is a rough and ready page that should give you a feel of what the Tailwind Vue components look and behave
+      like in a page. To learn more about how we hava approached Tailwind colors in the taiwlind.config.js file I
+      suggest you read the <a class="link" href="https://github.com/richardhulbert/vue3-tailwind-components#readme">documentation</a>.
+    </div>
     <section class=" p-4">
       <h1 class="my-2 text-2xl">Color control</h1>
       <div class="flex gap-4">
@@ -202,9 +205,9 @@ function handleChangeTheme(){
           <tw-input form-name-and-id="pageSize" type="number" v-model="pageSize">Page size</tw-input>
         </div>
         <div>
-          <tw-button @click="createProducts(0)" color="secondary" class="mt-5">
+          <tw-button @click="createProducts(0)" :color="accentColor" class="mt-5">
             <tw-icon icon="plus" class="mr-2"></tw-icon>
-            Create
+            Create records
           </tw-button>
         </div>
         <div class="flex-col">
@@ -243,13 +246,11 @@ function handleChangeTheme(){
         </div>
         <tw-modal :color="accentColor" v-model="modalShow">
           This is a modal that has a simple message
-
         </tw-modal>
       </div>
       <div class="flex-col">
         <h1 class="my-2 text-2xl">Rollouts</h1>
         <tw-button outline :color="accentColor" @click="rolloutShow">Show Rollout</tw-button>
-
         <tw-rollout z-index="50" width="w-10/12" :color="accentColor" v-model="showRollout">
           <div class="m-8 p-8 ">
             <tw-table :hover="hover" :heading-color="accentColor" :stripe-color="accentColor"
@@ -275,9 +276,14 @@ function handleChangeTheme(){
       <div class="">
         <h1 class=" relative my-2 text-2xl">Notification</h1>
         <div class="flex gap-2">
-          <tw-button :color="accentColor" size="sm" @click="notify" outline>Notify</tw-button>
-          <tw-input :color="accentColor" description="The message for the notification"
-                    v-model="notificationMessage"></tw-input>
+          <div class="flex-shrink">
+            <tw-button :color="accentColor"  @click="notify" >Notify</tw-button>
+          </div>
+<div class="flex-grow">
+  <tw-input :color="accentColor" description="The message for the notification"
+            v-model="notificationMessage"></tw-input>
+</div>
+
 
         </div>
         <div class="flex content-center  mt-2 gap-2">
@@ -314,7 +320,7 @@ function handleChangeTheme(){
           </tw-button>
         </div>
         <div>
-          <tw-button :color="accentColor" :outline="buttonOutline" variant="rounded" >
+          <tw-button :color="accentColor" :outline="buttonOutline" variant="round">
             Rounded button
           </tw-button>
         </div>
@@ -353,7 +359,9 @@ function handleChangeTheme(){
       <h1 class="my-4 text-2xl">Text Area</h1>
       <div class="grid grid-cols-2 gap-4">
         <div>
-          <tw-textarea placeholder="a text area" :color="accentColor" v-model="textareaValue" description="This is a text area" :error="inputError">A Textarea</tw-textarea>
+          <tw-textarea placeholder="a text area" :color="accentColor" v-model="textareaValue"
+                       description="This is a text area" :error="inputError">A Textarea
+          </tw-textarea>
         </div>
         <div>
           <h4 class="text-primary-500 text-sm">The value of the text area</h4>
@@ -375,7 +383,7 @@ function handleChangeTheme(){
           <tw-icon icon="person" class="mr-2"></tw-icon>
           Medium
         </tw-badge>
-        <tw-badge swatch="#990012">#990012</tw-badge>
+        <tw-badge swatch="#708024">#708024</tw-badge>
       </div>
     </section>
 
@@ -383,4 +391,10 @@ function handleChangeTheme(){
   </div>
 
 </template>
+<style scoped>
+a.link {
+  color: #0969da;
+  text-decoration: underline;
+}
+</style>
 

@@ -32,10 +32,10 @@ export default {
     variant:{
       type:String,
       default:'',
-      // validator(value) {
-      //   // The value must match one of these strings
-      //   return ['round', 'square'].includes(value)
-      // }
+      validator(value) {
+        // The value must match one of these strings
+        return ['round', 'square'].includes(value)
+      }
     }
   },
   computed: {
