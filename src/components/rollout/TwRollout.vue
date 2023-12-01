@@ -33,7 +33,7 @@ export default {
 
         zIndex:{
             type: String,
-            default: "50"
+            default: "20"
         },
         color: {
             type: String,

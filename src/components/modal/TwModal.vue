@@ -1,8 +1,8 @@
 <template>
   <div v-if="showing">
-    <div class="fixed inset-0 z-10 backdrop-blur-sm" :class="backgroundClass"></div>
-    <div class="fixed inset-0 z-50 flex items-center justify-center sm:p-0  animate-in fade-in zoom-in">
-      <div :class="modalClass" class=" overflow-hidden rounded-lg   shadow-xl w-full ">
+    <div class="fixed inset-0 z-30 backdrop-blur-sm" :class="backgroundClass"></div>
+    <div class="fixed inset-0 z-40 flex items-center justify-center sm:p-0  animate-in fade-in zoom-in">
+      <div :class="modalClass" class=" rounded-lg   shadow-xl w-full h-auto ">
 
         <div class="relative  ">
           <tw-icon v-if="!hideClose" @click="closeDialog" set="regular" :class="closeButtonClass"
@@ -13,7 +13,7 @@
               <h1 class="font-bold "> Modal title</h1>
             </slot>
           </div>
-          <div class="flex-1 p-4">
+          <div class="h-fit  p-4">
             <slot >
               <div class="mt-2 text-sm text-primary-400">This is the modals default content. Replace this with content in the body slot of the component.
               </div>

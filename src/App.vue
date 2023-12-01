@@ -246,6 +246,9 @@ function handleChangeTheme() {
         </div>
         <tw-modal :color="accentColor" v-model="modalShow">
           This is a modal that has a simple message
+          <tw-select label="Select a color" class="w-80" v-model="accentColor" :color="accentColor"
+                     :items="colors"></tw-select>
+
         </tw-modal>
       </div>
       <div class="flex-col">

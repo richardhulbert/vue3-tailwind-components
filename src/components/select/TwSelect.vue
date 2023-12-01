@@ -12,7 +12,7 @@
 
     <!-- Panel -->
     <div v-if="open"
-         class=" bg-white mt-1 animate-in slide-in-from-top-16 fade-in-20  absolute left-0 right-0 z-10  rounded-lg  text-left text-sm shadow-lg"
+         class="z-50 bg-white mt-1 animate-in slide-in-from-top-16 fade-in-20  absolute left-0 right-0  rounded-lg  text-left text-sm shadow-lg"
          :class="panelClass">
       <div>
         <tw-option :color="color" @selected="selectItem" v-for="(item,index) in items" :key="index" :label="item.label"
