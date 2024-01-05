@@ -34,7 +34,7 @@ export default {
       default:'',
       validator(value) {
         // The value must match one of these strings
-        return ['round', 'square'].includes(value)
+        return ['','round', 'square'].includes(value)
       }
     }
   },
