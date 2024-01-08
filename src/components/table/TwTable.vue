@@ -76,11 +76,11 @@ export default {
   },
   methods: {
     rowClass(ndx) {
-      let h = this.hover ?' hover:bg-'+this.hoverColor+'-300 dark:hover:bg-'+this.hoverColor+'-700':''
-      if(this.selectedIndex === ndx) h = ' bg-'+this.selectColor+'-300 dark:bg-'+this.selectColor+'-500'
-      if(this.striped && this.selectedIndex !== ndx) return ndx % 2 !== 0 ? 'bg-'+this.stripeColor+'-100 dark:bg-'+this.stripeColor+'-900 dark:text-gray-200'+h: ' dark:text-gray-200 '+h;
+      let h = this.hover ?' hover:bg-'+this.hoverColor+'-300 dark:hover:bg-'+this.hoverColor+'-700 dark:hover:text-white':''
+      if(this.selectedIndex === ndx) h = ' bg-'+this.selectColor+'-300 dark:bg-'+this.selectColor+'-400'
+      if(this.striped && this.selectedIndex !== ndx) return ndx % 2 !== 0 ? 'bg-'+this.stripeColor+'-100 dark:bg-'+this.stripeColor+'-800 dark:text-gray-200'+h: ' dark:text-gray-700 '+h;
 
-      return h+' dark:text-gray-200'
+      return h+' dark:text-gray-700'
     }
   },
 }

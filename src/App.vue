@@ -15,7 +15,8 @@ import {
   TwRollout,
   TwDropdown,
   TwNotification,
-  TwTextarea
+  TwTextarea,
+  TwCollapse
 } from "./components/";
 
 
@@ -185,7 +186,7 @@ function handleChangeTheme() {
 
     </section>
     <section class=" p-4">
-      <h1 class="my-2 text-2xl">Table</h1>
+      <tw-collapse label="Table Operations" :color="accentColor">
       <div class=" flex flex-row gap-3  p-3 bg-slate-100 dark:bg-slate-700">
         <div class="flex-col ">
           <tw-switch class="mt-6" :disabled="records.length===0" :color="accentColor" v-model="striped">
@@ -237,6 +238,7 @@ function handleChangeTheme() {
                       :num-of-pages="numOfPages"
                       class="mt-2"></tw-paginator>
       </div>
+      </tw-collapse>
     </section>
     <section class="flex flex-row gap-24 p-4">
       <div class="flex-col">
@@ -388,6 +390,20 @@ function handleChangeTheme() {
         </tw-badge>
         <tw-badge swatch="#708024">#708024</tw-badge>
       </div>
+    </section>
+    <section class="p-3 ">
+      <hr>
+      <h1 class="my-4 text-2xl">Collapse </h1>
+     <tw-collapse label="Click me" :color="accentColor">
+       <template #label>
+         <tw-icon class="mr-2" icon="rectangle-list" set="regular"></tw-icon>
+         Some hidden content
+       </template>
+       <h2 class="text-xl bg-primary-800">Some content</h2>
+       <p class="dark: bg-primary-800">
+         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad adipisci amet aperiam atque, cupiditate dolor doloribus ea eligendi exercitationem expedita fugit, illum impedit iste maiores odio, optio pariatur repellendus voluptas?
+       </p>
+     </tw-collapse>
     </section>
 
 
