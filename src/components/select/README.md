@@ -18,7 +18,7 @@ the label of the select to the model
 
 ```vue
 
-<tw-select :items="items" color="secondary" v-model="a_reactive_variable"></tw-select>
+<tw-select :items="items" color="secondary" v-model="a_reactive_variable" :error="some.form.error"></tw-select>
 
 ```
 ## Properties
@@ -30,6 +30,7 @@ the label of the select to the model
 | color            | String  |    no    |   'primary'   | The theme color of the select box and options                                       |
 | label            | String  |    no    |      ''       | Text of the select button if no value has been set                                  |
 | disabled         | Boolean |    no    |     false     | The select is disabled when set to true                                             |
+| error            | String  |    no    |      ''       | An error message (a non empty string will set the color to 'danger'                 |
 | form-name-and-id | String  |    no    | random string | Sets the id and name of the hidden select (for use in forms)                        |
 
 ## Events

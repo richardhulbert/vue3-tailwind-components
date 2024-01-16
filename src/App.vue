@@ -350,10 +350,13 @@ function handleChangeTheme() {
           <tw-input placeholder="Add an error to the Test input" color="danger"
                     v-model="inputError"></tw-input>
         </div>
-        <div>
+        <div class="block">
           <tw-input @changed="handleChangedFile" type="file" :color="accentColor"></tw-input>
         </div>
-
+<div>
+  <tw-select label="Select a color" class="w-80" v-model="accentColor" :color="accentColor"
+             :items="colors" :error="inputError" ></tw-select>
+</div>
         <div>
           <p>{{ fileInfo }}</p>
         </div>

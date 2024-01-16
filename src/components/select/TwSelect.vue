@@ -10,6 +10,8 @@
       <tw-icon :class="chevronClass" class="transition-transform" icon="chevron-down"></tw-icon>
     </button>
 
+    <p class="m-1 text-sm text-danger-500" v-if="hasError">{{error}}</p>
+
     <!-- Panel -->
     <div v-if="open"
          class="z-50 bg-white mt-1 animate-in slide-in-from-top-16 fade-in-20  absolute left-0 right-0  rounded-lg  text-left text-sm shadow-lg"
@@ -55,6 +57,10 @@ export default {
     formNameAndId: {
       type: String,
       default: (Math.random() + 1).toString(36).substring(5)
+    },
+    error:{
+      type:String,
+      default:''
     }
   },
   data() {
@@ -134,19 +140,25 @@ export default {
     }
   },
   computed: {
+    hasError(){
+      return this.error.length>0
+    },
     chevronClass() {
-      return this.open ? "rotate-180 text-" + this.color + '-500 dark:text-' + this.color + '-100' : "text-" + this.color + '-500 dark:text-' + this.color + '-100'
+      let color = this.hasError?'danger':this.color
+      return this.open ? "rotate-180 text-" + color + '-500 dark:text-' + color + '-100' : "text-" + color + '-500 dark:text-' + color + '-100'
     },
     calculatedValue() {
       return (this.items.length > 0 && this.selectedItemIndex > -1) ? this.items[this.selectedItemIndex].value : ''
     },
     buttonClass() {
       let op = this.disabled ? ' opacity-50 ' : ''
+      if(this.hasError) return 'border-danger-500 hover:bg-danger-100 text-danger-700 dark:bg-danger-500 dark:text-danger-100' + op
       return 'border-' + this.color + '-500 hover:bg-' + this.color + '-100 text-' + this.color + '-700 dark:bg-' + this.color + '-500 dark:text-' + this.color + '-100' + op
     },
     panelClass() {
       return 'bg-white dark:bg-' + this.color + '-500 border border-' + this.color + '-500';
     }
+
 
   },
 
