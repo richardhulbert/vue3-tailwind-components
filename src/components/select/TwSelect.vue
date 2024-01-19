@@ -40,8 +40,6 @@ export default {
       default: []
     },
     modelValue: {
-      type: String,
-      default: ''
     },
     disabled: {
       type: Boolean,
@@ -136,6 +134,19 @@ export default {
           this.dLabel = this.label
         }
 
+      },
+      // force eager callback execution
+      immediate: true
+    },
+    items:{
+      handler(newVal) {
+        this.selectedItemIndex = _.findIndex(newVal, ['value', this.modelValue])
+        if (this.selectedItemIndex >= 0) {
+          this.dLabel = this.items[this.selectedItemIndex].label
+        } else {
+          //this means that value is not in the list show the first label
+          this.dLabel = this.label
+        }
       },
       // force eager callback execution
       immediate: true

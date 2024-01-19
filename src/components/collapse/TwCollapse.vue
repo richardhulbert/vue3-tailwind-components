@@ -1,7 +1,7 @@
 <template>
   <div class="relative ">
 
-    <div @click="toggleSelect" type="button"
+    <div @click.prevent="toggleSelect" type="button"
          :class="buttonClass"
          class=" w-full flex gap-2 cursor-pointer border  px-4 py-2 text-center text-sm font-medium  transition-all  disabled:cursor-not-allowed ">
       <div class="text-left flex-grow">

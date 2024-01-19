@@ -62,12 +62,17 @@ const colors = [
   {label: 'Info', value: 'info'}
 ]
 
-const eg_list = [
-  {label: 'One', value:1},
-  {label: 'Two', value: 2},
-  {label: 'Three', value: 3},
-  {label: 'Four', value: 4},
-]
+let eg_list = ref([
+])
+
+setTimeout(()=>{
+  eg_list.value = [
+    {label: 'One', value:1},
+    {label: 'Two', value: 2},
+    {label: 'Three', value: 3},
+    {label: 'Four', value: 4}
+  ]
+},1000)
 
 const eg_list_selected = ref(2)
 
