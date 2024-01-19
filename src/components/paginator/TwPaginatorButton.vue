@@ -6,7 +6,7 @@
 
 <script>
 export default {
-
+name:'TwPaginatorButton',
   props: {
     buttonPosition: {
       type: String,
@@ -50,4 +50,3 @@ export default {
 }
 </script>
 
->

@@ -4,7 +4,9 @@
 
 <script>
 export default {
+  name:'TwButton',
   props: {
+
     color: {
       type: String,
       default: 'primary'

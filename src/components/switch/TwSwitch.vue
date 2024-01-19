@@ -17,6 +17,7 @@
 
 <script>
 export default {
+  name:'TwSwitch',
   props: {
     color: {
       type: String,

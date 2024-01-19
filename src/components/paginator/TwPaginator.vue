@@ -14,8 +14,8 @@
 import TwPaginatorButton from "@/components/paginator/TwPaginatorButton.vue";
 
 export default {
+  name:'TwPaginator',
   components: {TwPaginatorButton: TwPaginatorButton},
-
   props: {
     numOfPages: {
       type: Number,

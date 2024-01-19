@@ -27,11 +27,11 @@
 </template>
 
 <script>
-import {TwIcon, TwOption} from "@/components";
+import {TwCollapse, TwIcon, TwOption} from "@/components";
 import {_} from 'lodash';
 
 export default {
-
+name:'TwCollapse',
   components: {
     TwIcon, TwOption
   },

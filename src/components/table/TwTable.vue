@@ -19,6 +19,7 @@
 
 <script>
 export default {
+  name:'TwTable',
   props: {
     items: {
       type: Array,

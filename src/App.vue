@@ -62,6 +62,15 @@ const colors = [
   {label: 'Info', value: 'info'}
 ]
 
+const eg_list = [
+  {label: 'One', value:1},
+  {label: 'Two', value: 2},
+  {label: 'Three', value: 3},
+  {label: 'Four', value: 4},
+]
+
+const eg_list_selected = ref(2)
+
 const menuItems = [
   {label: 'People', value: '/people', icon: 'users'},
   {label: 'Roles', value: '/roles', icon: 'user-shield'},
@@ -187,57 +196,57 @@ function handleChangeTheme() {
     </section>
     <section class=" p-4">
       <tw-collapse label="Table Operations" :color="accentColor">
-      <div class=" flex flex-row gap-3  p-3 bg-slate-100 dark:bg-slate-700">
-        <div class="flex-col ">
-          <tw-switch class="mt-6" :disabled="records.length===0" :color="accentColor" v-model="striped">
-            Striped?
-          </tw-switch>
-        </div>
-        <div class="flex-col">
-          <tw-switch class="mt-6" :disabled="records.length===0" :color="accentColor" v-model="hover">Hover?
-          </tw-switch>
-        </div>
-        <div class="flex-col">
-          <tw-input form-name-and-id="productCount" type="number" v-model="numOfProducts">Number of product to
-            create
-          </tw-input>
-        </div>
-        <div class="flex-col">
-          <tw-input form-name-and-id="pageSize" type="number" v-model="pageSize">Page size</tw-input>
-        </div>
-        <div>
-          <tw-button @click="createProducts(0)" :color="accentColor" class="mt-5">
-            <tw-icon icon="plus" class="mr-2"></tw-icon>
-            Create records
-          </tw-button>
-        </div>
-        <div class="flex-col">
-          <tw-button :disabled="records.length===0" @click="clearProducts" color="primary" outline
-                     class="mt-5">
-            <tw-icon icon="trash" class="mr-2"></tw-icon>
-            Clear
-          </tw-button>
-        </div>
+        <div class=" flex flex-row gap-3  p-3 bg-slate-100 dark:bg-slate-700">
+          <div class="flex-col ">
+            <tw-switch class="mt-6" :disabled="records.length===0" :color="accentColor" v-model="striped">
+              Striped?
+            </tw-switch>
+          </div>
+          <div class="flex-col">
+            <tw-switch class="mt-6" :disabled="records.length===0" :color="accentColor" v-model="hover">Hover?
+            </tw-switch>
+          </div>
+          <div class="flex-col">
+            <tw-input form-name-and-id="productCount" type="number" v-model="numOfProducts">Number of product to
+              create
+            </tw-input>
+          </div>
+          <div class="flex-col">
+            <tw-input form-name-and-id="pageSize" type="number" v-model="pageSize">Page size</tw-input>
+          </div>
+          <div>
+            <tw-button @click="createProducts(0)" :color="accentColor" class="mt-5">
+              <tw-icon icon="plus" class="mr-2"></tw-icon>
+              Create records
+            </tw-button>
+          </div>
+          <div class="flex-col">
+            <tw-button :disabled="records.length===0" @click="clearProducts" color="primary" outline
+                       class="mt-5">
+              <tw-icon icon="trash" class="mr-2"></tw-icon>
+              Clear
+            </tw-button>
+          </div>
 
-      </div>
-      <div class=" flex-row ml-3 text-slate-500">{{ records.length }} Records</div>
-      <div class=" ml-2  w-full">
-        <tw-table :hover="hover" :heading-color="accentColor" :stripe-color="accentColor"
-                  :border-color="accentColor"
-                  :hover-color="accentColor" :striped="striped" :headings="headings" :items="products"
-                  :selected-index="selectedRow">
-          <template v-slot:link="row">
-            <a :href="row.item.link">{{ row.item.link }}</a>
-          </template>
-          <template v-slot:id="row">
-            <tw-button @click="selectRow(row.item.id)" size="sm">select</tw-button>
-          </template>
+        </div>
+        <div class=" flex-row ml-3 text-slate-500">{{ records.length }} Records</div>
+        <div class=" ml-2  w-full">
+          <tw-table :hover="hover" :heading-color="accentColor" :stripe-color="accentColor"
+                    :border-color="accentColor"
+                    :hover-color="accentColor" :striped="striped" :headings="headings" :items="products"
+                    :selected-index="selectedRow">
+            <template v-slot:link="row">
+              <a :href="row.item.link">{{ row.item.link }}</a>
+            </template>
+            <template v-slot:id="row">
+              <tw-button @click="selectRow(row.item.id)" size="sm">select</tw-button>
+            </template>
 
-        </tw-table>
-        <tw-paginator :color="accentColor" @paginate="paginate" :current-page="currentPage"
-                      :num-of-pages="numOfPages"
-                      class="mt-2"></tw-paginator>
-      </div>
+          </tw-table>
+          <tw-paginator :color="accentColor" @paginate="paginate" :current-page="currentPage"
+                        :num-of-pages="numOfPages"
+                        class="mt-2"></tw-paginator>
+        </div>
       </tw-collapse>
     </section>
     <section class="flex flex-row gap-24 p-4">
@@ -282,12 +291,12 @@ function handleChangeTheme() {
         <h1 class=" relative my-2 text-2xl">Notification</h1>
         <div class="flex gap-2">
           <div class="flex-shrink">
-            <tw-button :color="accentColor"  @click="notify" >Notify</tw-button>
+            <tw-button :color="accentColor" @click="notify">Notify</tw-button>
           </div>
-<div class="flex-grow">
-  <tw-input :color="accentColor" description="The message for the notification"
-            v-model="notificationMessage"></tw-input>
-</div>
+          <div class="flex-grow">
+            <tw-input :color="accentColor" description="The message for the notification"
+                      v-model="notificationMessage"></tw-input>
+          </div>
 
 
         </div>
@@ -353,10 +362,10 @@ function handleChangeTheme() {
         <div class="block">
           <tw-input @changed="handleChangedFile" type="file" :color="accentColor"></tw-input>
         </div>
-<div>
-  <tw-select label="Select a color" class="w-80" v-model="accentColor" :color="accentColor"
-             :items="colors" :error="inputError" ></tw-select>
-</div>
+        <div>
+          <tw-select label="Pick a number" class="w-80" v-model="eg_list_selected" :color="accentColor"
+                     :items="eg_list" :error="inputError"></tw-select>
+        </div>
         <div>
           <p>{{ fileInfo }}</p>
         </div>
@@ -397,16 +406,18 @@ function handleChangeTheme() {
     <section class="p-3 ">
       <hr>
       <h1 class="my-4 text-2xl">Collapse </h1>
-     <tw-collapse label="Click me" :color="accentColor">
-       <template #label>
-         <tw-icon class="mr-2" icon="rectangle-list" set="regular"></tw-icon>
-         Some hidden content
-       </template>
-       <h2 class="text-xl bg-primary-800">Some content</h2>
-       <p class="dark: bg-primary-800">
-         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad adipisci amet aperiam atque, cupiditate dolor doloribus ea eligendi exercitationem expedita fugit, illum impedit iste maiores odio, optio pariatur repellendus voluptas?
-       </p>
-     </tw-collapse>
+      <tw-collapse label="Click me" :color="accentColor">
+        <template #label>
+          <tw-icon class="mr-2" icon="rectangle-list" set="regular"></tw-icon>
+          Some hidden content
+        </template>
+        <h2 class="text-xl bg-primary-800">Some content</h2>
+        <p class="dark: bg-primary-800">
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad adipisci amet aperiam atque, cupiditate dolor
+          doloribus ea eligendi exercitationem expedita fugit, illum impedit iste maiores odio, optio pariatur
+          repellendus voluptas?
+        </p>
+      </tw-collapse>
     </section>
 
 

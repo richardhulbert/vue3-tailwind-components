@@ -1,6 +1,7 @@
 <script>
 export default {
   name: "TwTextarea",
+  emits: ['changed','update:modelValue'],
   props: {
     color: {
       type: String,

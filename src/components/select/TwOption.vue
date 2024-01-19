@@ -3,8 +3,12 @@
 </template>
 
 <script>
+import {TwOption} from "@/components";
+
 export default {
+  name:'TwOption',
   props: {
+
     label: {
       type: String,
       default: 'no data'

@@ -36,7 +36,7 @@
 import {TwButton, TwIcon} from "../";
 
 export default {
-
+name:'TwModal',
   props: {
     modelValue: {
       type: Boolean,

@@ -19,9 +19,8 @@
 <script>
 import {TwIcon} from "@/components";
 export default {
-  emits:{
-    changed:null
-  },
+  name:'TwInput',
+  emits: ['changed','update:modelValue'],
   components: {
     TwIcon,
   },
