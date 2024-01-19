@@ -10,7 +10,7 @@
       <tw-icon :class="chevronClass" class="transition-transform" icon="chevron-down"></tw-icon>
     </button>
 
-    <p class="m-1 text-sm text-danger-500" v-if="hasError">{{error}}</p>
+    <p class="m-1 text-sm text-danger-500" v-if="hasError">{{ error }}</p>
 
     <!-- Panel -->
     <div v-if="open"
@@ -29,7 +29,8 @@ import {TwIcon, TwOption} from "@/components";
 import {_} from 'lodash';
 
 export default {
-
+  name:'TwSelect',
+  emits: ['changed','update:model-value'],
   components: {
     TwIcon, TwOption
   },
@@ -58,9 +59,9 @@ export default {
       type: String,
       default: (Math.random() + 1).toString(36).substring(5)
     },
-    error:{
-      type:String,
-      default:''
+    error: {
+      type: String,
+      default: ''
     }
   },
   data() {
@@ -112,7 +113,7 @@ export default {
       this.dLabel = this.items[index].label
       this.toggleSelect()
       if (this.selectedItemIndex >= 0) {
-        this.$emit('update:modelValue', this.items[index].value)
+        this.$emit('update:model-value', this.items[index].value)
         this.$emit('changed', this.items[index].value)
       }
     },
@@ -131,7 +132,8 @@ export default {
         if (this.selectedItemIndex >= 0) {
           this.dLabel = this.items[this.selectedItemIndex].label
         } else {
-          this.dLabel = newVal
+          //this means that value is not in the list show the first label
+          this.dLabel = this.label
         }
 
       },
@@ -140,11 +142,11 @@ export default {
     }
   },
   computed: {
-    hasError(){
-      return this.error.length>0
+    hasError() {
+      return this.error.length > 0
     },
     chevronClass() {
-      let color = this.hasError?'danger':this.color
+      let color = this.hasError ? 'danger' : this.color
       return this.open ? "rotate-180 text-" + color + '-500 dark:text-' + color + '-100' : "text-" + color + '-500 dark:text-' + color + '-100'
     },
     calculatedValue() {
@@ -152,7 +154,7 @@ export default {
     },
     buttonClass() {
       let op = this.disabled ? ' opacity-50 ' : ''
-      if(this.hasError) return 'border-danger-500 hover:bg-danger-100 text-danger-700 dark:bg-danger-500 dark:text-danger-100' + op
+      if (this.hasError) return 'border-danger-500 hover:bg-danger-100 text-danger-700 dark:bg-danger-500 dark:text-danger-100' + op
       return 'border-' + this.color + '-500 hover:bg-' + this.color + '-100 text-' + this.color + '-700 dark:bg-' + this.color + '-500 dark:text-' + this.color + '-100' + op
     },
     panelClass() {
