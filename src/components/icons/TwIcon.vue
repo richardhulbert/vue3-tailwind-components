@@ -16,7 +16,7 @@ const props=defineProps({
     type: String,
     validator(value) {
       // The value must match one of these strings
-      return ['regular', 'solid'].includes(value)
+      return ['regular', 'solid','brand'].includes(value)
     },
     default() {
       return 'solid'

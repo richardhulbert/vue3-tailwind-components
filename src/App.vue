@@ -44,6 +44,7 @@ let notificationLifetime = ref(6)
 let textareaValue = ref('');
 let selectedRow = ref(-1)
 let fileInfo = ref('')
+let rolloutAlignRight=ref(false);
 const darkTheme = ref(false)
 
 let numOfPages = computed(() => {
@@ -267,10 +268,11 @@ function handleChangeTheme() {
 
         </tw-modal>
       </div>
-      <div class="flex-col">
+      <div class="flex-col gap-2">
         <h1 class="my-2 text-2xl">Rollouts</h1>
         <tw-button outline :color="accentColor" @click="rolloutShow">Show Rollout</tw-button>
-        <tw-rollout z-index="50" width="w-10/12" :color="accentColor" v-model="showRollout">
+        <tw-switch size="sm" v-model="rolloutAlignRight">From right</tw-switch>
+        <tw-rollout z-index="50" width="w-10/12" :align-right="rolloutAlignRight" :color="accentColor" v-model="showRollout">
           <div class="m-8 p-8 ">
             <tw-table :hover="hover" :heading-color="accentColor" :stripe-color="accentColor"
                       :border-color="accentColor"
