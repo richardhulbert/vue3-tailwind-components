@@ -44,6 +44,10 @@ name:'TwCollapse',
       type: String,
       default: "Select"
     },
+    expanded:{
+      type:Boolean,
+      default:false
+    }
 
   },
   data() {
@@ -60,13 +64,16 @@ name:'TwCollapse',
   },
   computed: {
     chevronClass() {
-      return this.open ? "rotate-180 text-" + this.color + '-500 dark:text-' + this.color + '-100' : "text-" + this.color + '-500 dark:text-' + this.color + '-100'
+      return this.open ? "rotate-180 text-" + this.color + '-500 dark:text-' + this.color + '-200' : "text-" + this.color + '-500 dark:text-' + this.color + '-100'
     },
     buttonClass() {
       let op = this.disabled ? ' opacity-50 ' : ''
-      return 'border-' + this.color + '-100 hover:bg-' + this.color + '-100 text-' + this.color + '-700 dark:bg-' + this.color + '-500 dark:text-' + this.color + '-100' + op
+      return 'bg-' + this.color + '-200 hover:bg-' + this.color + '-300 text-' + this.color + '-700 dark:bg-' + this.color + '-500 dark:text-' + this.color + '-100 dark:hover:bg-'+this.color+'-600' + op
     }
 
+  },
+  mounted() {
+ this.open=this.expanded
   },
 
 }

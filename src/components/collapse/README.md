@@ -26,10 +26,11 @@ or
 ```
 ## Properties
 
-| Property         |  Type   | Required |    default    | notes                                                                               |
-|:-----------------|:-------:|:--------:|:-------------:|:------------------------------------------------------------------------------------|
-| color            | String  |    no    |   'primary'   | The theme color of the select box and options                                       |
-| label            | String  |    no    |      ''       | Text of the select button if no value has been set                                  |
+| Property |  Type   | Required |  default  | notes                                              |
+|:---------|:-------:|:--------:|:---------:|:---------------------------------------------------|
+| color    | String  |    no    | 'primary' | The theme color of the select box and options      |
+| label    | String  |    no    |    ''     | Text of the select button if no value has been set |
+| expanded | Boolean |    no    |   false   | Whether the collapse should be expanded            |
 
 ## Slots
 This component has two slots : the `default` slot and the `label` slot you can set the label as a property or slot if you want to use icons etc

@@ -413,13 +413,13 @@ function handleChangeTheme() {
     <section class="p-3 ">
       <hr>
       <h1 class="my-4 text-2xl">Collapse </h1>
-      <tw-collapse label="Click me" :color="accentColor">
+      <tw-collapse label="Click me" :color="accentColor" :expanded="true">
         <template #label>
           <tw-icon class="mr-2" icon="rectangle-list" set="regular"></tw-icon>
           Some hidden content
         </template>
-        <h2 class="text-xl bg-primary-800">Some content</h2>
-        <p class="dark: bg-primary-800">
+        <h2 class="text-xl dark:text-white dark:bg-primary-800">Some content</h2>
+        <p class="dark:bg-primary-800 bg-white">
           Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad adipisci amet aperiam atque, cupiditate dolor
           doloribus ea eligendi exercitationem expedita fugit, illum impedit iste maiores odio, optio pariatur
           repellendus voluptas?
