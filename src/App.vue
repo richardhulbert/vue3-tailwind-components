@@ -46,6 +46,7 @@ let selectedRow = ref(-1)
 let fileInfo = ref('')
 let rolloutAlignRight=ref(false);
 const darkTheme = ref(false)
+const blurRollout= ref(true)
 
 let numOfPages = computed(() => {
   return Math.ceil(records.value.length / pageSize.value)
@@ -271,8 +272,9 @@ function handleChangeTheme() {
       <div class="flex-col gap-2">
         <h1 class="my-2 text-2xl">Rollouts</h1>
         <tw-button outline :color="accentColor" @click="rolloutShow">Show Rollout</tw-button>
+        <tw-switch size="sm" v-model="blurRollout">Blur Background</tw-switch>
         <tw-switch size="sm" v-model="rolloutAlignRight">From right</tw-switch>
-        <tw-rollout z-index="50" width="w-10/12" :align-right="rolloutAlignRight" :color="accentColor" v-model="showRollout">
+        <tw-rollout z-index="50" width="w-10/12" :align-right="rolloutAlignRight" :color="accentColor" v-model="showRollout" :blur="blurRollout">
           <div class="m-8 p-8 ">
             <tw-table :hover="hover" :heading-color="accentColor" :stripe-color="accentColor"
                       :border-color="accentColor"

@@ -14,4 +14,5 @@ This component rolls out from the left hand side or from the top on the right ha
 | width       | String  |    no    |  'w-3/4'  | How far across in Tailwind terms the rollout covers the screen      |
 | align-right | Boolean |    no    |   false   | Moved the rollout so it comes from the top down the right hand side |
 | z-index     | Number  |    no    |    10     | The z-index of the rollout                                          |
+| blur        | Boolean |    no    |   true    | Set the blur of the background (on by default)                      |
 

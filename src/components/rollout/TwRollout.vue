@@ -1,6 +1,6 @@
 <template>
   <div :class="transformClass" class="absolute transition-transform duration-300 top-0 left-0 right-0 bottom-0">
-    <div class="fixed inset-0 backdrop-blur-sm" @click="closeDialog"></div>
+    <div :class="backgroundClass" class="fixed inset-0" @click="closeDialog"></div>
 
     <div :class="compClass" class="absolute min-h-screen h-fit">
       <tw-icon @click="closeDialog" set="regular" :class="closeButtonClass"
@@ -43,6 +43,10 @@ export default {
       type: String,
       default: 'primary'
     },
+    blur:{
+      type:Boolean,
+      default:true
+    }
   },
   methods: {
     handleInput() {
@@ -73,6 +77,12 @@ export default {
     closeButtonClass() {
       return 'text-' + this.color + '-500'
     },
+
+    backgroundClass(){
+      return this.blur?'backdrop-blur-sm':''
+    }
+
+
   },
   watch: {
     modelValue: {
