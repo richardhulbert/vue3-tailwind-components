@@ -16,7 +16,8 @@ import {
   TwDropdown,
   TwNotification,
   TwTextarea,
-  TwCollapse
+  TwCollapse,
+  TwRange
 } from "./components/";
 
 
@@ -44,9 +45,12 @@ let notificationLifetime = ref(6)
 let textareaValue = ref('');
 let selectedRow = ref(-1)
 let fileInfo = ref('')
-let rolloutAlignRight=ref(false);
+let rolloutAlignRight = ref(false);
 const darkTheme = ref(false)
-const blurRollout= ref(true)
+const blurRollout = ref(true)
+const rangeValue = ref(0)
+const rangeStep = ref(1)
+const rangeShowLabels = ref(true)
 
 let numOfPages = computed(() => {
   return Math.ceil(records.value.length / pageSize.value)
@@ -64,17 +68,16 @@ const colors = [
   {label: 'Info', value: 'info'}
 ]
 
-let eg_list = ref([
-])
+let eg_list = ref([])
 
-setTimeout(()=>{
+setTimeout(() => {
   eg_list.value = [
-    {label: 'One', value:1},
+    {label: 'One', value: 1},
     {label: 'Two', value: 2},
     {label: 'Three', value: 3},
     {label: 'Four', value: 4}
   ]
-},1000)
+}, 1000)
 
 const eg_list_selected = ref(2)
 
@@ -274,7 +277,8 @@ function handleChangeTheme() {
         <tw-button outline :color="accentColor" @click="rolloutShow">Show Rollout</tw-button>
         <tw-switch size="sm" v-model="blurRollout">Blur Background</tw-switch>
         <tw-switch size="sm" v-model="rolloutAlignRight">From right</tw-switch>
-        <tw-rollout z-index="50" width="w-10/12" :align-right="rolloutAlignRight" :color="accentColor" v-model="showRollout" :blur="blurRollout">
+        <tw-rollout z-index="50" width="w-10/12" :align-right="rolloutAlignRight" :color="accentColor"
+                    v-model="showRollout" :blur="blurRollout">
           <div class="m-8 p-8 ">
             <tw-table :hover="hover" :heading-color="accentColor" :stripe-color="accentColor"
                       :border-color="accentColor"
@@ -378,6 +382,24 @@ function handleChangeTheme() {
         <div>
           <p>{{ fileInfo }}</p>
         </div>
+
+      </div>
+      <h1 class="my-4 text-2xl">Range</h1>
+      <div class="flex gap-8">
+        <div class="flex-grow">
+          <tw-range :color="accentColor" class="w-full" min="-50" max="50" v-model="rangeValue" :step="rangeStep" :show-labels="rangeShowLabels"><span class="text-primary-500 dark:text-white">A range slider</span></tw-range>
+        </div>
+        <div>
+          <tw-input v-model="rangeValue">Range value</tw-input>
+        </div>
+        <div>
+          <tw-input v-model="rangeStep">Step values</tw-input>
+        </div>
+        <div>
+          Show labels
+          <tw-switch v-model="rangeShowLabels">Labels</tw-switch>
+        </div>
+
       </div>
     </section>
     <section class="p-3 ">

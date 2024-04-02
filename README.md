@@ -12,11 +12,14 @@ This is a simple set of Vue 3, Tailwind based components. At the moment these co
 * [Dropdown](./src/components/dropdown/README.md)
 * [Notication (Toast)](./src/components/notification/README.md)
 * [Collapse](./src/components/collapse/README.md)
+
 * Form elements
 *
     * [Select](./src/components/select/README.md)
 *
     * [Input](./src/components/input/README.md)
+
+    * [Range (slider)](./src/components/range/README.md)
 *
     * [Textarea](./src/components/textarea/README.md)
 *

@@ -20,6 +20,10 @@ module.exports = {
       variants:['file','dark']
     },
     {
+      pattern: /accent-(\w+)-(\d00)/,
+      variants:['file','dark']
+    },
+    {
       pattern: /placeholder-(\w+)-(\d00)/,
     },
 

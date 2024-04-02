@@ -13,6 +13,7 @@ export {default as TwDropdown} from './dropdown/TwDropdown.vue'
 export {default as TwNotification} from './notification/TwNotification.vue'
 export {default as TwTextarea} from './textarea/TwTextarea.vue'
 export {default as TwCollapse} from './collapse/TwCollapse.vue'
+export {default as TwRange} from './range/TwRange.vue'
 
 
 
