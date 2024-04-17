@@ -3,6 +3,7 @@
 This is a simple set of Vue 3, Tailwind based components. At the moment these consist of:
 
 * [Button](./src/components/button/README.md)
+* [Button Group](./src/components/buttonGroup/README.md)
 * [Badge](./src/components/badge/README.md)
 * [Table](./src/components/table/README.md)
 * [Paginator](./src/components/paginator/README.md)
@@ -43,44 +44,52 @@ classes that are computed in the components.
 Here is a boilerplate tailwind config:
 
 ```javascript
-/** @type {import('tailwindcss').Config} */
 const colors = require('tailwindcss/colors')
 module.exports = {
-    content: [
-        "./index.html",
-        "./src/**/*.{js,ts,jsx,vue}",
-        "./node_modules/vue3-tailwind-components/dist/vue3-tailwind-components.es.js"
-    ],
-    safelist: [
-        {
-            pattern: /bg-(primary|secondary|warning|success|danger|info)-(\d00)/,
-            variants: ['hover', 'focus', 'file', 'dark', 'dark:hover'],
-        },
-        {
-            pattern: /border-(primary|secondary|warning|success|danger|info)-(\d00)/,
-            variants: ['dark', 'dark:hover'],
-        },
-        {
-            pattern: /text-(primary|secondary|warning|success|danger|info)-(\d00)/,
-            variants: ['file', 'dark']
-        },
-        {
-            pattern: /placeholder-(\w+)-(\d00)/,
-        },
-    ],
-    theme: {
-        extend: {
-            colors: {
-                primary: colors.slate,
-                secondary: colors.lime,
-                warning: colors.amber,
-                success: colors.green,
-                danger: colors.red,
-                info: colors.indigo
-            }
-        },
+  darkMode: 'class',
+  content: [
+    "./index.html",
+    "./src/**/*.{js,ts,jsx,vue}",
+  ],
+  safelist: [
+    {
+      pattern: /bg-(primary|secondary|warning|success|danger|info)-(\d00)/,
+      variants:  ['hover', 'focus', 'file','dark', 'dark:hover'],
     },
-    plugins: [require("tailwindcss-animate")],
+    {
+      pattern: /border-(primary|secondary|warning|success|danger|info)-(\d00)/,
+      variants:  ['dark', 'dark:hover'],
+    },
+    {
+      pattern: /divide-(primary|secondary|warning|success|danger|info)-(\d00)/,
+      variants:  ['dark', 'dark:hover'],
+    },
+    {
+      pattern: /text-(\w+)-(\d00)/,
+      variants:['file','dark']
+    },
+    {
+      pattern: /accent-(\w+)-(\d00)/,
+      variants:['file','dark']
+    },
+    {
+      pattern: /placeholder-(\w+)-(\d00)/,
+    },
+
+  ],
+  theme: {
+    extend: {
+      colors:{
+        primary:colors.slate,
+        secondary:colors.lime,
+        warning:colors.amber,
+        success:colors.green,
+        danger:colors.red,
+        info:colors.indigo
+      }
+    },
+  },
+  plugins: [require("tailwindcss-animate")],
 }
 ```
 
@@ -110,23 +119,32 @@ If you want to use every color that Tailwind supply in their default theme you c
 ```javascript
  ...
 safelist: [
-    {
-        pattern: /bg-(\w+)-(\d00)/,
-        variants: ['hover', 'focus', 'file', 'dark', 'dark:hover'],
-    },
-    {
-        pattern: /border-(\w+)-(\d00)/,
-        variants: ['dark', 'dark:hover'],
-    },
-    {
-        pattern: /text-(\w+)-(\d00)/,
-        variants: ['file', 'dark']
-    },
-    {
-        pattern: /placeholder-(\w+)-(\d00)/,
-    },
+  {
+    pattern: /bg-(primary|secondary|warning|success|danger|info)-(\d00)/,
+    variants:  ['hover', 'focus', 'file','dark', 'dark:hover'],
+  },
+  {
+    pattern: /border-(primary|secondary|warning|success|danger|info)-(\d00)/,
+    variants:  ['dark', 'dark:hover'],
+  },
+  {
+    pattern: /divide-(primary|secondary|warning|success|danger|info)-(\d00)/,
+    variants:  ['dark', 'dark:hover'],
+  },
+  {
+    pattern: /text-(\w+)-(\d00)/,
+    variants:['file','dark']
+  },
+  {
+    pattern: /accent-(\w+)-(\d00)/,
+    variants:['file','dark']
+  },
+  {
+    pattern: /placeholder-(\w+)-(\d00)/,
+  },
+
 ],
-...
+
 ```
 
 This tells Tailwind - Do not remove any color classes for background, border or text (that is over 2000!) from the CSS.

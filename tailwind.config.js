@@ -16,6 +16,10 @@ module.exports = {
       variants:  ['dark', 'dark:hover'],
     },
     {
+      pattern: /divide-(primary|secondary|warning|success|danger|info)-(\d00)/,
+      variants:  ['dark', 'dark:hover'],
+    },
+    {
       pattern: /text-(\w+)-(\d00)/,
       variants:['file','dark']
     },

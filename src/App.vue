@@ -1,4 +1,4 @@
-<script setup>
+<script setup xmlns:tw-button-group="http://www.w3.org/1999/html">
 import {computed, ref} from "vue";
 import _ from 'lodash'
 import {faker} from '@faker-js/faker';
@@ -17,7 +17,8 @@ import {
   TwNotification,
   TwTextarea,
   TwCollapse,
-  TwRange
+  TwRange,
+    TwButtonGroup
 } from "./components/";
 
 
@@ -357,10 +358,14 @@ function handleChangeTheme() {
             Toggle button
           </tw-button>
         </div>
+        <div>
+          <tw-button-group :color="accentColor" :items="colors" v-model="accentColor"></tw-button-group>
+        </div>
 
       </div>
 
     </section>
+
     <section class="p-3 ">
       <hr>
       <h1 class="my-4 text-2xl">Input</h1>
