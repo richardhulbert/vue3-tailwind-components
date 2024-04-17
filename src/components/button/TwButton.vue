@@ -38,7 +38,16 @@ export default {
         // The value must match one of these strings
         return ['','round', 'square'].includes(value)
       }
+    },
+    selected:{
+      type:Boolean,
+      default:false
+    },
+    selectedColor:{
+      type:String,
+      default:'info'
     }
+
   },
   computed: {
     sizeClass(){
@@ -59,12 +68,13 @@ export default {
     },
     bgcolor() {
       let op = this.disabled? ' opacity-50':''
-      let cls = 'bg-'+this.color+'-500 hover:bg-'+this.color+'-700 text-white border-'+this.color+'-500'
+      let bg_color = this.selected? this.selectedColor:this.color
+      let cls = 'bg-'+bg_color+'-500 hover:bg-'+bg_color+'-700 text-white border-'+bg_color+'-500'
       if(this.outline){
         if(this.menu){
-          cls = 'hover:bg-'+this.color+'-500 text-'+this.color+'-500 hover:text-white'
+          cls = 'hover:bg-'+bg_color+'-500 text-'+bg_color+'-500 hover:text-white'
         }else{
-          cls = 'border-'+this.color+'-500 hover:bg-'+this.color+'-500 text-'+this.color+'-500 hover:text-white border'
+          cls = 'border-'+bg_color+'-500 hover:bg-'+bg_color+'-500 text-'+bg_color+'-500 hover:text-white border'
         }
 
       }

@@ -36,6 +36,7 @@ let inputError = ref('');
 let inputDisabled = ref(false);
 let buttonOutline = ref(false);
 let buttonSquare = ref(false);
+let buttonSelected = ref(false);
 let showRollout = ref(false);
 let dropDownResult = ref("")
 let showNotification = ref(false)
@@ -349,6 +350,11 @@ function handleChangeTheme() {
         <div>
           <tw-button :color="accentColor" :outline="buttonOutline" variant="round">
             Rounded button
+          </tw-button>
+        </div>
+        <div>
+          <tw-button @click="buttonSelected=!buttonSelected" :color="accentColor" :outline="buttonOutline" :selected="buttonSelected">
+            Toggle button
           </tw-button>
         </div>
 
