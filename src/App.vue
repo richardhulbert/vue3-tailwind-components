@@ -62,12 +62,12 @@ const buttonVariant = computed(() => {
   return buttonSquare.value ? 'square' : ''
 })
 const colors = [
-  {label: 'Primary', value: 'primary'},
-  {label: 'Secondary', value: 'secondary'},
-  {label: 'Warning', value: 'warning'},
-  {label: 'Success', value: 'success'},
-  {label: 'Danger', value: 'danger'},
-  {label: 'Info', value: 'info'}
+  {label: 'Primary', value: 'primary', icon:'star'},
+  {label: 'Secondary', value: 'secondary', icon:'dice-two'},
+  {label: 'Warning', value: 'warning', icon:'triangle-exclamation'},
+  {label: 'Success', value: 'success', icon:'circle-check'},
+  {label: 'Danger', value: 'danger', icon:'radiation'},
+  {label: 'Info', value: 'info', icon:'circle-info'}
 ]
 
 let eg_list = ref([])

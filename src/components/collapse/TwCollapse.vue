@@ -18,7 +18,7 @@
   </div>
   <!-- Panel -->
   <div v-if="open"
-       class="z-50 bg-white mt-1 animate-in slide-in-from-top-16 fade-in-20 text-left text-sm ">
+       class="z-50 mt-1 animate-in slide-in-from-top-16 fade-in-20 text-left text-sm ">
     <slot>
 
     </slot>
