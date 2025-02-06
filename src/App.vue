@@ -208,6 +208,13 @@ function handleChangeTheme() {
     </section>
     <section class=" p-4">
       <tw-collapse label="Table Operations" :color="accentColor">
+        <template #label>
+          <h3>
+            <tw-icon icon="table" class="mr-2"></tw-icon>
+            Table Operations
+          </h3>
+
+        </template>
         <div class=" flex flex-row gap-3  p-3 bg-slate-100 dark:bg-slate-700">
           <div class="flex-col ">
             <tw-switch class="mt-6" :disabled="records.length===0" :color="accentColor" v-model="striped">
