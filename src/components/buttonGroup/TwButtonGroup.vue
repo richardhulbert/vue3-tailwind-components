@@ -20,6 +20,11 @@ const props = defineProps({
   color:{
     type: String,
     default:'primary'
+  },
+  size:{
+    type:String,
+    default:'md',
+    accept:['sm','md','lg','xs']
   }
 })
 
@@ -34,7 +39,7 @@ function handleClick(i){
 <template>
 <div class="inline-flex -space-x-0 divide-x  overflow-hidden rounded-lg border text-sm " :class="baseClass">
 
-  <tw-button-group-item :color="props.color"  v-for="(item, index) in items" :key="index" @click="handleClick(item.value)" :item="item" :value="item.value" :selected-value="props.modelValue"></tw-button-group-item>
+  <tw-button-group-item :color="props.color"  v-for="(item, index) in items" :key="index" @click="handleClick(item.value)" :item="item" :size="size" :value="item.value" :selected-value="props.modelValue"></tw-button-group-item>
 
 </div>
 </template>

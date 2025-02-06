@@ -53,6 +53,7 @@ const blurRollout = ref(true)
 const rangeValue = ref(0)
 const rangeStep = ref(1)
 const rangeShowLabels = ref(true)
+const buttonGroupSize = ref('sm')
 
 let numOfPages = computed(() => {
   return Math.ceil(records.value.length / pageSize.value)
@@ -104,6 +105,14 @@ const notificationPositions = [
   {label: 'Bottom Center', value: 'bottom-center'},
   {label: 'Bottom Left', value: 'bottom-left'},
   {label: 'Bottom Right', value: 'bottom-right'},
+]
+
+const buttonGroupSizes = [
+  {label: 'Large', value: 'lg'},
+  {label: 'Medium', value: 'md'},
+  {label: 'Small', value: 'sm'},
+  {label: 'Extra Small', value: 'xs'},
+
 ]
 
 
@@ -207,6 +216,7 @@ function handleChangeTheme() {
 
     </section>
     <section class=" p-4">
+      <h1 class="my-2 text-2xl">Tables</h1>
       <tw-collapse label="Table Operations" :color="accentColor">
         <template #label>
           <h3>
@@ -365,8 +375,12 @@ function handleChangeTheme() {
             Toggle button
           </tw-button>
         </div>
-        <div>
-          <tw-button-group :color="accentColor" :items="colors" v-model="accentColor"></tw-button-group>
+        <div class="block">
+          <div class="mb-4">
+            <tw-button-group :color="accentColor" :items="colors" v-model="accentColor" :size="buttonGroupSize"></tw-button-group>
+          </div>
+
+          <tw-button-group :color="accentColor" :items="buttonGroupSizes" v-model="buttonGroupSize" :size="buttonGroupSize" ></tw-button-group>
         </div>
 
       </div>
