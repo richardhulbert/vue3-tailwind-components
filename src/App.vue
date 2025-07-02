@@ -118,6 +118,10 @@ const buttonGroupSizes = [
 
 const headings = [
   {
+    label: 'icon',
+    field: 'icon'
+  },
+  {
     label: 'Product label',
     field: 'name'
   },
@@ -146,6 +150,7 @@ function paginate(page) {
 function createProducts() {
   for (let i = 0; i < numOfProducts.value; i++) {
     let product = {
+      icon: 'box',
       code: faker.random.alpha(10),
       name: faker.name.firstName(),
       link: faker.internet.url(),
@@ -264,6 +269,9 @@ function handleChangeTheme() {
                     :border-color="accentColor"
                     :hover-color="accentColor" :striped="striped" :headings="headings" :items="products"
                     :selected-index="selectedRow">
+            <template v-slot:icon="row">
+              <tw-icon :icon="row.item.icon" ></tw-icon>
+            </template>
             <template v-slot:link="row">
               <a :href="row.item.link">{{ row.item.link }}</a>
             </template>

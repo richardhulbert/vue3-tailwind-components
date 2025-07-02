@@ -14,35 +14,30 @@ const props = defineProps({
   }
 })
 
-const emit = defineEmits(['update:modelValue'])
 
 
-const inputVal = ref(props.modelValue)
+
+
+const inputVal = defineModel()
 
 const barClass = computed(()=>{
-return 'accent-'+props.color+'-600 dark:accent-'+props.color+'-400'
+return 'range accent-'+props.color+'-600 dark:accent-'+props.color+'-400'
 })
 
-watch(props.modelValue,(neVal)=>{
-  inputVal.value=neVal
-})
 
-function changedInput(){
-  emit('update:modelValue',  inputVal.value)
-}
+
+
 
 </script>
 
 <template>
 <div class="relative">
   <slot></slot>
-  <input @input="changedInput" class="w-full" :class="barClass " :min="min" :max="max" :step="step" v-model="inputVal"  type="range" :disabled="disabled" :id="formNameAndId" :name="formNameAndId"/>
-  <span v-if="showLabels" class="text-sm text-gray-500 dark:text-gray-400 absolute start-0 -bottom-6">Min {{ min }}</span>
-  <span v-if="showLabels"  class="text-sm text-gray-500 dark:text-gray-400 absolute end-0 -bottom-6">Max {{max}}</span>
+  <input class="w-full" :class="barClass " :min="min" :max="max" :step="step" v-model="inputVal"  type="range" :disabled="disabled" :id="formNameAndId" :name="formNameAndId"/>
+  <span v-if="showLabels" class="text-sm text-primary-500 dark:text-primary-400 absolute start-0 -bottom-6">Min {{ min }}</span>
+  <span v-if="showLabels"  class="text-sm text-primary-500 dark:text-primary-400 absolute end-0 -bottom-6">Max {{max}}</span>
 </div>
 
 </template>
 
-<style scoped>
 
-</style>
