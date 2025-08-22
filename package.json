@@ -8,7 +8,10 @@
     "components"
   ],
   "license": "MIT",
-  "repository": "richardhulbert/vue3-tailwind-components",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/richardhulbert/vue3-tailwind-components.git"
+  },
   "files": [
     "dist"
   ],
