@@ -69,7 +69,7 @@ export default {
     bgcolor() {
       let op = this.disabled? ' opacity-50':''
       let bg_color = this.selected? this.selectedColor:this.color
-      let cls = 'bg-'+bg_color+'-500 hover:bg-'+bg_color+'-700 text-white border-'+bg_color+'-500'
+      let cls = 'bg-'+bg_color+'-500 hover:bg-'+bg_color+'-700 text-white border-'+bg_color+'-500 border border-'+bg_color+'-500 '
       if(this.outline){
         if(this.menu){
           cls = 'hover:bg-'+bg_color+'-500 text-'+bg_color+'-500 hover:text-white'
