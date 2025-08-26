@@ -55,6 +55,7 @@ const rangeStep = ref(1)
 const rangeShowLabels = ref(true)
 const buttonGroupSize = ref('sm')
 
+
 let numOfPages = computed(() => {
   return Math.ceil(records.value.length / pageSize.value)
 })
@@ -116,6 +117,7 @@ const buttonGroupSizes = [
 ]
 
 
+
 const headings = [
   {
     label: 'icon',
@@ -137,6 +139,13 @@ const headings = [
     label: 'Action',
     field: 'id'
   }
+]
+
+const alignMenu =[
+  {label: '', value: 'left', icon:'align-left'},
+  {label: '', value: 'center', icon:'align-center'},
+  {label: '', value: 'right', icon:'align-right'},
+  {label: '', value: 'justify', icon:'align-justify'},
 ]
 
 
@@ -218,6 +227,16 @@ function handleChangeTheme() {
         <tw-switch @changed="handleChangeTheme" v-model="darkTheme" size="lg">Dark Mode</tw-switch>
       </div>
 
+
+    </section>
+
+    <section class=" p-4">
+      <h1 class="my-2 text-2xl">Select with Icons</h1>
+<div class="flex gap-4">
+  <tw-select label="Align" :items="alignMenu"  :color="accentColor" :size="buttonGroupSize"></tw-select>
+  <tw-select :items="buttonGroupSizes" v-model="buttonGroupSize" class="w-32" :size="buttonGroupSize"></tw-select>
+
+</div>
 
     </section>
     <section class=" p-4">

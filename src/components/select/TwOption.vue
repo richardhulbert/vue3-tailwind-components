@@ -1,42 +1,50 @@
 <template>
-<button @click="sendClick" :class="buttonClass" class="flex w-full pl-3 p-1 transition-colors  ">{{label}}</button>
+<button @click="sendClick" :class="buttonClass" class="flex w-full pl-3 p-1 transition-colors  ">
+  <tw-icon v-if="icon" class="my-1 mx-2" :icon="icon"></tw-icon>
+  {{label}}
+</button>
 </template>
 
-<script>
-import {TwOption} from "@/components";
+<script setup>
+import { computed } from 'vue'
+import {TwIcon} from "@/components";
 
-export default {
-  name:'TwOption',
-  props: {
+const emit = defineEmits(['selected'])
 
-    label: {
-      type: String,
-      default: 'no data'
-    },
-    color:{
-      type:String,
-      default:'primary'
-    },
-    index:{
-      type:Number,
-      default:0
-    },
-    selected:{
-      type:Boolean,
-      default:false
-    }
+const props = defineProps({
+  label: {
+    type: String,
+    default: 'no data'
   },
-  computed: {
-    buttonClass() {
-      let selected = this.selected?' bg-'+this.color+'-500 dark:text-'+this.color+'-300 dark:bg-'+this.color+'-700':''
-      return "text-"+this.color+'-700 hover:bg-'+this.color+'-100 dark:hover:bg-'+this.color+'-700 dark:text-'+this.color+'-100'+selected
-    }
+  icon: {
+    type: String,
+    default: ''
   },
-  methods: {
-    sendClick() {
-      this.$emit('selected',this.index)
-    }
+  color: {
+    type: String,
+    default: 'primary'
   },
+  index: {
+    type: Number,
+    default: 0
+  },
+  selected: {
+    type: Boolean,
+    default: false
+  }
+})
+
+const buttonClass = computed(() => {
+  const selectedClass = props.selected
+    ? ` bg-${props.color}-500 dark:text-${props.color}-300 dark:bg-${props.color}-700`
+    : ''
+  return (
+    `text-${props.color}-700 hover:bg-${props.color}-100 dark:hover:bg-${props.color}-700 dark:text-${props.color}-100` +
+    selectedClass
+  )
+})
+
+function sendClick() {
+  emit('selected', props.index)
 }
 </script>
->

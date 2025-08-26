@@ -7,7 +7,12 @@ import vue from '@vitejs/plugin-vue'
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [vue()],
-  build: {
+    define: {
+        __VUE_PROD_HYDRATION_MISMATCH_DETAILS__: false,
+    },
+
+
+    build: {
     lib: {
       entry: path.resolve(__dirname, 'src/components/index.js'),
       name: 'Vue3TWComp',
@@ -28,5 +33,13 @@ export default defineConfig({
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))
     }
+  },
+  server:{
+      port: 5173,
+      hmr: {
+          host: 'localhost',
+          protocol: 'ws',
+          port: 5173,
+      },
   }
 })
