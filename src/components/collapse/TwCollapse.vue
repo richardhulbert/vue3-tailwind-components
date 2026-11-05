@@ -1,23 +1,24 @@
 <template>
   <div class="relative ">
 
-    <div @click.prevent="toggleSelect" type="button"
-         :class="buttonClass"
-         class=" w-full flex gap-2 cursor-pointer border  px-4 py-2 text-center text-sm font-medium  transition-all  disabled:cursor-not-allowed ">
-      <div class="text-left flex-grow">
+    <button type="button" @click.prevent="toggleSelect" :disabled="disabled"
+            :aria-expanded="open ? 'true' : 'false'" :aria-controls="panelId"
+            :class="buttonClass"
+            class=" w-full flex gap-2 cursor-pointer border  px-4 py-2 text-center text-sm font-medium  transition-all  disabled:cursor-not-allowed ">
+      <span class="text-left flex-grow">
         <slot name="label">
           <span class="text-left">{{ label }}</span>
         </slot>
 
-      </div>
-      <div class="flex-shrink">
+      </span>
+      <span class="flex-shrink">
         <tw-icon :class="chevronClass" class="transition-transform" icon="chevron-down"></tw-icon>
-      </div>
-    </div>
+      </span>
+    </button>
 
   </div>
   <!-- Panel -->
-  <div v-if="open"
+  <div v-if="open" :id="panelId"
        class="z-50 mt-1 animate-in slide-in-from-top-16 fade-in-20 text-left text-sm ">
     <slot>
 
@@ -27,7 +28,7 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed, watch, onMounted, useId } from 'vue'
 import { TwIcon } from '@/components'
 
 defineOptions({ name: 'TwCollapse' })
@@ -68,8 +69,15 @@ const buttonClass = computed(() => {
   return 'bg-' + c + '-200 hover:bg-' + c + '-300 text-' + c + '-700 dark:bg-' + c + '-500 dark:text-' + c + '-100 dark:hover:bg-' + c + '-600' + op
 })
 
+const panelId = useId()
+
 // Applied after mounting, as before, so the panel appears on the next tick.
 onMounted(() => {
   open.value = props.expanded
+})
+
+// Later changes to expanded open or close it too; clicking still toggles.
+watch(() => props.expanded, (value) => {
+  open.value = value
 })
 </script>

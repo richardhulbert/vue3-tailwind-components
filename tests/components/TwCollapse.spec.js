@@ -33,15 +33,33 @@ describe('TwCollapse', () => {
     expect(w.find('.content').exists()).toBe(true)
   })
 
-  it.fails('follows later changes to expanded (known bug: read only on mount)', async () => {
+  it('follows later changes to expanded', async () => {
     const w = collapse()
     await w.setProps({ expanded: true })
     expect(w.find('.content').exists()).toBe(true)
+    await w.setProps({ expanded: false })
+    expect(w.find('.content').exists()).toBe(false)
   })
 
-  it.fails('can be operated from the keyboard (known bug: the header is a clickable div)', () => {
-    // Fix: make the header a <button type="button"> with aria-expanded.
-    expect(header(collapse()).element.tagName).toBe('BUTTON')
+  it('has a real button as its header, so it works from the keyboard', () => {
+    const h = header(collapse())
+    expect(h.element.tagName).toBe('BUTTON')
+    expect(h.attributes('type')).toBe('button')
+  })
+
+  it('reports whether it is expanded, and which panel it controls', async () => {
+    const w = collapse()
+    expect(header(w).attributes('aria-expanded')).toBe('false')
+    await header(w).trigger('click')
+    expect(header(w).attributes('aria-expanded')).toBe('true')
+    expect(w.get(`#${CSS.escape(header(w).attributes('aria-controls'))}`).text()).toBe('Inside')
+  })
+
+  it('does not toggle while disabled', async () => {
+    const w = collapse({ disabled: true })
+    await header(w).trigger('click')
+    expect(w.find('.content').exists()).toBe(false)
+    expect(header(w).attributes('disabled')).toBeDefined()
   })
 
   describe('class contract', () => {
