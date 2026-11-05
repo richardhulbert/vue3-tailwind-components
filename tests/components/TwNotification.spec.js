@@ -39,22 +39,37 @@ describe('TwNotification', () => {
     expect(w.emitted('update:modelValue')).toEqual([[false]])
   })
 
-  it('accepts center and the top positions', () => {
+  it('accepts every position it styles', () => {
     const { validator } = TwNotification.props.position
-    expect(['center', 'top-left', 'top-right', 'top-center'].every(validator)).toBe(true)
+    expect(['center', 'top-left', 'top-right', 'top-center', 'bottom-left', 'bottom-right', 'bottom-center'].every(validator)).toBe(true)
+    expect(validator('middle')).toBe(false)
   })
 
-  it.fails('accepts the bottom positions it styles (known bug: the validator rejects them)', () => {
-    // positionClass handles bottom-left, bottom-center and bottom-right, but the
-    // validator does not list them, so Vue warns. Fix: add them to the validator.
+  it('takes a bottom position without Vue warnings', () => {
     const warnings = vueWarnings(() => mount(TwNotification, { props: { modelValue: true, position: 'bottom-left' } }))
     expect(warnings).toEqual([])
   })
 
-  it.fails('cancels its timer when unmounted (known bug: the interval leaks)', () => {
-    // Fix: use setTimeout and clear it in onBeforeUnmount. Then change it.fails to it.
+  it('cancels its timer when unmounted', () => {
     const w = mount(TwNotification, { props: { modelValue: true, lifetime: 5 } })
     w.unmount()
+    expect(vi.getTimerCount()).toBe(0)
+  })
+
+  it('restarts its lifetime when re-opened, closing only once', async () => {
+    const w = mount(TwNotification, { props: { modelValue: true, lifetime: 2 } })
+    vi.advanceTimersByTime(1500)
+    await w.setProps({ modelValue: false })
+    await w.setProps({ modelValue: true })
+    vi.advanceTimersByTime(1500)
+    expect(w.emitted('update:modelValue')).toBeUndefined()
+    vi.advanceTimersByTime(600)
+    expect(w.emitted('update:modelValue')).toEqual([[false]])
+  })
+
+  it('cancels its timer when closed by hand', async () => {
+    const w = mount(TwNotification, { props: { modelValue: true, lifetime: 5 } })
+    await w.get('[data-icon="fa-regular fa-circle-xmark"]').trigger('click')
     expect(vi.getTimerCount()).toBe(0)
   })
 
@@ -71,6 +86,9 @@ describe('TwNotification', () => {
         topCenter: alert('top-center'),
         topLeft: alert('top-left'),
         topRight: alert('top-right'),
+        bottomCenter: alert('bottom-center'),
+        bottomLeft: alert('bottom-left'),
+        bottomRight: alert('bottom-right'),
       }).toMatchSnapshot()
     })
   })

@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed, watch } from 'vue'
+import { computed, watch, onBeforeUnmount } from 'vue'
 import { TwIcon } from '@/components'
 
 defineOptions({ name: 'TwNotification' })
@@ -29,18 +29,25 @@ const props = defineProps({
     type: String,
     default: 'center',
     validator(value) {
-      return ['center', 'top-left', 'top-right', 'top-center'].includes(value)
+      return ['center', 'top-left', 'top-right', 'top-center', 'bottom-left', 'bottom-right', 'bottom-center'].includes(value)
     }
   }
 })
 
 const emit = defineEmits(['update:modelValue'])
 
-const timer = ref(false)
+// One pending auto-close at most, cleared whenever the notification closes,
+// re-opens or unmounts.
+let timer = null
+
+function clearTimer() {
+  clearTimeout(timer)
+  timer = null
+}
 
 function closeNotification() {
+  clearTimer()
   emit('update:modelValue', false)
-  clearInterval(timer.value)
 }
 
 const closeButtonClass = computed(() => 'text-' + props.color + '-500 dark:text-' + props.color + '-200')
@@ -64,12 +71,13 @@ const notificationClass = computed(() => {
 })
 
 watch(() => props.modelValue, (showing) => {
+  clearTimer()
   if (showing && props.lifetime > 0) {
-    timer.value = setInterval(() => {
-      closeNotification()
-    }, props.lifetime * 1000)
+    timer = setTimeout(closeNotification, props.lifetime * 1000)
   }
 }, { immediate: true })
+
+onBeforeUnmount(clearTimer)
 </script>
 
 <template>
