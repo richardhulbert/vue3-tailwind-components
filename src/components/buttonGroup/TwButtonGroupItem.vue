@@ -39,7 +39,8 @@ const dynamicClass = computed(() => {
           break;
     default: _cls = ' py-2 px-4 '
   }
-  _cls+= props.selectedValue === props.value? `bg-${props.color}-200   dark:bg-${props.color}-700 `:`hover:bg-${props.color}-100 dark:hover:bg-${props.color}-500`;
+  // Colours come from the enclosing TwButtonGroup's tone, per the selection rule.
+  _cls += isSelected.value ? 'bg-[color:var(--c-selected)] text-[color:var(--c-on-selected)]' : 'hover:bg-[color:var(--c-subtle)]'
  return _cls
 })
 

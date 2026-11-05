@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest'
 import { mount } from '@vue/test-utils'
 import { TwButtonGroup } from '@/components'
 import TwButtonGroupItem from '@/components/buttonGroup/TwButtonGroupItem.vue'
-import { COLORS, classes } from '../helpers'
+import { COLORS, classes, toneOf } from '../helpers'
 
 const items = [
   { label: 'Light', value: 'light', icon: 'sun' },
@@ -74,9 +74,13 @@ describe('TwButtonGroup', () => {
     expect(w.emitted('update:modelValue')).toBeUndefined()
   })
 
+  it.each(COLORS)('takes its tone from color: %s', (color) => {
+    expect(toneOf(group({ color }))).toBe(color)
+  })
+
   describe('class contract', () => {
-    it.each(COLORS)('%s: group, item and selected item', (color) => {
-      const w = group({ color, modelValue: 'dark' })
+    it('group, item and selected item', () => {
+      const w = group({ modelValue: 'dark' })
       expect({ group: classes(w), item: classes(parts(w)[0]), selected: classes(parts(w)[1]) }).toMatchSnapshot()
     })
 

@@ -1,6 +1,7 @@
 <script setup>
 import {computed, useTemplateRef, nextTick} from 'vue';
 import TwButtonGroupItem from "./TwButtonGroupItem.vue";
+import { useTone } from '@/components/composables/useTone'
 
 const emit = defineEmits(
     ['update:modelValue']
@@ -28,9 +29,9 @@ const props = defineProps({
   }
 })
 
-const baseClass=computed(()=>{
-  return `border-${props.color}-900 dark:border-${props.color}-400 divide-${props.color}-600 text-${props.color}-700 dark:text-${props.color}-200`
-})
+const toneAttrs = useTone(() => props.color)
+
+const baseClass = computed(() => 'border-[color:var(--c-line)] divide-[color:var(--c-line)] text-[color:var(--c-fg-strong)]')
 function handleClick(i){
   emit('update:modelValue', i)
 }
@@ -56,7 +57,7 @@ async function handleKey(event) {
 </script>
 
 <template>
-<div ref="groupEl" role="radiogroup" @keydown="handleKey" class="inline-flex -space-x-0 divide-x  overflow-hidden rounded-lg border text-sm " :class="baseClass">
+<div ref="groupEl" v-bind="toneAttrs" role="radiogroup" @keydown="handleKey" class="inline-flex -space-x-0 divide-x  overflow-hidden rounded-lg border text-sm " :class="baseClass">
 
   <tw-button-group-item :color="props.color"  v-for="(item, index) in items" :key="index" @click="handleClick(item.value)" :item="item" :size="size" :value="item.value" :selected-value="props.modelValue" :tab-stop="index === tabStopIndex"></tw-button-group-item>
 

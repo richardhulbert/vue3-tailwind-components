@@ -1,149 +1,35 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`TwButtonGroup > class contract > danger: group, item and selected item 1`] = `
+exports[`TwButtonGroup > class contract > group, item and selected item 1`] = `
 {
   "group": [
     "-space-x-0",
     "border",
-    "border-danger-900",
-    "dark:border-danger-400",
-    "dark:text-danger-200",
-    "divide-danger-600",
+    "border-[color:var(--c-line)]",
+    "divide-[color:var(--c-line)]",
     "divide-x",
     "inline-flex",
     "overflow-hidden",
     "rounded-lg",
-    "text-danger-700",
+    "text-[color:var(--c-fg-strong)]",
     "text-sm",
   ],
   "item": [
     "cursor-pointer",
-    "dark:hover:bg-danger-500",
-    "hover:bg-danger-100",
+    "hover:bg-[color:var(--c-subtle)]",
     "px-4",
     "px-4",
     "py-2",
     "py-2",
   ],
   "selected": [
-    "bg-danger-200",
+    "bg-[color:var(--c-selected)]",
     "cursor-pointer",
-    "dark:bg-danger-700",
     "px-4",
     "px-4",
     "py-2",
     "py-2",
-  ],
-}
-`;
-
-exports[`TwButtonGroup > class contract > info: group, item and selected item 1`] = `
-{
-  "group": [
-    "-space-x-0",
-    "border",
-    "border-info-900",
-    "dark:border-info-400",
-    "dark:text-info-200",
-    "divide-info-600",
-    "divide-x",
-    "inline-flex",
-    "overflow-hidden",
-    "rounded-lg",
-    "text-info-700",
-    "text-sm",
-  ],
-  "item": [
-    "cursor-pointer",
-    "dark:hover:bg-info-500",
-    "hover:bg-info-100",
-    "px-4",
-    "px-4",
-    "py-2",
-    "py-2",
-  ],
-  "selected": [
-    "bg-info-200",
-    "cursor-pointer",
-    "dark:bg-info-700",
-    "px-4",
-    "px-4",
-    "py-2",
-    "py-2",
-  ],
-}
-`;
-
-exports[`TwButtonGroup > class contract > primary: group, item and selected item 1`] = `
-{
-  "group": [
-    "-space-x-0",
-    "border",
-    "border-primary-900",
-    "dark:border-primary-400",
-    "dark:text-primary-200",
-    "divide-primary-600",
-    "divide-x",
-    "inline-flex",
-    "overflow-hidden",
-    "rounded-lg",
-    "text-primary-700",
-    "text-sm",
-  ],
-  "item": [
-    "cursor-pointer",
-    "dark:hover:bg-primary-500",
-    "hover:bg-primary-100",
-    "px-4",
-    "px-4",
-    "py-2",
-    "py-2",
-  ],
-  "selected": [
-    "bg-primary-200",
-    "cursor-pointer",
-    "dark:bg-primary-700",
-    "px-4",
-    "px-4",
-    "py-2",
-    "py-2",
-  ],
-}
-`;
-
-exports[`TwButtonGroup > class contract > secondary: group, item and selected item 1`] = `
-{
-  "group": [
-    "-space-x-0",
-    "border",
-    "border-secondary-900",
-    "dark:border-secondary-400",
-    "dark:text-secondary-200",
-    "divide-secondary-600",
-    "divide-x",
-    "inline-flex",
-    "overflow-hidden",
-    "rounded-lg",
-    "text-secondary-700",
-    "text-sm",
-  ],
-  "item": [
-    "cursor-pointer",
-    "dark:hover:bg-secondary-500",
-    "hover:bg-secondary-100",
-    "px-4",
-    "px-4",
-    "py-2",
-    "py-2",
-  ],
-  "selected": [
-    "bg-secondary-200",
-    "cursor-pointer",
-    "dark:bg-secondary-700",
-    "px-4",
-    "px-4",
-    "py-2",
-    "py-2",
+    "text-[color:var(--c-on-selected)]",
   ],
 }
 `;
@@ -152,8 +38,7 @@ exports[`TwButtonGroup > class contract > sizes 1`] = `
 {
   "lg": [
     "cursor-pointer",
-    "dark:hover:bg-primary-500",
-    "hover:bg-primary-100",
+    "hover:bg-[color:var(--c-subtle)]",
     "px-4",
     "px-8",
     "py-2",
@@ -162,8 +47,7 @@ exports[`TwButtonGroup > class contract > sizes 1`] = `
   ],
   "md": [
     "cursor-pointer",
-    "dark:hover:bg-primary-500",
-    "hover:bg-primary-100",
+    "hover:bg-[color:var(--c-subtle)]",
     "px-4",
     "px-4",
     "py-2",
@@ -171,8 +55,7 @@ exports[`TwButtonGroup > class contract > sizes 1`] = `
   ],
   "sm": [
     "cursor-pointer",
-    "dark:hover:bg-primary-500",
-    "hover:bg-primary-100",
+    "hover:bg-[color:var(--c-subtle)]",
     "px-3",
     "px-4",
     "py-1",
@@ -181,87 +64,12 @@ exports[`TwButtonGroup > class contract > sizes 1`] = `
   ],
   "xs": [
     "cursor-pointer",
-    "dark:hover:bg-primary-500",
-    "hover:bg-primary-100",
+    "hover:bg-[color:var(--c-subtle)]",
     "px-3",
     "px-4",
     "py-2",
     "py-[4px]",
     "text-[11px]",
-  ],
-}
-`;
-
-exports[`TwButtonGroup > class contract > success: group, item and selected item 1`] = `
-{
-  "group": [
-    "-space-x-0",
-    "border",
-    "border-success-900",
-    "dark:border-success-400",
-    "dark:text-success-200",
-    "divide-success-600",
-    "divide-x",
-    "inline-flex",
-    "overflow-hidden",
-    "rounded-lg",
-    "text-sm",
-    "text-success-700",
-  ],
-  "item": [
-    "cursor-pointer",
-    "dark:hover:bg-success-500",
-    "hover:bg-success-100",
-    "px-4",
-    "px-4",
-    "py-2",
-    "py-2",
-  ],
-  "selected": [
-    "bg-success-200",
-    "cursor-pointer",
-    "dark:bg-success-700",
-    "px-4",
-    "px-4",
-    "py-2",
-    "py-2",
-  ],
-}
-`;
-
-exports[`TwButtonGroup > class contract > warning: group, item and selected item 1`] = `
-{
-  "group": [
-    "-space-x-0",
-    "border",
-    "border-warning-900",
-    "dark:border-warning-400",
-    "dark:text-warning-200",
-    "divide-warning-600",
-    "divide-x",
-    "inline-flex",
-    "overflow-hidden",
-    "rounded-lg",
-    "text-sm",
-    "text-warning-700",
-  ],
-  "item": [
-    "cursor-pointer",
-    "dark:hover:bg-warning-500",
-    "hover:bg-warning-100",
-    "px-4",
-    "px-4",
-    "py-2",
-    "py-2",
-  ],
-  "selected": [
-    "bg-warning-200",
-    "cursor-pointer",
-    "dark:bg-warning-700",
-    "px-4",
-    "px-4",
-    "py-2",
-    "py-2",
   ],
 }
 `;
