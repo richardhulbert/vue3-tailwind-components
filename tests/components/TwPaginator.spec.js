@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest'
 import { mount } from '@vue/test-utils'
 import { TwPaginator } from '@/components'
-import { COLORS, classes } from '../helpers'
+import { COLORS, classes, toneOf } from '../helpers'
 
 const pager = (props) => mount(TwPaginator, { props: { numOfPages: 5, currentPage: 3, ...props } })
 const buttons = (w) => w.findAll('button')
@@ -53,9 +53,13 @@ describe('TwPaginator', () => {
     expect(buttons(pager()).map((b) => b.attributes('aria-current'))).toEqual([undefined, undefined, undefined, 'page', undefined, undefined, undefined])
   })
 
+  it.each(COLORS)('takes its tone from color: %s', (color) => {
+    expect(toneOf(pager({ color }).get('nav'))).toBe(color)
+  })
+
   describe('class contract', () => {
-    it.each(COLORS)('%s: disabled, page, current page and last', (color) => {
-      const b = buttons(pager({ color, currentPage: 1 }))
+    it('disabled, page, current page and last', () => {
+      const b = buttons(pager({ currentPage: 1 }))
       expect({
         disabledFirst: classes(b[0]),
         current: classes(b[1]),

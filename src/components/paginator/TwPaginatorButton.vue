@@ -37,14 +37,14 @@ const positionClass = computed(() => {
   }
 })
 
+// Colours come from the enclosing TwPaginator's tone; color is kept for compatibility.
 const finalClass = computed(() => {
-  const c = props.color
   if (props.disabled) {
-    return ' border-' + c + '-200 dark:border-' + c + '-700 text-' + c + '-400 ' + positionClass.value
+    return ' border-[color:var(--c-line-muted)] text-[color:var(--c-fg-muted)] ' + positionClass.value
   }
   if (props.selected) {
-    return ' bg-' + c + '-200  dark:bg-' + c + '-500 dark:border-' + c + '-700' + positionClass.value
+    return ' bg-[color:var(--c-selected)] text-[color:var(--c-on-selected)] border-[color:var(--c-line-muted)] ' + positionClass.value
   }
-  return ' hover:bg-' + c + '-300 dark:hover:bg-' + c + '-500 border-' + c + '-300  dark:border-' + c + '-700 text-' + c + '-500 dark:text-' + c + '-200 ' + positionClass.value
+  return ' hover:bg-[color:var(--c-soft-hover)] border-[color:var(--c-line-muted)] text-[color:var(--c-fg)] ' + positionClass.value
 })
 </script>

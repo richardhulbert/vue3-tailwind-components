@@ -1,6 +1,6 @@
 <template>
 
-  <nav aria-label="Pagination" >
+  <nav v-bind="toneAttrs" aria-label="Pagination" >
     <ul class="inline-flex -space-x-px">
       <tw-paginator-button :color="color" @click="decrement" :disabled="currentPage<=1" button-position="first"  ><slot name="first" >Previous</slot></tw-paginator-button>
       <tw-paginator-button :color="color" v-for="index in numOfPages" :key="index" @click="paginate(index)" :selected="index===currentPage" >{{index}}</tw-paginator-button>
@@ -12,6 +12,7 @@
 
 <script setup>
 import TwPaginatorButton from '@/components/paginator/TwPaginatorButton.vue'
+import { useTone } from '@/components/composables/useTone'
 
 defineOptions({ name: 'TwPaginator' })
 
@@ -31,6 +32,8 @@ const props = defineProps({
 })
 
 const emit = defineEmits(['paginate'])
+
+const toneAttrs = useTone(() => props.color)
 
 function paginate(page) {
   emit('paginate', page)
