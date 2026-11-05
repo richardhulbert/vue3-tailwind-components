@@ -94,5 +94,7 @@ const knobClass = computed(() => {
   return ' bg-[color:var(--c-soft)] border-[color:var(--c-line)] left-0' + s
 })
 
-const labelClass = computed(() => 'text-[color:var(--c-fg)] text-' + props.size)
+// md inherits the surrounding text size, as the old (non-existent) text-md did.
+const LABEL_SIZES = { sm: ' text-sm', md: '', lg: ' text-lg' }
+const labelClass = computed(() => 'text-[color:var(--c-fg)]' + (LABEL_SIZES[props.size] ?? ''))
 </script>

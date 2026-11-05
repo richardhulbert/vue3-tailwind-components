@@ -1,7 +1,5 @@
 <template>
 
-<!--  <div class="hidden focus:border-info-700"></div>-->
-
   <label v-bind="toneAttrs" :for="fieldId" :class="labelClass" class="my-1">
     <slot></slot>
   </label>

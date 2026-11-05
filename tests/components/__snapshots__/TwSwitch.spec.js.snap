@@ -28,7 +28,6 @@ exports[`TwSwitch > class contract > off and on 1`] = `
     "label": [
       "mx-2",
       "text-[color:var(--c-fg)]",
-      "text-md",
     ],
     "root": [
       "cursor-pointer",
@@ -63,7 +62,6 @@ exports[`TwSwitch > class contract > off and on 1`] = `
     "label": [
       "mx-2",
       "text-[color:var(--c-fg)]",
-      "text-md",
     ],
     "root": [
       "cursor-pointer",
@@ -104,7 +102,6 @@ exports[`TwSwitch > class contract > sizes and disabled 1`] = `
     "label": [
       "mx-2",
       "text-[color:var(--c-fg)]",
-      "text-md",
     ],
     "root": [
       "cursor-not-allowed",
