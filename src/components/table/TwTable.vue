@@ -1,11 +1,11 @@
 <template>
-  <table class="border-collapse table-auto w-full text-sm">
-    <thead :class="headingClass" class="text-primary-800">
+  <table v-bind="toneAttrs" class="border-collapse table-auto w-full text-sm">
+    <thead v-bind="headingToneAttrs" :class="headingClass">
     <tr>
       <th class="p-2 font-normal" v-for="h in headings" :key="h.field">{{ h.label }}</th>
     </tr>
     </thead>
-    <tbody class="text-primary-600 dark:text-primary-100">
+    <tbody class="text-[color:var(--c-fg-strong)]">
     <tr
         v-for="(item, index) in items"
         :key="index"
@@ -16,7 +16,7 @@
           v-for="cell in headings"
           :key="cell.field"
           :class="boarderClass"
-          class=" text-primary-600 dark:text-primary-100 px-4 py-2"
+          class=" px-4 py-2"
       >
         <!-- Scoped slot for customization -->
         <slot :name="cell.field" :item="item">
@@ -29,7 +29,8 @@
 </template>
 
 <script setup>
-import { computed } from 'vue'
+import { computed, warn } from 'vue'
+import { useTone } from '@/components/composables/useTone'
 
 defineOptions({ name: 'TwTable' })
 
@@ -54,21 +55,28 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
-  headingColor: {
+  // The table's tone: body text, borders, stripes, hover and selection.
+  color: {
     type: String,
     default: 'primary',
   },
+  // The heading's tone, when it should differ from color.
+  headingColor: {
+    type: String,
+    default: undefined,
+  },
+  // Deprecated in 1.0: the body takes its colours from color.
   borderColor: {
     type: String,
-    default: 'primary',
+    default: undefined,
   },
   stripeColor: {
     type: String,
-    default: 'primary',
+    default: undefined,
   },
   hoverColor: {
     type: String,
-    default: 'primary',
+    default: undefined,
   },
   selectedIndex: {
     type: Number,
@@ -76,35 +84,34 @@ const props = defineProps({
   },
   selectColor: {
     type: String,
-    default: 'primary',
+    default: undefined,
   },
 })
 
-const headingClass = computed(() => {
-  return `bg-${props.headingColor}-200 dark:bg-${props.headingColor}-700 dark:text-${props.headingColor}-200`
-})
+const toneAttrs = useTone(() => props.color)
+const headingToneAttrs = useTone(() => props.headingColor ?? props.color)
 
-const boarderClass = computed(() => {
-  return props.border
-    ? `border border-${props.borderColor}-200 dark:border-${props.borderColor}-700`
-    : ''
-})
+for (const name of ['borderColor', 'stripeColor', 'hoverColor', 'selectColor']) {
+  if (props[name] !== undefined) {
+    warn(`TwTable: ${name} is deprecated and has no effect. The body takes its colours from color.`)
+  }
+}
+
+const headingClass = computed(() => 'bg-[color:var(--c-soft)] text-[color:var(--c-on-soft)]')
+
+const boarderClass = computed(() => (props.border ? 'border border-[color:var(--c-line-muted)]' : ''))
 
 function rowClass(ndx) {
-  const hoverClass = props.hover
-    ? `hover:bg-${props.hoverColor}-300 dark:hover:bg-${props.hoverColor}-700 dark:hover:text-white`
-    : ''
+  const hoverClass = props.hover ? 'hover:bg-[color:var(--c-soft-hover)]' : ''
 
   if (props.selectedIndex === ndx) {
-    return `bg-${props.selectColor}-300 dark:bg-${props.selectColor}-400`
+    return 'bg-[color:var(--c-selected)] text-[color:var(--c-on-selected)]'
   }
 
-  if (props.striped && props.selectedIndex !== ndx) {
-    return ndx % 2 !== 0
-      ? `bg-${props.stripeColor}-100 dark:bg-${props.stripeColor}-800 dark:text-primary-200 ${hoverClass}`
-      : `dark:text-primary-700 ${hoverClass}`
+  if (props.striped && ndx % 2 !== 0) {
+    return `bg-[color:var(--c-subtle)] ${hoverClass}`
   }
 
-  return `${hoverClass} dark:text-gray-700`
+  return hoverClass
 }
 </script>

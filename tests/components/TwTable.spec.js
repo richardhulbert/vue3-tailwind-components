@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest'
 import { mount } from '@vue/test-utils'
 import { TwTable } from '@/components'
-import { COLORS, classes } from '../helpers'
+import { COLORS, classes, toneOf, vueWarnings } from '../helpers'
 
 const headings = [{ field: 'name', label: 'Name' }, { field: 'role', label: 'Role' }]
 const items = [
@@ -41,11 +41,23 @@ describe('TwTable', () => {
     expect(TwTable.props.headings.required).toBe(true)
   })
 
+  it.each(COLORS)('takes its tone from color, and the heading from headingColor: %s', (color) => {
+    expect(toneOf(mount(TwTable, { props: { headings, items, color } }).get('table'))).toBe(color)
+    expect(toneOf(mount(TwTable, { props: { headings, items, color } }).get('thead'))).toBe(color)
+    expect(toneOf(mount(TwTable, { props: { headings, items, headingColor: color } }).get('thead'))).toBe(color)
+  })
+
+  it.each(['borderColor', 'stripeColor', 'hoverColor', 'selectColor'])('warns that %s is deprecated', (name) => {
+    const warnings = vueWarnings(() => mount(TwTable, { props: { headings, items, [name]: 'info' } }))
+    expect(warnings.join()).toContain(`${name} is deprecated`)
+  })
+
   describe('class contract', () => {
-    it.each(COLORS)('%s: heading, cell, striped, hover and selected rows', (color) => {
-      const props = { headings, items, headingColor: color, borderColor: color, stripeColor: color, hoverColor: color, selectColor: color }
+    it('heading, body, cell, striped, hover and selected rows', () => {
+      const props = { headings, items }
       expect({
         heading: classes(mount(TwTable, { props }).get('thead')),
+        body: classes(mount(TwTable, { props }).get('tbody')),
         cell: classes(mount(TwTable, { props }).get('td')),
         plainRows: rowClasses(mount(TwTable, { props })),
         stripedHoverRows: rowClasses(mount(TwTable, { props: { ...props, striped: true, hover: true } })),
