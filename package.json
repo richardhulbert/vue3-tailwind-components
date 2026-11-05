@@ -31,7 +31,8 @@
     "preview": "vite build --config site.config.js --outDir .preview --emptyOutDir && vite preview --config site.config.js --outDir .preview",
     "site": "vite build --config site.config.js",
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "prepublishOnly": "npm test && npm run build"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.2.1",
