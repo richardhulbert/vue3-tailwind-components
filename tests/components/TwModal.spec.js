@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest'
 import { mount } from '@vue/test-utils'
 import { TwModal, TwButton } from '@/components'
-import { COLORS, classes } from '../helpers'
+import { COLORS, classes, toneOf } from '../helpers'
 
 const shown = (props = {}, slots = {}) => mount(TwModal, { props: { modelValue: true, ...props }, slots })
 const closeIcon = (w) => w.get('[data-icon="fa-regular fa-circle-xmark"]')
@@ -89,9 +89,15 @@ describe('TwModal', () => {
     expect(w.emitted('update:modelValue')).toBeUndefined()
   })
 
+  it.each(COLORS)('takes the panel tone from color and the backdrop tone from backgroundColor: %s', (color) => {
+    const w = shown({ color, backgroundColor: 'info' })
+    expect(toneOf(w.get('[role="dialog"]'))).toBe(color)
+    expect(toneOf(w.get('.backdrop-blur-sm'))).toBe('info')
+  })
+
   describe('class contract', () => {
-    it.each(COLORS)('%s', (color) => {
-      const w = shown({ color, backgroundColor: color })
+    it('backdrop, panel, header, footer and close icon', () => {
+      const w = shown()
       expect({
         backdrop: classes(w.get('.backdrop-blur-sm')),
         panel: classes(w.get('.rounded-lg')),

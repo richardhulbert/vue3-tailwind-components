@@ -1,8 +1,8 @@
 <template>
   <div v-if="showing">
-    <div class="fixed inset-0 z-30 backdrop-blur-sm" :class="backgroundClass"></div>
+    <div v-bind="backdropToneAttrs" class="fixed inset-0 z-30 backdrop-blur-sm" :class="backgroundClass"></div>
     <div class="fixed inset-0 z-40 flex items-center justify-center sm:p-0  animate-in fade-in zoom-in">
-      <div role="dialog" aria-modal="true" :aria-labelledby="hideHeader ? undefined : headerId" :class="modalClass" class=" rounded-lg   shadow-xl w-full h-auto ">
+      <div v-bind="toneAttrs" role="dialog" aria-modal="true" :aria-labelledby="hideHeader ? undefined : headerId" :class="modalClass" class=" rounded-lg   shadow-xl w-full h-auto ">
 
         <div class="relative  ">
           <tw-icon v-if="!hideClose" @click="closeDialog" set="regular" :class="closeButtonClass"
@@ -15,7 +15,7 @@
           </div>
           <div class="h-fit  p-4">
             <slot >
-              <div class="mt-2 text-sm text-primary-400">This is the modals default content. Replace this with content in the body slot of the component.
+              <div class="mt-2 text-sm text-[color:var(--c-fg-muted)]">This is the modals default content. Replace this with content in the body slot of the component.
               </div>
             </slot>
           </div>
@@ -35,6 +35,7 @@
 <script setup>
 import { ref, computed, watch, useId } from 'vue'
 import { useEventListener } from '@vueuse/core'
+import { useTone } from '@/components/composables/useTone'
 import { TwButton, TwIcon } from '../'
 
 defineOptions({ name: 'TwModal' })
@@ -77,8 +78,12 @@ const emit = defineEmits(['update:modelValue', 'closed'])
 
 const showing = ref(false)
 
+// The panel takes color's tone; the backdrop takes backgroundColor's.
+const toneAttrs = useTone(() => props.color)
+const backdropToneAttrs = useTone(() => props.backgroundColor)
+
 const modalClass = computed(() => {
-  const cls = ' bg-white dark:bg-' + props.color + '-900'
+  const cls = ' bg-[color:var(--c-surface)]'
   switch (props.size) {
     case 'sm': return ' md:w-1/3 ' + cls
     case 'md': return ' md:w-2/3 ' + cls
@@ -87,13 +92,13 @@ const modalClass = computed(() => {
   }
 })
 
-const closeButtonClass = computed(() => 'text-' + props.color + '-700')
+const closeButtonClass = computed(() => 'text-[color:var(--c-fg-strong)]')
 
-const backgroundClass = computed(() => ' bg-' + props.backgroundColor + '-700/50 ')
+const backgroundClass = computed(() => ' bg-[color:var(--c-backdrop)] ')
 
-const headerClass = computed(() => 'bg-' + props.color + '-200 + text-' + props.color + '-700')
+const headerClass = computed(() => 'bg-[color:var(--c-soft)] text-[color:var(--c-on-soft)]')
 
-const footerClass = computed(() => 'border-' + props.color + '-200')
+const footerClass = computed(() => 'border-[color:var(--c-line-muted)]')
 
 watch(() => props.modelValue, (value) => {
   showing.value = value
