@@ -1,5 +1,5 @@
 <template>
-  <div role="switch" :aria-checked="checked ? 'true' : 'false'" :aria-disabled="disabled ? 'true' : undefined" :aria-labelledby="labelId"
+  <div v-bind="toneAttrs" role="switch" :aria-checked="checked ? 'true' : 'false'" :aria-disabled="disabled ? 'true' : undefined" :aria-labelledby="labelId"
        @keydown.enter="handleInput" @keydown.space.prevent="handleInput" tabindex="0" :class="topClass" class="flex  select-none items-center" @click="handleInput">
     <!--    this is needed so that tailwind doesnt strip these classes-->
     <div class=" hidden h-3 w-3 w-6 h-7 w-7 h-5 w-5 w-10 w-14"></div>
@@ -19,6 +19,7 @@
 <script setup>
 import { ref, computed, watch, useId } from 'vue'
 import { useFieldId } from '@/components/composables/useFieldId'
+import { useTone } from '@/components/composables/useTone'
 
 defineOptions({ name: 'TwSwitch' })
 
@@ -78,20 +79,20 @@ const baseSize = computed(() => {
 
 const topClass = computed(() => (props.disabled ? 'cursor-not-allowed' : 'cursor-pointer'))
 
+const toneAttrs = useTone(() => props.color)
+
 const backClass = computed(() => {
-  const c = props.color
   const s = ' h-' + baseSize.value + ' w-' + (baseSize.value * 2)
   const op = props.disabled ? ' opacity-50 ' : ''
-  if (checked.value) return 'bg-' + c + '-500' + s + op
-  return 'bg-white border-' + c + '-500  dark:border-' + c + '-200' + s + op
+  if (checked.value) return 'bg-[color:var(--c-solid)] border-[color:var(--c-solid)]' + s + op
+  return 'bg-[color:var(--c-surface)] border-[color:var(--c-line)]' + s + op
 })
 
 const knobClass = computed(() => {
-  const c = props.color
   const s = ' h-' + baseSize.value + ' w-' + baseSize.value
-  if (checked.value) return 'translate-x-full bg-white dark:bg-' + c + '-700 border-' + c + '-200 ' + s
-  return ' bg-' + c + '-200 border-' + c + '-500 dark:bg-' + c + '-700 left-0 dark:border-' + c + '-500' + s
+  if (checked.value) return 'translate-x-full bg-[color:var(--c-on-solid)] border-[color:var(--c-line-muted)] ' + s
+  return ' bg-[color:var(--c-soft)] border-[color:var(--c-line)] left-0' + s
 })
 
-const labelClass = computed(() => 'text-' + props.color + '-500 text-' + props.size)
+const labelClass = computed(() => 'text-[color:var(--c-fg)] text-' + props.size)
 </script>

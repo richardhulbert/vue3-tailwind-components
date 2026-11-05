@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest'
 import { mount } from '@vue/test-utils'
 import { TwSwitch } from '@/components'
-import { COLORS, classes, idsOfTwo } from '../helpers'
+import { COLORS, classes, idsOfTwo, toneOf } from '../helpers'
 
 const parts = (w) => {
   const [back, knob] = w.findAll('.relative > div')
@@ -83,11 +83,15 @@ describe('TwSwitch', () => {
     expect(w.emitted('update:modelValue')).toEqual([[true]])
   })
 
+  it.each(COLORS)('takes its tone from color: %s', (color) => {
+    expect(toneOf(mount(TwSwitch, { props: { color } }))).toBe(color)
+  })
+
   describe('class contract', () => {
-    it.each(COLORS)('%s: off and on', (color) => {
+    it('off and on', () => {
       expect({
-        off: parts(mount(TwSwitch, { props: { color } })),
-        on: parts(mount(TwSwitch, { props: { color, modelValue: true } })),
+        off: parts(mount(TwSwitch)),
+        on: parts(mount(TwSwitch, { props: { modelValue: true } })),
       }).toMatchSnapshot()
     })
 

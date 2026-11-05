@@ -1,13 +1,12 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`TwSwitch > class contract > danger: off and on 1`] = `
+exports[`TwSwitch > class contract > off and on 1`] = `
 {
   "off": {
     "back": [
-      "bg-white",
+      "bg-[color:var(--c-surface)]",
       "border",
-      "border-danger-500",
-      "dark:border-danger-200",
+      "border-[color:var(--c-line)]",
       "h-5",
       "rounded-full",
       "shadow-inner",
@@ -15,11 +14,9 @@ exports[`TwSwitch > class contract > danger: off and on 1`] = `
     ],
     "knob": [
       "absolute",
-      "bg-danger-200",
+      "bg-[color:var(--c-soft)]",
       "border",
-      "border-danger-500",
-      "dark:bg-danger-700",
-      "dark:border-danger-500",
+      "border-[color:var(--c-line)]",
       "dot",
       "h-5",
       "left-0",
@@ -30,7 +27,7 @@ exports[`TwSwitch > class contract > danger: off and on 1`] = `
     ],
     "label": [
       "mx-2",
-      "text-danger-500",
+      "text-[color:var(--c-fg)]",
       "text-md",
     ],
     "root": [
@@ -42,8 +39,9 @@ exports[`TwSwitch > class contract > danger: off and on 1`] = `
   },
   "on": {
     "back": [
-      "bg-danger-500",
+      "bg-[color:var(--c-solid)]",
       "border",
+      "border-[color:var(--c-solid)]",
       "h-5",
       "rounded-full",
       "shadow-inner",
@@ -51,10 +49,9 @@ exports[`TwSwitch > class contract > danger: off and on 1`] = `
     ],
     "knob": [
       "absolute",
-      "bg-white",
+      "bg-[color:var(--c-on-solid)]",
       "border",
-      "border-danger-200",
-      "dark:bg-danger-700",
+      "border-[color:var(--c-line-muted)]",
       "dot",
       "h-5",
       "rounded-full",
@@ -65,242 +62,8 @@ exports[`TwSwitch > class contract > danger: off and on 1`] = `
     ],
     "label": [
       "mx-2",
-      "text-danger-500",
+      "text-[color:var(--c-fg)]",
       "text-md",
-    ],
-    "root": [
-      "cursor-pointer",
-      "flex",
-      "items-center",
-      "select-none",
-    ],
-  },
-}
-`;
-
-exports[`TwSwitch > class contract > info: off and on 1`] = `
-{
-  "off": {
-    "back": [
-      "bg-white",
-      "border",
-      "border-info-500",
-      "dark:border-info-200",
-      "h-5",
-      "rounded-full",
-      "shadow-inner",
-      "w-10",
-    ],
-    "knob": [
-      "absolute",
-      "bg-info-200",
-      "border",
-      "border-info-500",
-      "dark:bg-info-700",
-      "dark:border-info-500",
-      "dot",
-      "h-5",
-      "left-0",
-      "rounded-full",
-      "top-0",
-      "transition",
-      "w-5",
-    ],
-    "label": [
-      "mx-2",
-      "text-info-500",
-      "text-md",
-    ],
-    "root": [
-      "cursor-pointer",
-      "flex",
-      "items-center",
-      "select-none",
-    ],
-  },
-  "on": {
-    "back": [
-      "bg-info-500",
-      "border",
-      "h-5",
-      "rounded-full",
-      "shadow-inner",
-      "w-10",
-    ],
-    "knob": [
-      "absolute",
-      "bg-white",
-      "border",
-      "border-info-200",
-      "dark:bg-info-700",
-      "dot",
-      "h-5",
-      "rounded-full",
-      "top-0",
-      "transition",
-      "translate-x-full",
-      "w-5",
-    ],
-    "label": [
-      "mx-2",
-      "text-info-500",
-      "text-md",
-    ],
-    "root": [
-      "cursor-pointer",
-      "flex",
-      "items-center",
-      "select-none",
-    ],
-  },
-}
-`;
-
-exports[`TwSwitch > class contract > primary: off and on 1`] = `
-{
-  "off": {
-    "back": [
-      "bg-white",
-      "border",
-      "border-primary-500",
-      "dark:border-primary-200",
-      "h-5",
-      "rounded-full",
-      "shadow-inner",
-      "w-10",
-    ],
-    "knob": [
-      "absolute",
-      "bg-primary-200",
-      "border",
-      "border-primary-500",
-      "dark:bg-primary-700",
-      "dark:border-primary-500",
-      "dot",
-      "h-5",
-      "left-0",
-      "rounded-full",
-      "top-0",
-      "transition",
-      "w-5",
-    ],
-    "label": [
-      "mx-2",
-      "text-md",
-      "text-primary-500",
-    ],
-    "root": [
-      "cursor-pointer",
-      "flex",
-      "items-center",
-      "select-none",
-    ],
-  },
-  "on": {
-    "back": [
-      "bg-primary-500",
-      "border",
-      "h-5",
-      "rounded-full",
-      "shadow-inner",
-      "w-10",
-    ],
-    "knob": [
-      "absolute",
-      "bg-white",
-      "border",
-      "border-primary-200",
-      "dark:bg-primary-700",
-      "dot",
-      "h-5",
-      "rounded-full",
-      "top-0",
-      "transition",
-      "translate-x-full",
-      "w-5",
-    ],
-    "label": [
-      "mx-2",
-      "text-md",
-      "text-primary-500",
-    ],
-    "root": [
-      "cursor-pointer",
-      "flex",
-      "items-center",
-      "select-none",
-    ],
-  },
-}
-`;
-
-exports[`TwSwitch > class contract > secondary: off and on 1`] = `
-{
-  "off": {
-    "back": [
-      "bg-white",
-      "border",
-      "border-secondary-500",
-      "dark:border-secondary-200",
-      "h-5",
-      "rounded-full",
-      "shadow-inner",
-      "w-10",
-    ],
-    "knob": [
-      "absolute",
-      "bg-secondary-200",
-      "border",
-      "border-secondary-500",
-      "dark:bg-secondary-700",
-      "dark:border-secondary-500",
-      "dot",
-      "h-5",
-      "left-0",
-      "rounded-full",
-      "top-0",
-      "transition",
-      "w-5",
-    ],
-    "label": [
-      "mx-2",
-      "text-md",
-      "text-secondary-500",
-    ],
-    "root": [
-      "cursor-pointer",
-      "flex",
-      "items-center",
-      "select-none",
-    ],
-  },
-  "on": {
-    "back": [
-      "bg-secondary-500",
-      "border",
-      "h-5",
-      "rounded-full",
-      "shadow-inner",
-      "w-10",
-    ],
-    "knob": [
-      "absolute",
-      "bg-white",
-      "border",
-      "border-secondary-200",
-      "dark:bg-secondary-700",
-      "dot",
-      "h-5",
-      "rounded-full",
-      "top-0",
-      "transition",
-      "translate-x-full",
-      "w-5",
-    ],
-    "label": [
-      "mx-2",
-      "text-md",
-      "text-secondary-500",
     ],
     "root": [
       "cursor-pointer",
@@ -316,10 +79,9 @@ exports[`TwSwitch > class contract > sizes and disabled 1`] = `
 {
   "disabled": {
     "back": [
-      "bg-white",
+      "bg-[color:var(--c-surface)]",
       "border",
-      "border-primary-500",
-      "dark:border-primary-200",
+      "border-[color:var(--c-line)]",
       "h-5",
       "opacity-50",
       "rounded-full",
@@ -328,11 +90,9 @@ exports[`TwSwitch > class contract > sizes and disabled 1`] = `
     ],
     "knob": [
       "absolute",
-      "bg-primary-200",
+      "bg-[color:var(--c-soft)]",
       "border",
-      "border-primary-500",
-      "dark:bg-primary-700",
-      "dark:border-primary-500",
+      "border-[color:var(--c-line)]",
       "dot",
       "h-5",
       "left-0",
@@ -343,8 +103,8 @@ exports[`TwSwitch > class contract > sizes and disabled 1`] = `
     ],
     "label": [
       "mx-2",
+      "text-[color:var(--c-fg)]",
       "text-md",
-      "text-primary-500",
     ],
     "root": [
       "cursor-not-allowed",
@@ -355,10 +115,9 @@ exports[`TwSwitch > class contract > sizes and disabled 1`] = `
   },
   "lg": {
     "back": [
-      "bg-white",
+      "bg-[color:var(--c-surface)]",
       "border",
-      "border-primary-500",
-      "dark:border-primary-200",
+      "border-[color:var(--c-line)]",
       "h-7",
       "rounded-full",
       "shadow-inner",
@@ -366,11 +125,9 @@ exports[`TwSwitch > class contract > sizes and disabled 1`] = `
     ],
     "knob": [
       "absolute",
-      "bg-primary-200",
+      "bg-[color:var(--c-soft)]",
       "border",
-      "border-primary-500",
-      "dark:bg-primary-700",
-      "dark:border-primary-500",
+      "border-[color:var(--c-line)]",
       "dot",
       "h-7",
       "left-0",
@@ -381,8 +138,8 @@ exports[`TwSwitch > class contract > sizes and disabled 1`] = `
     ],
     "label": [
       "mx-2",
+      "text-[color:var(--c-fg)]",
       "text-lg",
-      "text-primary-500",
     ],
     "root": [
       "cursor-pointer",
@@ -393,10 +150,9 @@ exports[`TwSwitch > class contract > sizes and disabled 1`] = `
   },
   "sm": {
     "back": [
-      "bg-white",
+      "bg-[color:var(--c-surface)]",
       "border",
-      "border-primary-500",
-      "dark:border-primary-200",
+      "border-[color:var(--c-line)]",
       "h-3",
       "rounded-full",
       "shadow-inner",
@@ -404,11 +160,9 @@ exports[`TwSwitch > class contract > sizes and disabled 1`] = `
     ],
     "knob": [
       "absolute",
-      "bg-primary-200",
+      "bg-[color:var(--c-soft)]",
       "border",
-      "border-primary-500",
-      "dark:bg-primary-700",
-      "dark:border-primary-500",
+      "border-[color:var(--c-line)]",
       "dot",
       "h-3",
       "left-0",
@@ -419,164 +173,8 @@ exports[`TwSwitch > class contract > sizes and disabled 1`] = `
     ],
     "label": [
       "mx-2",
-      "text-primary-500",
+      "text-[color:var(--c-fg)]",
       "text-sm",
-    ],
-    "root": [
-      "cursor-pointer",
-      "flex",
-      "items-center",
-      "select-none",
-    ],
-  },
-}
-`;
-
-exports[`TwSwitch > class contract > success: off and on 1`] = `
-{
-  "off": {
-    "back": [
-      "bg-white",
-      "border",
-      "border-success-500",
-      "dark:border-success-200",
-      "h-5",
-      "rounded-full",
-      "shadow-inner",
-      "w-10",
-    ],
-    "knob": [
-      "absolute",
-      "bg-success-200",
-      "border",
-      "border-success-500",
-      "dark:bg-success-700",
-      "dark:border-success-500",
-      "dot",
-      "h-5",
-      "left-0",
-      "rounded-full",
-      "top-0",
-      "transition",
-      "w-5",
-    ],
-    "label": [
-      "mx-2",
-      "text-md",
-      "text-success-500",
-    ],
-    "root": [
-      "cursor-pointer",
-      "flex",
-      "items-center",
-      "select-none",
-    ],
-  },
-  "on": {
-    "back": [
-      "bg-success-500",
-      "border",
-      "h-5",
-      "rounded-full",
-      "shadow-inner",
-      "w-10",
-    ],
-    "knob": [
-      "absolute",
-      "bg-white",
-      "border",
-      "border-success-200",
-      "dark:bg-success-700",
-      "dot",
-      "h-5",
-      "rounded-full",
-      "top-0",
-      "transition",
-      "translate-x-full",
-      "w-5",
-    ],
-    "label": [
-      "mx-2",
-      "text-md",
-      "text-success-500",
-    ],
-    "root": [
-      "cursor-pointer",
-      "flex",
-      "items-center",
-      "select-none",
-    ],
-  },
-}
-`;
-
-exports[`TwSwitch > class contract > warning: off and on 1`] = `
-{
-  "off": {
-    "back": [
-      "bg-white",
-      "border",
-      "border-warning-500",
-      "dark:border-warning-200",
-      "h-5",
-      "rounded-full",
-      "shadow-inner",
-      "w-10",
-    ],
-    "knob": [
-      "absolute",
-      "bg-warning-200",
-      "border",
-      "border-warning-500",
-      "dark:bg-warning-700",
-      "dark:border-warning-500",
-      "dot",
-      "h-5",
-      "left-0",
-      "rounded-full",
-      "top-0",
-      "transition",
-      "w-5",
-    ],
-    "label": [
-      "mx-2",
-      "text-md",
-      "text-warning-500",
-    ],
-    "root": [
-      "cursor-pointer",
-      "flex",
-      "items-center",
-      "select-none",
-    ],
-  },
-  "on": {
-    "back": [
-      "bg-warning-500",
-      "border",
-      "h-5",
-      "rounded-full",
-      "shadow-inner",
-      "w-10",
-    ],
-    "knob": [
-      "absolute",
-      "bg-white",
-      "border",
-      "border-warning-200",
-      "dark:bg-warning-700",
-      "dot",
-      "h-5",
-      "rounded-full",
-      "top-0",
-      "transition",
-      "translate-x-full",
-      "w-5",
-    ],
-    "label": [
-      "mx-2",
-      "text-md",
-      "text-warning-500",
     ],
     "root": [
       "cursor-pointer",
