@@ -16,138 +16,116 @@
 
 </template>
 
-<script>
-import {TwIcon} from "@/components";
-export default {
-  name:'TwInput',
-  emits: ['changed','update:modelValue'],
-  components: {
-    TwIcon,
-  },
-  props: {
-    color: {
-      type: String,
-      default: "primary"
-    },
-    modelValue:{
+<script setup>
+import { ref, computed, watch } from 'vue'
+import { TwIcon } from '@/components'
 
+defineOptions({ name: 'TwInput' })
+
+const props = defineProps({
+  color: {
+    type: String,
+    default: 'primary'
+  },
+  modelValue: {},
+  disabled: {
+    type: Boolean,
+    default: false
+  },
+  error: {
+    type: String,
+    default: ''
+  },
+  errorColor: {
+    type: String,
+    default: 'danger'
+  },
+  icon: {
+    type: String,
+    default: ''
+  },
+  description: {
+    type: String,
+    default: ''
+  },
+  placeholder: {
+    type: String,
+    default: ''
+  },
+  formNameAndId: {
+    type: String,
+    default: (Math.random() + 1).toString(36).substring(5)
+  },
+  type: {
+    type: String,
+    validator: (propValue) => {
+      return [
+        'text',
+        'number',
+        'password',
+        'email',
+        'tel',
+        'search',
+        'color',
+        'date',
+        'file'
+      ].includes(propValue)
     },
-    disabled:{
-      type:Boolean,
-      default:false
-    },
-    error: {
-      type: String,
-      default: ''
-    },
-    errorColor: {
-      type: String,
-      default: "danger"
-    },
-    icon:{
-      type:String,
-      default:''
-    },
-    description:{
-      type:String,
-      default:''
-    },
-    placeholder: {
-      type: String,
-      default: ""
-    },
-    formNameAndId:{
-      type:String,
-      default:(Math.random() + 1).toString(36).substring(5)
-    },
-    type:{
-      type:String,
-      validator: propValue => {
-       return   [
-          'text',
-          'number',
-          'password',
-          'email',
-          'tel',
-          'search',
-          'color',
-          'date',
-          'file'
-        ].includes(propValue)
-      },
-      default:'text'
-    },
-    labelPosition:{
-      type:String,
-      default:'block'
-    },
-    accept:{
-      type:String,
-      default:''
+    default: 'text'
+  },
+  labelPosition: {
+    type: String,
+    default: 'block'
+  },
+  accept: {
+    type: String,
+    default: ''
+  }
+})
+
+const emit = defineEmits(['changed', 'update:modelValue'])
+
+const inputVal = ref('')
+
+function handleChange($event) {
+  if (props.type === 'file') {
+    const target = $event.target
+    if (target && target.files) {
+      const file = target.files[0]
+      emit('changed', file)
     }
-  },
-  data() {
-    return {
-      inputVal: ''
-    }
-  },
-  methods: {
-    handleChange($event){
-      if(this.type==='file'){
-        const target = $event.target;
-
-        if (target && target.files) {
-          let file = target.files[0]
-          this.$emit('changed',file)
-        }
-      }else{
-        this.$emit('update:modelValue',this.inputVal)
-        this.$emit('changed',this.inputVal)
-      }
-
-
-
-
-    }
-
-  },
-  watch: {
-    modelValue: {
-      handler(neval) {
-        this.inputVal = neval
-      },
-      // force eager callback execution
-      immediate: true
-    }
-  },
-  computed: {
-    inputClass() {
-      let c = this.error? this.errorColor:this.color;
-      let lm = this.hasIcon? ' pl-8 ':''
-      let op = this.disabled? ' opacity-50':''
-      let f = this.type==='file'? ' file:bg-'+this.color+'-300 file:text-sm file:border-0 file:rounded file:text-'+this.color+'-700':''
-      return 'border-'+c+'-500  text-'+c+'-500' +lm +op +' placeholder:italic placeholder-'+this.color+'-300 dark:bg-'+this.color+'-900 dark:text-'+this.color+'-100' +f
-    },
-    hasError(){
-      return this.error.length>0
-    },
-    hasIcon(){
-      return this.icon.length>0
-    },
-    iconClass(){
-      let c = this.error? this.errorColor:this.color;
-      let op = this.disabled? ' opacity-50':''
-      return 'border-'+c+'-500 text-'+c+'-300'+op
-    },
-    descriptionClass(){
-      let c = this.error? this.errorColor + '-300' :this.color+'-500';
-      return 'text-'+c
-    },
-    labelClass(){
-      return 'text-'+this.color+'-500 dark:text-'+this.color+'-100'
-    }
-  },
+  } else {
+    emit('update:modelValue', inputVal.value)
+    emit('changed', inputVal.value)
+  }
 }
+
+watch(() => props.modelValue, (value) => {
+  inputVal.value = value
+}, { immediate: true })
+
+const hasError = computed(() => props.error.length > 0)
+
+const hasIcon = computed(() => props.icon.length > 0)
+
+const inputClass = computed(() => {
+  const c = props.error ? props.errorColor : props.color
+  const lm = hasIcon.value ? ' pl-8 ' : ''
+  const op = props.disabled ? ' opacity-50' : ''
+  const f = props.type === 'file' ? ' file:bg-' + props.color + '-300 file:text-sm file:border-0 file:rounded file:text-' + props.color + '-700' : ''
+  return 'border-' + c + '-500  text-' + c + '-500' + lm + op + ' placeholder:italic placeholder-' + props.color + '-300 dark:bg-' + props.color + '-900 dark:text-' + props.color + '-100' + f
+})
+
+const iconClass = computed(() => {
+  const c = props.error ? props.errorColor : props.color
+  const op = props.disabled ? ' opacity-50' : ''
+  return 'border-' + c + '-500 text-' + c + '-300' + op
+})
+
+const descriptionClass = computed(() => {
+  const c = props.error ? props.errorColor + '-300' : props.color + '-500'
+  return 'text-' + c
+})
+
+const labelClass = computed(() => 'text-' + props.color + '-500 dark:text-' + props.color + '-100')
 </script>
-
-
