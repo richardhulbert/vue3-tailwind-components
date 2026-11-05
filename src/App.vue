@@ -283,9 +283,7 @@ function handleChangeTheme() {
         </div>
         <div class=" flex-row ml-3 text-slate-500">{{ records.length }} Records</div>
         <div class=" ml-2  w-full">
-          <tw-table :hover="hover" :heading-color="accentColor" :stripe-color="accentColor"
-                    :border-color="accentColor"
-                    :hover-color="accentColor" :striped="striped" :headings="headings" :items="products"
+          <tw-table :hover="hover" :color="accentColor" :striped="striped" :headings="headings" :items="products"
                     :selected-index="selectedRow">
             <template v-slot:icon="row">
               <tw-icon :icon="row.item.icon" ></tw-icon>
@@ -325,9 +323,7 @@ function handleChangeTheme() {
         <tw-rollout z-index="50" width="w-10/12" :align-right="rolloutAlignRight" :color="accentColor"
                     v-model="showRollout" :blur="blurRollout">
           <div class="m-8 p-8 ">
-            <tw-table :hover="hover" :heading-color="accentColor" :stripe-color="accentColor"
-                      :border-color="accentColor"
-                      :hover-color="accentColor" :striped="striped" :headings="headings" :items="products">
+            <tw-table :hover="hover" :color="accentColor" :striped="striped" :headings="headings" :items="products">
               <template v-slot:link="row">
                 <a :href="row.item.link">{{ row.item.link }}</a>
               </template>

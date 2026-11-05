@@ -6,32 +6,6 @@ module.exports = {
     "./index.html",
     "./src/**/*.{js,ts,jsx,vue}",
   ],
-  safelist: [
-    {
-      pattern: /bg-(primary|secondary|warning|success|danger|info)-(\d00)/,
-      variants:  ['hover', 'focus', 'file','dark', 'dark:hover'],
-    },
-    {
-      pattern: /border-(primary|secondary|warning|success|danger|info)-(\d00)/,
-      variants:  ['dark', 'dark:hover'],
-    },
-    {
-      pattern: /divide-(primary|secondary|warning|success|danger|info)-(\d00)/,
-      variants:  ['dark', 'dark:hover'],
-    },
-    {
-      pattern: /text-(\w+)-(\d00)/,
-      variants:['file','dark']
-    },
-    {
-      pattern: /accent-(\w+)-(\d00)/,
-      variants:['file','dark']
-    },
-    {
-      pattern: /placeholder-(\w+)-(\d00)/,
-    },
-
-  ],
   theme: {
     extend: {
       colors:{
@@ -44,5 +18,9 @@ module.exports = {
       }
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [
+    require("tailwindcss-animate"),
+    // Publishes --primary-500 and so on, which the components read.
+    require("./plugin/tailwind.cjs")(),
+  ],
 }
