@@ -15,90 +15,78 @@
   </div>
 </template>
 
-<script>
-export default {
-  name:'TwSwitch',
-  props: {
-    color: {
-      type: String,
-      default: 'primary'
-    },
-    modelValue: {
-      type: Boolean,
-      default: false
-    },
-    size : {
-      type:String,
-      default:'md',
-      validator(value) {
-        // The value must match one of these strings
-        return ['sm', 'md', 'lg'].includes(value)
-      }
-    },
-    disabled:{
-      type:Boolean,
-      default:false
-    },
-    formNameAndId:{
-      type:String,
-      default:(Math.random() + 1).toString(36).substring(5)
+<script setup>
+import { ref, computed, watch } from 'vue'
+
+defineOptions({ name: 'TwSwitch' })
+
+const props = defineProps({
+  color: {
+    type: String,
+    default: 'primary'
+  },
+  modelValue: {
+    type: Boolean,
+    default: false
+  },
+  size: {
+    type: String,
+    default: 'md',
+    validator(value) {
+      return ['sm', 'md', 'lg'].includes(value)
     }
   },
-  data() {
-    return {
-      checked: false
-    }
+  disabled: {
+    type: Boolean,
+    default: false
   },
-  methods: {
+  formNameAndId: {
+    type: String,
+    default: (Math.random() + 1).toString(36).substring(5)
+  }
+})
 
-    handleInput() {
-      if(!this.disabled){
-        this.checked = !this.checked
-        this.$emit('update:modelValue', this.checked)
-        this.$emit('changed', this.checked)
+const emit = defineEmits(['update:modelValue', 'changed'])
 
-      }
+const checked = ref(false)
 
-    }
-  },
-  watch: {
-    modelValue:{
-      handler(neval) {
-        this.checked = neval
-      },
-      // force eager callback execution
-      immediate: true
-    }
-  },
-  computed: {
-    baseSize(){
-      switch (this.size){
-        case 'sm': return 3
-        case 'md': return 5
-        case 'lg': return 7
-        default: return 5
-
-      }
-    },
-    topClass(){
-      return this.disabled?'cursor-not-allowed': 'cursor-pointer'
-    },
-    backClass() {
-      let s = ' h-'+this.baseSize + ' w-'+(this.baseSize*2)
-      let op = this.disabled ? ' opacity-50 ':''
-      if (this.checked) return 'bg-' + this.color + '-500' + s +op
-
-      return 'bg-white border-'+this.color+'-500  dark:border-'+this.color+'-200'+s +op
-    },
-    knobClass() {
-      let s = ' h-'+this.baseSize+ ' w-'+this.baseSize
-      if (this.checked) return 'translate-x-full bg-white dark:bg-'+this.color+'-700 border-'+this.color+'-200 '+s
-
-      return ' bg-'+this.color+'-200 border-'+this.color+'-500 dark:bg-'+this.color+'-700 left-0 dark:border-'+this.color+'-500'+s
-    },
-    labelClass(){
-      return 'text-'+this.color+'-500 text-'+this.size
-    }
-  },
+function handleInput() {
+  if (!props.disabled) {
+    checked.value = !checked.value
+    emit('update:modelValue', checked.value)
+    emit('changed', checked.value)
+  }
 }
+
+watch(() => props.modelValue, (value) => {
+  checked.value = value
+}, { immediate: true })
+
+const baseSize = computed(() => {
+  switch (props.size) {
+    case 'sm': return 3
+    case 'md': return 5
+    case 'lg': return 7
+    default: return 5
+  }
+})
+
+const topClass = computed(() => (props.disabled ? 'cursor-not-allowed' : 'cursor-pointer'))
+
+const backClass = computed(() => {
+  const c = props.color
+  const s = ' h-' + baseSize.value + ' w-' + (baseSize.value * 2)
+  const op = props.disabled ? ' opacity-50 ' : ''
+  if (checked.value) return 'bg-' + c + '-500' + s + op
+  return 'bg-white border-' + c + '-500  dark:border-' + c + '-200' + s + op
+})
+
+const knobClass = computed(() => {
+  const c = props.color
+  const s = ' h-' + baseSize.value + ' w-' + baseSize.value
+  if (checked.value) return 'translate-x-full bg-white dark:bg-' + c + '-700 border-' + c + '-200 ' + s
+  return ' bg-' + c + '-200 border-' + c + '-500 dark:bg-' + c + '-700 left-0 dark:border-' + c + '-500' + s
+})
+
+const labelClass = computed(() => 'text-' + props.color + '-500 text-' + props.size)
 </script>
