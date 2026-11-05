@@ -29,9 +29,49 @@ describe('TwButtonGroup', () => {
     expect(parts(group({ size: 'sm' })).map((i) => i.props('size'))).toEqual(['sm', 'sm', 'sm'])
   })
 
-  it.fails('can be operated from the keyboard (known bug: items are clickable divs)', () => {
-    // Fix: render items as buttons, with role="radio" and aria-checked.
-    expect(parts(group())[0].element.tagName).toBe('BUTTON')
+  it('renders items as buttons in a radio group', () => {
+    const w = group({ modelValue: 'dark' })
+    expect(w.attributes('role')).toBe('radiogroup')
+    expect(parts(w).map((i) => [i.element.tagName, i.attributes('type'), i.attributes('role'), i.attributes('aria-checked')])).toEqual([
+      ['BUTTON', 'button', 'radio', 'false'],
+      ['BUTTON', 'button', 'radio', 'true'],
+      ['BUTTON', 'button', 'radio', 'false'],
+    ])
+  })
+
+  it('is a single Tab stop: the selected item, or the first when none is', () => {
+    const stops = (props) => parts(group(props)).map((i) => i.attributes('tabindex'))
+    expect(stops({ modelValue: 'dark' })).toEqual(['-1', '0', '-1'])
+    expect(stops({})).toEqual(['0', '-1', '-1'])
+  })
+
+  it.each([
+    ['ArrowRight', 'dark', 'system'],
+    ['ArrowDown', 'dark', 'system'],
+    ['ArrowLeft', 'dark', 'light'],
+    ['ArrowUp', 'dark', 'light'],
+    ['ArrowRight', 'system', 'light'],
+    ['ArrowLeft', 'light', 'system'],
+  ])('%s from %s selects %s, wrapping at the ends', async (key, from, to) => {
+    const w = group({ modelValue: from })
+    await w.trigger('keydown', { key })
+    expect(w.emitted('update:modelValue')).toEqual([[to]])
+  })
+
+  it('moves focus with the selection', async () => {
+    const w = mount(TwButtonGroup, {
+      props: { items, modelValue: 'light', 'onUpdate:modelValue': (v) => w.setProps({ modelValue: v }) },
+      attachTo: document.body,
+    })
+    await w.trigger('keydown', { key: 'ArrowRight' })
+    await w.vm.$nextTick()
+    expect(document.activeElement).toBe(parts(w)[1].element)
+  })
+
+  it('ignores other keys', async () => {
+    const w = group({ modelValue: 'dark' })
+    await w.trigger('keydown', { key: 'a' })
+    expect(w.emitted('update:modelValue')).toBeUndefined()
   })
 
   describe('class contract', () => {
