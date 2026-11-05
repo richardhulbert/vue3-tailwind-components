@@ -59,14 +59,25 @@ describe('TwSwitch', () => {
     expect(mount(TwSwitch, { props: { formNameAndId: 'given' } }).get('input').attributes('id')).toBe('given')
   })
 
-  it.fails('announces itself as a switch (known bug: no role or checked state)', () => {
-    // Fix: role="switch" and aria-checked on the focusable element.
+  it('announces itself as a switch, with its state', async () => {
     const w = mount(TwSwitch, { props: { modelValue: true } })
     expect(w.attributes('role')).toBe('switch')
     expect(w.attributes('aria-checked')).toBe('true')
+    await w.trigger('click')
+    expect(w.attributes('aria-checked')).toBe('false')
   })
 
-  it.fails('toggles on Space, as a switch should (known bug: only Enter works)', async () => {
+  it('is labelled by its slot, and marks itself disabled', () => {
+    const w = mount(TwSwitch, { props: { disabled: true }, slots: { default: 'Dark mode' } })
+    expect(w.get(`#${CSS.escape(w.attributes('aria-labelledby'))}`).text()).toBe('Dark mode')
+    expect(w.attributes('aria-disabled')).toBe('true')
+  })
+
+  it('hides its form checkbox from assistive technology', () => {
+    expect(mount(TwSwitch).get('input').attributes()).toMatchObject({ 'aria-hidden': 'true', tabindex: '-1' })
+  })
+
+  it('toggles on Space, as a switch should', async () => {
     const w = mount(TwSwitch)
     await w.trigger('keydown', { key: ' ', code: 'Space' })
     expect(w.emitted('update:modelValue')).toEqual([[true]])

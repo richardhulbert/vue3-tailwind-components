@@ -1,14 +1,15 @@
 <template>
-  <div @keydown.enter="handleInput" tabindex="0" :class="topClass" class="flex  select-none items-center" @click="handleInput">
+  <div role="switch" :aria-checked="checked ? 'true' : 'false'" :aria-disabled="disabled ? 'true' : undefined" :aria-labelledby="labelId"
+       @keydown.enter="handleInput" @keydown.space.prevent="handleInput" tabindex="0" :class="topClass" class="flex  select-none items-center" @click="handleInput">
     <!--    this is needed so that tailwind doesnt strip these classes-->
     <div class=" hidden h-3 w-3 w-6 h-7 w-7 h-5 w-5 w-10 w-14"></div>
     <div class="relative">
-      <input :disabled="disabled" :id="fieldId" :name="fieldId" type="checkbox" class="sr-only " :value="checked"/>
+      <input :disabled="disabled" :id="fieldId" :name="fieldId" type="checkbox" class="sr-only " :value="checked" aria-hidden="true" tabindex="-1"/>
       <div :class="backClass" class="rounded-full border shadow-inner"></div>
       <div :class="knobClass"
            class="dot border   absolute top-0  transition  rounded-full "></div>
     </div>
-    <div :class="labelClass" class="mx-2">
+    <div :id="labelId" :class="labelClass" class="mx-2">
       <slot></slot>
     </div>
 
@@ -16,7 +17,7 @@
 </template>
 
 <script setup>
-import { ref, computed, watch } from 'vue'
+import { ref, computed, watch, useId } from 'vue'
 import { useFieldId } from '@/components/composables/useFieldId'
 
 defineOptions({ name: 'TwSwitch' })
@@ -48,6 +49,7 @@ const props = defineProps({
 })
 
 const fieldId = useFieldId(props)
+const labelId = useId()
 
 const emit = defineEmits(['update:modelValue', 'changed'])
 
