@@ -1,7 +1,7 @@
 import { describe, it, expect, vi } from 'vitest'
 import { mount } from '@vue/test-utils'
 import { TwSelect, TwOption } from '@/components'
-import { COLORS, classes, idsOfTwo } from '../helpers'
+import { COLORS, classes, idsOfTwo, toneOf } from '../helpers'
 
 const items = [
   { label: 'Apple', value: 'a' },
@@ -136,9 +136,21 @@ describe('TwSelect', () => {
     expect(event.defaultPrevented).toBe(false)
   })
 
+  it.each(COLORS)('takes its tone from color: %s', (color) => {
+    expect(toneOf(mount(TwSelect, { props: { items, color } }))).toBe(color)
+  })
+
+  it('recolours the button and message, not the panel, on an error', async () => {
+    const w = mount(TwSelect, { props: { items, error: 'Required' } })
+    expect(w.get('button').element.style.getPropertyValue('--c-line')).toBe('var(--danger-500, danger)')
+    expect(w.get('p').element.style.getPropertyValue('--c-fg')).toBe('var(--danger-500, danger)')
+    await open(w)
+    expect(w.get('.z-50').element.style.getPropertyValue('--c-line')).toBe('')
+  })
+
   describe('class contract', () => {
-    it.each(COLORS)('%s: button, chevron and panel', async (color) => {
-      const w = mount(TwSelect, { props: { items, color, modelValue: 'a' } })
+    it('button, chevron, panel and options', async () => {
+      const w = mount(TwSelect, { props: { items, modelValue: 'a' } })
       await open(w)
       expect({
         button: classes(w.get('button')),

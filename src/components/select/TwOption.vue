@@ -34,15 +34,13 @@ const props = defineProps({
   }
 })
 
-const buttonClass = computed(() => {
-  const selectedClass = props.selected
-    ? ` bg-${props.color}-500 dark:text-${props.color}-300 dark:bg-${props.color}-700`
-    : ''
-  return (
-    `text-${props.color}-700 hover:bg-${props.color}-100 dark:hover:bg-${props.color}-700 dark:text-${props.color}-100` +
-    selectedClass
-  )
-})
+// Colours come from the enclosing TwSelect's tone; color is kept for compatibility.
+// A selected option follows the selection rule.
+const buttonClass = computed(() =>
+  props.selected
+    ? 'bg-[color:var(--c-selected)] hover:bg-[color:var(--c-selected-hover)] text-[color:var(--c-on-selected)]'
+    : 'text-[color:var(--c-fg-strong)] hover:bg-[color:var(--c-subtle)]'
+)
 
 function sendClick() {
   emit('selected', props.index)

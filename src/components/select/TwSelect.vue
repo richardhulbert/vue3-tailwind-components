@@ -1,21 +1,21 @@
 <template>
-  <div ref="selectRef" class="relative " @keydown="handleKey">
+  <div ref="selectRef" v-bind="toneAttrs" class="relative " @keydown="handleKey">
     <select class="hidden" :name="fieldId" :id="fieldId" :value="calculatedValue">
       <option v-for="(item,index) in items" :key="index" :value="item.value">{{ item.label }}</option>
     </select>
     <button :disabled="disabled" @click="toggleSelect" type="button"
-            :class="buttonClass"
-            class=" w-full flex gap-2 rounded-lg border bg-white   text-sm shadow-sm transition-all  disabled:cursor-not-allowed ">
+            :class="buttonClass" :style="errorStyle"
+            class=" w-full flex gap-2 rounded-lg border   text-sm shadow-sm transition-all  disabled:cursor-not-allowed ">
       <tw-icon v-if="dIcon" class="my-1 mx-1" :icon="dIcon"></tw-icon>
       <span class="text-left flex-1 ">{{ dLabel }}</span>
       <tw-icon :class="chevronClass" class="transition-transform" icon="chevron-down"></tw-icon>
     </button>
 
-    <p class="m-1 text-sm text-danger-500" v-if="hasError">{{ error }}</p>
+    <p class="m-1 text-sm text-[color:var(--c-fg)]" :style="errorStyle" v-if="hasError">{{ error }}</p>
 
     <!-- Panel -->
     <div v-if="open"
-         class="z-50 bg-white mt-1 animate-in slide-in-from-top-16 fade-in-20  absolute left-0 right-0  rounded-lg  text-left text-sm shadow-lg"
+         class="z-50 mt-1 animate-in slide-in-from-top-16 fade-in-20  absolute left-0 right-0  rounded-lg  text-left text-sm shadow-lg"
          :class="panelClass">
       <div>
         <tw-option :color="color" @selected="selectItem" v-for="(item,index) in items" :key="index" :label="item.label" :icon="item.icon"
@@ -30,6 +30,7 @@ import { ref, computed, watch } from 'vue'
 import { TwIcon, TwOption } from "@/components";
 import { onClickOutside } from "@vueuse/core"
 import { useFieldId } from '@/components/composables/useFieldId'
+import { useTone, errorSlots } from '@/components/composables/useTone'
 
 const emit = defineEmits(['changed', 'update:model-value'])
 
@@ -171,12 +172,11 @@ watch(
 )
 
 const hasError = computed(() => props.error.length > 0)
-const chevronClass = computed(() => {
-  const color = hasError.value ? 'danger' : props.color
-  return open.value
-    ? `rotate-180 text-${color}-500 dark:text-${color}-100`
-    : `text-${color}-500 dark:text-${color}-100`
-})
+// An error recolours the button and its message, not the open panel.
+const toneAttrs = useTone(() => props.color)
+const errorStyle = computed(() => (hasError.value ? errorSlots('danger') : undefined))
+
+const chevronClass = computed(() => (open.value ? 'rotate-180 text-[color:var(--c-fg)]' : 'text-[color:var(--c-fg)]'))
 const calculatedValue = computed(() =>
   props.items.length > 0 && selectedItemIndex.value > -1
     ? props.items[selectedItemIndex.value].value
@@ -184,7 +184,7 @@ const calculatedValue = computed(() =>
 )
 const buttonClass = computed(() => {
   const op = props.disabled ? ' opacity-50 ' : ''
-let size
+  let size
   switch (props.size) {
     case 'xs': size = ' px-2 py-1 text-xs'; break;
     case 'sm': size = ' px-3 py-1 text-sm'; break;
@@ -192,18 +192,9 @@ let size
     case 'lg': size = ' px-6 py-2 text-xl'; break;
     default: size = ' px-4 py-2'
   }
-
-  if (hasError.value)
-    return (
-      'border-danger-500 hover:bg-danger-100 text-danger-700 dark:bg-danger-500 dark:text-danger-100' + op + size
-    )
-  return (
-    'border-' + props.color + '-500 hover:bg-' + props.color + '-100 text-' + props.color + '-700 dark:bg-' + props.color + '-500 dark:text-' + props.color + '-100' + op + size
-  )
+  return 'bg-[color:var(--c-surface)] border-[color:var(--c-line)] hover:bg-[color:var(--c-subtle)] text-[color:var(--c-fg-strong)]' + op + size
 })
-const panelClass = computed(() => {
-  return 'bg-white dark:bg-' + props.color + '-500 border border-' + props.color + '-500'
-})
+const panelClass = computed(() => 'bg-[color:var(--c-surface)] border border-[color:var(--c-line)]')
 </script>
 
 
