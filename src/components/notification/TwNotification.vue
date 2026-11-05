@@ -1,98 +1,75 @@
-<script>
-import {TwIcon} from "@/components";
+<script setup>
+import { ref, computed, watch } from 'vue'
+import { TwIcon } from '@/components'
 
-export default {
-  name: "TwNotification",
-  components: {
-    TwIcon
-  },
-  data() {
-    return {
-      timer: false
-    }
-  },
-  props: {
-    modelValue: {
-      type: Boolean,
-      default: false
-    },
-    color: {
-      type: String,
-      default: 'primary'
-    },
-    icon: {
-      type: String,
-      default: 'circle-info'
-    },
-    message: {
-      type: String,
-      default: 'Oh dear!'
-    },
-    lifetime: {
-      type: Number,
-      default: 6
-    },
-    position:{
-      type:String,
-      default:'center',
-      validator(value) {
-        // The value must match one of these strings
-        return ['center', 'top-left', 'top-right','top-center'].includes(value)
-      }
+defineOptions({ name: 'TwNotification' })
 
-    }
+const props = defineProps({
+  modelValue: {
+    type: Boolean,
+    default: false
   },
-  methods: {
-    handleInput() {
-      this.$emit('update:modelValue', this.modelValue)
-    },
-    closeNotification() {
-      this.$emit('update:modelValue', false)
-      clearInterval(this.timer);
-    }
+  color: {
+    type: String,
+    default: 'primary'
   },
-  computed: {
-    closeButtonClass() {
-      return 'text-' + this.color + '-500 dark:text-'+this.color+'-200'
-    },
-    notificationClass() {
-     return 'bg-' + this.color + '-200 dark:bg-'+this.color+'-600 dark:text-'+this.color+'-200 text-' + this.color + '-700'+this.positionClass;
-    },
-    positionClass(){
-      let pos = ''
-      switch(this.position){
-        case 'center': pos = ' inset-x-96 inset-y-1/2  '
-          break;
-        case 'top-center': pos = ' inset-x-96 top-5 '
-          break;
-        case 'top-left': pos = ' w-1/4 top-5 left-5'
-          break;
-        case 'top-right': pos = ' w-1/4 top-5 right-5'
-          break;
-        case 'bottom-center': pos = ' inset-x-96 bottom-5'
-          break;
-        case 'bottom-left': pos = ' w-1/4 bottom-5 left-5'
-          break;
-        case 'bottom-right': pos = ' w-1/4 bottom-5 right-5'
-          break;
-      }
-      return pos
-    }
+  icon: {
+    type: String,
+    default: 'circle-info'
   },
-  watch: {
-    modelValue: {
-      handler(showing) {
-        if (showing && this.lifetime>0) {
-          this.timer = setInterval(() => {
-            this.closeNotification();
-          }, (this.lifetime * 1000))
-        }
-      },
-      // force eager callback execution
-      immediate: true
-    }
+  message: {
+    type: String,
+    default: 'Oh dear!'
   },
+  lifetime: {
+    type: Number,
+    default: 6
+  },
+  position: {
+    type: String,
+    default: 'center',
+    validator(value) {
+      return ['center', 'top-left', 'top-right', 'top-center'].includes(value)
+    }
+  }
+})
+
+const emit = defineEmits(['update:modelValue'])
+
+const timer = ref(false)
+
+function closeNotification() {
+  emit('update:modelValue', false)
+  clearInterval(timer.value)
 }
+
+const closeButtonClass = computed(() => 'text-' + props.color + '-500 dark:text-' + props.color + '-200')
+
+const positionClass = computed(() => {
+  switch (props.position) {
+    case 'center': return ' inset-x-96 inset-y-1/2  '
+    case 'top-center': return ' inset-x-96 top-5 '
+    case 'top-left': return ' w-1/4 top-5 left-5'
+    case 'top-right': return ' w-1/4 top-5 right-5'
+    case 'bottom-center': return ' inset-x-96 bottom-5'
+    case 'bottom-left': return ' w-1/4 bottom-5 left-5'
+    case 'bottom-right': return ' w-1/4 bottom-5 right-5'
+    default: return ''
+  }
+})
+
+const notificationClass = computed(() => {
+  const c = props.color
+  return 'bg-' + c + '-200 dark:bg-' + c + '-600 dark:text-' + c + '-200 text-' + c + '-700' + positionClass.value
+})
+
+watch(() => props.modelValue, (showing) => {
+  if (showing && props.lifetime > 0) {
+    timer.value = setInterval(() => {
+      closeNotification()
+    }, props.lifetime * 1000)
+  }
+}, { immediate: true })
 </script>
 
 <template>
