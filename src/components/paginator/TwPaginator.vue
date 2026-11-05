@@ -10,37 +10,37 @@
 
 </template>
 
-<script>
-import TwPaginatorButton from "@/components/paginator/TwPaginatorButton.vue";
+<script setup>
+import TwPaginatorButton from '@/components/paginator/TwPaginatorButton.vue'
 
-export default {
-  name:'TwPaginator',
-  components: {TwPaginatorButton: TwPaginatorButton},
-  props: {
-    numOfPages: {
-      type: Number,
-      default: 0
-    },
-    currentPage: {
-      type: Number,
-      default: 0
-    },
-    color: {
-      type: String,
-      default: 'primary'
-    },
+defineOptions({ name: 'TwPaginator' })
 
+const props = defineProps({
+  numOfPages: {
+    type: Number,
+    default: 0
   },
-  methods: {
-    paginate(page) {
-      this.$emit('paginate',page)
-    },
-    increment(){
-     if(this.currentPage<this.numOfPages) this.$emit('paginate',this.currentPage+1)
-    },
-    decrement(){
-      if(this.currentPage>1) this.$emit('paginate',this.currentPage-1)
-    }
+  currentPage: {
+    type: Number,
+    default: 0
   },
+  color: {
+    type: String,
+    default: 'primary'
+  },
+})
+
+const emit = defineEmits(['paginate'])
+
+function paginate(page) {
+  emit('paginate', page)
+}
+
+function increment() {
+  if (props.currentPage < props.numOfPages) emit('paginate', props.currentPage + 1)
+}
+
+function decrement() {
+  if (props.currentPage > 1) emit('paginate', props.currentPage - 1)
 }
 </script>
