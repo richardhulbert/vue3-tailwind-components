@@ -1,45 +1,37 @@
 <template>
 <div @click="sendAction" :class="itemClass" class="block  py-2 px-6 cursor-pointer">
   <tw-icon class="mr-2"  v-if="showIcon" :icon="item.icon"></tw-icon>
-  {{ this.item.label }}
+  {{ item.label }}
 </div>
 </template>
 
-<script>
-import {defineComponent} from 'vue'
-import {TwIcon} from "@/components";
+<script setup>
+import { computed } from 'vue'
+import { TwIcon } from '@/components'
 
-export default defineComponent({
-    name: "TwDropdownItem",
-  components: {TwIcon},
-  props: {
+defineOptions({ name: 'TwDropdownItem' })
 
-    color:{
-      type:String,
-      default:'primary'
-    },
-    item:{
-      type:Object,
-      default:{'id':0,'icon':"gauge",component:"None","label":"Not Set"}
-    }
+const props = defineProps({
+  color: {
+    type: String,
+    default: 'primary'
   },
-  computed: {
-    showIcon() {
-      return this.item.hasOwnProperty('icon');
-    },
-    itemClass(){
-      return 'text-'+this.color+'-500 dark:text-'+this.color+'-200 hover:bg-'+this.color+'-200 dark:hover:bg-'+this.color+'-500'
-    }
-  },
-  methods: {
-    sendAction() {
-      this.$emit('selected',this.item)
-    }
-  },
+  item: {
+    type: Object,
+    default: () => ({ id: 0, icon: 'gauge', component: 'None', label: 'Not Set' })
+  }
 })
+
+const emit = defineEmits(['selected'])
+
+const showIcon = computed(() => Object.prototype.hasOwnProperty.call(props.item, 'icon'))
+
+const itemClass = computed(() => {
+  const c = props.color
+  return 'text-' + c + '-500 dark:text-' + c + '-200 hover:bg-' + c + '-200 dark:hover:bg-' + c + '-500'
+})
+
+function sendAction() {
+  emit('selected', props.item)
+}
 </script>
-
-
-<style scoped>
-
-</style>
