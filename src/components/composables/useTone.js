@@ -25,7 +25,7 @@ export const SLOTS = {
   'on-solid': ['var(--t-on-solid)', 'var(--t-on-solid)'],
   soft: [200, 600],
   'soft-hover': [300, 500],
-  'on-soft': [700, 200],
+  'on-soft': [800, 200],
   subtle: [100, 800],
   surface: ['#ffffff', 900],
   line: [500, 500],

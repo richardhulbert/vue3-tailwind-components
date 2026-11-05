@@ -110,7 +110,7 @@ A component never builds class names from its colour. Instead, `color` gives it 
 | `solid`, `solid-hover` | filled controls | 500, 700 | 500, 700 |
 | `on-solid` | text on solid | white | white |
 | `soft`, `soft-hover` | tinted areas | 200, 300 | 600, 500 |
-| `on-soft` | text on soft | 700 | 200 |
+| `on-soft` | text on soft | 800 | 200 |
 | `subtle` | faint tints, hovers | 100 | 800 |
 | `surface` | panels and fields | white | 900 |
 | `line`, `line-muted` | borders, dividers | 500, 200 | 500, 700 |
