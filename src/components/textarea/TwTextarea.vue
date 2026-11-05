@@ -1,86 +1,73 @@
-<script>
-export default {
-  name: "TwTextarea",
-  emits: ['changed','update:modelValue'],
-  props: {
-    color: {
-      type: String,
-      default: "primary"
-    },
-    modelValue: {
-      type: String
-    },
-    disabled: {
-      type: Boolean,
-      default: false
-    },
-    error: {
-      type: String,
-      default: ''
-    },
-    errorColor: {
-      type: String,
-      default: "danger"
-    },
-    description: {
-      type: String,
-      default: ''
-    },
-    placeholder: {
-      type: String,
-      default: ""
-    },
-    formNameAndId: {
-      type: String,
-      default: (Math.random() + 1).toString(36).substring(5)
-    },
-    labelPosition: {
-      type: String,
-      default: 'block'
-    }
-  },
-  data() {
-    return {
-      inputVal: ''
-    }
-  },
-  methods: {
-    handleChange(){
-      this.$emit('update:modelValue',this.inputVal)
-      this.$emit('changed',this.inputVal)
-    }
+<script setup>
+import { ref, computed, watch } from 'vue'
 
-  },
-  watch: {
-    modelValue: {
-      handler(neval) {
-        this.inputVal = neval
-      },
-      // force eager callback execution
-      immediate: true
-    }
-  },
-  computed: {
-    inputClass() {
-      let c = this.error? this.errorColor:this.color;
+defineOptions({ name: 'TwTextarea' })
 
-      let op = this.disabled? ' opacity-50':''
-      return 'border-'+c+'-500  text-'+c+'-500'  +op +' placeholder:italic placeholder-'+this.color+'-300 dark:bg-'+this.color+'-900 dark:text-'+this.color+'-100'
-    },
-    hasError(){
-      return this.error.length>0
-    },
-    descriptionClass(){
-      let c = this.error? this.errorColor + '-300' :this.color+'-500';
-      return 'text-'+c
-    },
-    labelClass(){
-      return 'text-'+this.color+'-500 dark:text-'+this.color+'-100'
-    }
+const props = defineProps({
+  color: {
+    type: String,
+    default: 'primary'
   },
+  modelValue: {
+    type: String
+  },
+  disabled: {
+    type: Boolean,
+    default: false
+  },
+  error: {
+    type: String,
+    default: ''
+  },
+  errorColor: {
+    type: String,
+    default: 'danger'
+  },
+  description: {
+    type: String,
+    default: ''
+  },
+  placeholder: {
+    type: String,
+    default: ''
+  },
+  formNameAndId: {
+    type: String,
+    default: (Math.random() + 1).toString(36).substring(5)
+  },
+  labelPosition: {
+    type: String,
+    default: 'block'
+  }
+})
 
+const emit = defineEmits(['changed', 'update:modelValue'])
 
+const inputVal = ref('')
+
+function handleChange() {
+  emit('update:modelValue', inputVal.value)
+  emit('changed', inputVal.value)
 }
+
+watch(() => props.modelValue, (value) => {
+  inputVal.value = value
+}, { immediate: true })
+
+const inputClass = computed(() => {
+  const c = props.error ? props.errorColor : props.color
+  const op = props.disabled ? ' opacity-50' : ''
+  return 'border-' + c + '-500  text-' + c + '-500' + op + ' placeholder:italic placeholder-' + props.color + '-300 dark:bg-' + props.color + '-900 dark:text-' + props.color + '-100'
+})
+
+const hasError = computed(() => props.error.length > 0)
+
+const descriptionClass = computed(() => {
+  const c = props.error ? props.errorColor + '-300' : props.color + '-500'
+  return 'text-' + c
+})
+
+const labelClass = computed(() => 'text-' + props.color + '-500 dark:text-' + props.color + '-100')
 </script>
 
 <template>
@@ -91,7 +78,3 @@ export default {
   <div v-if="hasError" class="m-1 text-sm text-danger-500">{{error}}</div>
   <div v-else :class="descriptionClass" class="m-1 text-sm">{{description}}</div>
 </template>
-
-<style scoped>
-
-</style>
