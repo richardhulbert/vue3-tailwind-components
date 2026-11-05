@@ -28,95 +28,83 @@
   </table>
 </template>
 
-<script>
-import { defineComponent, computed } from "vue";
+<script setup>
+import { computed } from 'vue'
 
-export default defineComponent({
-  name: "TwTable",
-  props: {
-    items: {
-      type: Array,
-      default: () => [],
-    },
-    headings: {
-      type: Array,
-      required: true,
-    },
-    border: {
-      type: Boolean,
-      default: true,
-    },
-    striped: {
-      type: Boolean,
-      default: false,
-    },
-    hover: {
-      type: Boolean,
-      default: false,
-    },
-    headingColor: {
-      type: String,
-      default: "primary",
-    },
-    borderColor: {
-      type: String,
-      default: "primary",
-    },
-    stripeColor: {
-      type: String,
-      default: "primary",
-    },
-    hoverColor: {
-      type: String,
-      default: "primary",
-    },
-    selectedIndex: {
-      type: Number,
-      default: -1,
-    },
-    selectColor: {
-      type: String,
-      default: "primary",
-    },
+defineOptions({ name: 'TwTable' })
+
+const props = defineProps({
+  items: {
+    type: Array,
+    default: () => [],
   },
-  setup(props) {
-    // Compute the heading CSS class
-    const headingClass = computed(() => {
-      return `bg-${props.headingColor}-200 dark:bg-${props.headingColor}-700 dark:text-${props.headingColor}-200`;
-    });
-
-    // Compute the border class for table cells
-    const boarderClass = computed(() => {
-      return props.border
-          ? `border border-${props.borderColor}-200 dark:border-${props.borderColor}-700`
-          : "";
-    });
-
-    // Compute the row class based on props and index
-    const rowClass = (ndx) => {
-      let hoverClass = props.hover
-          ? `hover:bg-${props.hoverColor}-300 dark:hover:bg-${props.hoverColor}-700 dark:hover:text-white`
-          : "";
-
-      if (props.selectedIndex === ndx) {
-        return `bg-${props.selectColor}-300 dark:bg-${props.selectColor}-400`;
-      }
-
-      if (props.striped && props.selectedIndex !== ndx) {
-        return ndx % 2 !== 0
-            ? `bg-${props.stripeColor}-100 dark:bg-${props.stripeColor}-800 dark:text-primary-200 ${hoverClass}`
-            : `dark:text-primary-700 ${hoverClass}`;
-      }
-
-      return `${hoverClass} dark:text-gray-700`;
-    };
-
-    // Expose all computed properties and methods for template
-    return {
-      headingClass,
-      boarderClass,
-      rowClass,
-    };
+  headings: {
+    type: Array,
+    required: true,
   },
-});
+  border: {
+    type: Boolean,
+    default: true,
+  },
+  striped: {
+    type: Boolean,
+    default: false,
+  },
+  hover: {
+    type: Boolean,
+    default: false,
+  },
+  headingColor: {
+    type: String,
+    default: 'primary',
+  },
+  borderColor: {
+    type: String,
+    default: 'primary',
+  },
+  stripeColor: {
+    type: String,
+    default: 'primary',
+  },
+  hoverColor: {
+    type: String,
+    default: 'primary',
+  },
+  selectedIndex: {
+    type: Number,
+    default: -1,
+  },
+  selectColor: {
+    type: String,
+    default: 'primary',
+  },
+})
+
+const headingClass = computed(() => {
+  return `bg-${props.headingColor}-200 dark:bg-${props.headingColor}-700 dark:text-${props.headingColor}-200`
+})
+
+const boarderClass = computed(() => {
+  return props.border
+    ? `border border-${props.borderColor}-200 dark:border-${props.borderColor}-700`
+    : ''
+})
+
+function rowClass(ndx) {
+  const hoverClass = props.hover
+    ? `hover:bg-${props.hoverColor}-300 dark:hover:bg-${props.hoverColor}-700 dark:hover:text-white`
+    : ''
+
+  if (props.selectedIndex === ndx) {
+    return `bg-${props.selectColor}-300 dark:bg-${props.selectColor}-400`
+  }
+
+  if (props.striped && props.selectedIndex !== ndx) {
+    return ndx % 2 !== 0
+      ? `bg-${props.stripeColor}-100 dark:bg-${props.stripeColor}-800 dark:text-primary-200 ${hoverClass}`
+      : `dark:text-primary-700 ${hoverClass}`
+  }
+
+  return `${hoverClass} dark:text-gray-700`
+}
 </script>
