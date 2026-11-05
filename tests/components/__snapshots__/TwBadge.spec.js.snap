@@ -1,88 +1,30 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`TwBadge > class contract > danger 1`] = `
-[
-  "bg-danger-200",
-  "px-6",
-  "py-2",
-  "rounded-full",
-  "text-danger-600",
-  "text-sm",
-]
-`;
-
-exports[`TwBadge > class contract > info 1`] = `
-[
-  "bg-info-200",
-  "px-6",
-  "py-2",
-  "rounded-full",
-  "text-info-600",
-  "text-sm",
-]
-`;
-
-exports[`TwBadge > class contract > primary 1`] = `
-[
-  "bg-primary-200",
-  "px-6",
-  "py-2",
-  "rounded-full",
-  "text-primary-600",
-  "text-sm",
-]
-`;
-
-exports[`TwBadge > class contract > secondary 1`] = `
-[
-  "bg-secondary-200",
-  "px-6",
-  "py-2",
-  "rounded-full",
-  "text-secondary-600",
-  "text-sm",
-]
-`;
-
-exports[`TwBadge > class contract > sizes 1`] = `
+exports[`TwBadge > class contract > default and sizes 1`] = `
 {
   "lg": [
-    "bg-primary-200",
+    "bg-[color:var(--c-soft)]",
     "px-8",
     "py-4",
     "rounded-full",
+    "text-[color:var(--c-on-soft)]",
     "text-lg",
-    "text-primary-600",
+  ],
+  "md": [
+    "bg-[color:var(--c-soft)]",
+    "px-6",
+    "py-2",
+    "rounded-full",
+    "text-[color:var(--c-on-soft)]",
+    "text-sm",
   ],
   "sm": [
-    "bg-primary-200",
+    "bg-[color:var(--c-soft)]",
     "px-4",
     "py-1",
     "rounded-full",
-    "text-primary-600",
+    "text-[color:var(--c-on-soft)]",
     "text-xs",
   ],
 }
-`;
-
-exports[`TwBadge > class contract > success 1`] = `
-[
-  "bg-success-200",
-  "px-6",
-  "py-2",
-  "rounded-full",
-  "text-sm",
-  "text-success-600",
-]
-`;
-
-exports[`TwBadge > class contract > warning 1`] = `
-[
-  "bg-warning-200",
-  "px-6",
-  "py-2",
-  "rounded-full",
-  "text-sm",
-  "text-warning-600",
-]
 `;

@@ -1,9 +1,10 @@
 <template>
-  <span :class="bgColor" class="rounded-full" :style="swatchColorStyle"><slot>Badge</slot></span>
+  <span v-bind="toneAttrs" :class="bgColor" class="rounded-full" :style="swatchColorStyle"><slot>Badge</slot></span>
 </template>
 
 <script setup>
 import ColorUtils from "@/utils/ColorUtils";
+import { useTone } from '@/components/composables/useTone'
 import {ref,computed} from 'vue'
 
 const CU = ref(new ColorUtils())
@@ -45,8 +46,11 @@ const sizeClass = computed(()=>{
   }
 })
 
+const toneAttrs = useTone(() => props.color)
+
+// A swatch paints its exact colour inline, over the tone, with a contrasting text colour.
 const   bgColor=computed(()=>{
-  return 'bg-' + props.color + '-200 text-' + props.color + '-600 ' + sizeClass.value
+  return 'bg-[color:var(--c-soft)] text-[color:var(--c-on-soft)] ' + sizeClass.value
 })
 
   const swatchColorStyle = computed(()=>{

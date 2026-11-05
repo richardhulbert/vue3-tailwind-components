@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest'
 import { mount } from '@vue/test-utils'
 import { TwBadge } from '@/components'
-import { COLORS, classes } from '../helpers'
+import { COLORS, classes, toneOf } from '../helpers'
 
 describe('TwBadge', () => {
   it('shows "Badge" when given no content', () => {
@@ -19,20 +19,23 @@ describe('TwBadge', () => {
   })
 
   it('ignores a swatch that is not a hex colour', () => {
-    expect(mount(TwBadge, { props: { swatch: 'red' } }).attributes('style')).toBeUndefined()
+    const style = mount(TwBadge, { props: { swatch: 'red' } }).attributes('style')
+    expect(style).not.toContain('background:')
+    expect(style).not.toMatch(/(^|;)\s*color:/)
   })
 
   it('rejects an unknown size', () => {
     expect(TwBadge.props.size.validator('xl')).toBe(false)
   })
 
-  describe('class contract', () => {
-    it.each(COLORS)('%s', (color) => {
-      expect(classes(mount(TwBadge, { props: { color } }))).toMatchSnapshot()
-    })
+  it.each(COLORS)('takes its tone from color: %s', (color) => {
+    expect(toneOf(mount(TwBadge, { props: { color } }))).toBe(color)
+  })
 
-    it('sizes', () => {
+  describe('class contract', () => {
+    it('default and sizes', () => {
       expect({
+        md: classes(mount(TwBadge)),
         sm: classes(mount(TwBadge, { props: { size: 'sm' } })),
         lg: classes(mount(TwBadge, { props: { size: 'lg' } })),
       }).toMatchSnapshot()
