@@ -1,6 +1,6 @@
 <template>
   <li >
-    <button type="button" :class="finalClass" class="px-3 py-2 ml-0 leading-tight transition-colors border"><slot></slot></button>
+    <button type="button" :disabled="disabled" :aria-current="selected ? 'page' : undefined" :class="finalClass" class="px-3 py-2 ml-0 leading-tight transition-colors border"><slot></slot></button>
   </li>
 </template>
 

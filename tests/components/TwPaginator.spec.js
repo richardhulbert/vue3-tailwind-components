@@ -43,12 +43,14 @@ describe('TwPaginator', () => {
     expect(buttons(w).at(-1).text()).toBe('On')
   })
 
-  it.fails('disables Previous on the first page (known bug: only styled as disabled)', () => {
+  it('disables Previous on the first page and Next on the last', () => {
     expect(buttons(pager({ currentPage: 1 })).at(0).attributes('disabled')).toBeDefined()
+    expect(buttons(pager({ currentPage: 5 })).at(-1).attributes('disabled')).toBeDefined()
+    expect(buttons(pager()).at(0).attributes('disabled')).toBeUndefined()
   })
 
-  it.fails('marks the current page for assistive technology (known bug: no aria-current)', () => {
-    expect(buttons(pager())[3].attributes('aria-current')).toBe('page')
+  it('marks the current page, and only it, for assistive technology', () => {
+    expect(buttons(pager()).map((b) => b.attributes('aria-current'))).toEqual([undefined, undefined, undefined, 'page', undefined, undefined, undefined])
   })
 
   describe('class contract', () => {
