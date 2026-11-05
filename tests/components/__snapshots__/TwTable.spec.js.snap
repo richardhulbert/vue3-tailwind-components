@@ -1,0 +1,454 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`TwTable > class contract > danger: heading, cell, striped, hover and selected rows 1`] = `
+{
+  "cell": [
+    "border",
+    "border-danger-200",
+    "dark:border-danger-700",
+    "dark:text-primary-100",
+    "px-4",
+    "py-2",
+    "text-primary-600",
+  ],
+  "heading": [
+    "bg-danger-200",
+    "dark:bg-danger-700",
+    "dark:text-danger-200",
+    "text-primary-800",
+  ],
+  "plainRows": [
+    [
+      "dark:text-gray-700",
+      "transition-colors",
+    ],
+    [
+      "dark:text-gray-700",
+      "transition-colors",
+    ],
+    [
+      "dark:text-gray-700",
+      "transition-colors",
+    ],
+  ],
+  "selectedRows": [
+    [
+      "dark:text-primary-700",
+      "transition-colors",
+    ],
+    [
+      "bg-danger-300",
+      "dark:bg-danger-400",
+      "transition-colors",
+    ],
+    [
+      "dark:text-primary-700",
+      "transition-colors",
+    ],
+  ],
+  "stripedHoverRows": [
+    [
+      "dark:hover:bg-danger-700",
+      "dark:hover:text-white",
+      "dark:text-primary-700",
+      "hover:bg-danger-300",
+      "transition-colors",
+    ],
+    [
+      "bg-danger-100",
+      "dark:bg-danger-800",
+      "dark:hover:bg-danger-700",
+      "dark:hover:text-white",
+      "dark:text-primary-200",
+      "hover:bg-danger-300",
+      "transition-colors",
+    ],
+    [
+      "dark:hover:bg-danger-700",
+      "dark:hover:text-white",
+      "dark:text-primary-700",
+      "hover:bg-danger-300",
+      "transition-colors",
+    ],
+  ],
+}
+`;
+
+exports[`TwTable > class contract > info: heading, cell, striped, hover and selected rows 1`] = `
+{
+  "cell": [
+    "border",
+    "border-info-200",
+    "dark:border-info-700",
+    "dark:text-primary-100",
+    "px-4",
+    "py-2",
+    "text-primary-600",
+  ],
+  "heading": [
+    "bg-info-200",
+    "dark:bg-info-700",
+    "dark:text-info-200",
+    "text-primary-800",
+  ],
+  "plainRows": [
+    [
+      "dark:text-gray-700",
+      "transition-colors",
+    ],
+    [
+      "dark:text-gray-700",
+      "transition-colors",
+    ],
+    [
+      "dark:text-gray-700",
+      "transition-colors",
+    ],
+  ],
+  "selectedRows": [
+    [
+      "dark:text-primary-700",
+      "transition-colors",
+    ],
+    [
+      "bg-info-300",
+      "dark:bg-info-400",
+      "transition-colors",
+    ],
+    [
+      "dark:text-primary-700",
+      "transition-colors",
+    ],
+  ],
+  "stripedHoverRows": [
+    [
+      "dark:hover:bg-info-700",
+      "dark:hover:text-white",
+      "dark:text-primary-700",
+      "hover:bg-info-300",
+      "transition-colors",
+    ],
+    [
+      "bg-info-100",
+      "dark:bg-info-800",
+      "dark:hover:bg-info-700",
+      "dark:hover:text-white",
+      "dark:text-primary-200",
+      "hover:bg-info-300",
+      "transition-colors",
+    ],
+    [
+      "dark:hover:bg-info-700",
+      "dark:hover:text-white",
+      "dark:text-primary-700",
+      "hover:bg-info-300",
+      "transition-colors",
+    ],
+  ],
+}
+`;
+
+exports[`TwTable > class contract > primary: heading, cell, striped, hover and selected rows 1`] = `
+{
+  "cell": [
+    "border",
+    "border-primary-200",
+    "dark:border-primary-700",
+    "dark:text-primary-100",
+    "px-4",
+    "py-2",
+    "text-primary-600",
+  ],
+  "heading": [
+    "bg-primary-200",
+    "dark:bg-primary-700",
+    "dark:text-primary-200",
+    "text-primary-800",
+  ],
+  "plainRows": [
+    [
+      "dark:text-gray-700",
+      "transition-colors",
+    ],
+    [
+      "dark:text-gray-700",
+      "transition-colors",
+    ],
+    [
+      "dark:text-gray-700",
+      "transition-colors",
+    ],
+  ],
+  "selectedRows": [
+    [
+      "dark:text-primary-700",
+      "transition-colors",
+    ],
+    [
+      "bg-primary-300",
+      "dark:bg-primary-400",
+      "transition-colors",
+    ],
+    [
+      "dark:text-primary-700",
+      "transition-colors",
+    ],
+  ],
+  "stripedHoverRows": [
+    [
+      "dark:hover:bg-primary-700",
+      "dark:hover:text-white",
+      "dark:text-primary-700",
+      "hover:bg-primary-300",
+      "transition-colors",
+    ],
+    [
+      "bg-primary-100",
+      "dark:bg-primary-800",
+      "dark:hover:bg-primary-700",
+      "dark:hover:text-white",
+      "dark:text-primary-200",
+      "hover:bg-primary-300",
+      "transition-colors",
+    ],
+    [
+      "dark:hover:bg-primary-700",
+      "dark:hover:text-white",
+      "dark:text-primary-700",
+      "hover:bg-primary-300",
+      "transition-colors",
+    ],
+  ],
+}
+`;
+
+exports[`TwTable > class contract > secondary: heading, cell, striped, hover and selected rows 1`] = `
+{
+  "cell": [
+    "border",
+    "border-secondary-200",
+    "dark:border-secondary-700",
+    "dark:text-primary-100",
+    "px-4",
+    "py-2",
+    "text-primary-600",
+  ],
+  "heading": [
+    "bg-secondary-200",
+    "dark:bg-secondary-700",
+    "dark:text-secondary-200",
+    "text-primary-800",
+  ],
+  "plainRows": [
+    [
+      "dark:text-gray-700",
+      "transition-colors",
+    ],
+    [
+      "dark:text-gray-700",
+      "transition-colors",
+    ],
+    [
+      "dark:text-gray-700",
+      "transition-colors",
+    ],
+  ],
+  "selectedRows": [
+    [
+      "dark:text-primary-700",
+      "transition-colors",
+    ],
+    [
+      "bg-secondary-300",
+      "dark:bg-secondary-400",
+      "transition-colors",
+    ],
+    [
+      "dark:text-primary-700",
+      "transition-colors",
+    ],
+  ],
+  "stripedHoverRows": [
+    [
+      "dark:hover:bg-secondary-700",
+      "dark:hover:text-white",
+      "dark:text-primary-700",
+      "hover:bg-secondary-300",
+      "transition-colors",
+    ],
+    [
+      "bg-secondary-100",
+      "dark:bg-secondary-800",
+      "dark:hover:bg-secondary-700",
+      "dark:hover:text-white",
+      "dark:text-primary-200",
+      "hover:bg-secondary-300",
+      "transition-colors",
+    ],
+    [
+      "dark:hover:bg-secondary-700",
+      "dark:hover:text-white",
+      "dark:text-primary-700",
+      "hover:bg-secondary-300",
+      "transition-colors",
+    ],
+  ],
+}
+`;
+
+exports[`TwTable > class contract > success: heading, cell, striped, hover and selected rows 1`] = `
+{
+  "cell": [
+    "border",
+    "border-success-200",
+    "dark:border-success-700",
+    "dark:text-primary-100",
+    "px-4",
+    "py-2",
+    "text-primary-600",
+  ],
+  "heading": [
+    "bg-success-200",
+    "dark:bg-success-700",
+    "dark:text-success-200",
+    "text-primary-800",
+  ],
+  "plainRows": [
+    [
+      "dark:text-gray-700",
+      "transition-colors",
+    ],
+    [
+      "dark:text-gray-700",
+      "transition-colors",
+    ],
+    [
+      "dark:text-gray-700",
+      "transition-colors",
+    ],
+  ],
+  "selectedRows": [
+    [
+      "dark:text-primary-700",
+      "transition-colors",
+    ],
+    [
+      "bg-success-300",
+      "dark:bg-success-400",
+      "transition-colors",
+    ],
+    [
+      "dark:text-primary-700",
+      "transition-colors",
+    ],
+  ],
+  "stripedHoverRows": [
+    [
+      "dark:hover:bg-success-700",
+      "dark:hover:text-white",
+      "dark:text-primary-700",
+      "hover:bg-success-300",
+      "transition-colors",
+    ],
+    [
+      "bg-success-100",
+      "dark:bg-success-800",
+      "dark:hover:bg-success-700",
+      "dark:hover:text-white",
+      "dark:text-primary-200",
+      "hover:bg-success-300",
+      "transition-colors",
+    ],
+    [
+      "dark:hover:bg-success-700",
+      "dark:hover:text-white",
+      "dark:text-primary-700",
+      "hover:bg-success-300",
+      "transition-colors",
+    ],
+  ],
+}
+`;
+
+exports[`TwTable > class contract > warning: heading, cell, striped, hover and selected rows 1`] = `
+{
+  "cell": [
+    "border",
+    "border-warning-200",
+    "dark:border-warning-700",
+    "dark:text-primary-100",
+    "px-4",
+    "py-2",
+    "text-primary-600",
+  ],
+  "heading": [
+    "bg-warning-200",
+    "dark:bg-warning-700",
+    "dark:text-warning-200",
+    "text-primary-800",
+  ],
+  "plainRows": [
+    [
+      "dark:text-gray-700",
+      "transition-colors",
+    ],
+    [
+      "dark:text-gray-700",
+      "transition-colors",
+    ],
+    [
+      "dark:text-gray-700",
+      "transition-colors",
+    ],
+  ],
+  "selectedRows": [
+    [
+      "dark:text-primary-700",
+      "transition-colors",
+    ],
+    [
+      "bg-warning-300",
+      "dark:bg-warning-400",
+      "transition-colors",
+    ],
+    [
+      "dark:text-primary-700",
+      "transition-colors",
+    ],
+  ],
+  "stripedHoverRows": [
+    [
+      "dark:hover:bg-warning-700",
+      "dark:hover:text-white",
+      "dark:text-primary-700",
+      "hover:bg-warning-300",
+      "transition-colors",
+    ],
+    [
+      "bg-warning-100",
+      "dark:bg-warning-800",
+      "dark:hover:bg-warning-700",
+      "dark:hover:text-white",
+      "dark:text-primary-200",
+      "hover:bg-warning-300",
+      "transition-colors",
+    ],
+    [
+      "dark:hover:bg-warning-700",
+      "dark:hover:text-white",
+      "dark:text-primary-700",
+      "hover:bg-warning-300",
+      "transition-colors",
+    ],
+  ],
+}
+`;
+
+exports[`TwTable > class contract > without borders 1`] = `
+[
+  "dark:text-primary-100",
+  "px-4",
+  "py-2",
+  "text-primary-600",
+]
+`;

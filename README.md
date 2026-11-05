@@ -207,3 +207,14 @@ npm run dev
 ```sh
 npm run build
 ```
+
+### Run the tests
+
+```sh
+npm test            # once
+npm run test:watch  # re-run on change
+```
+
+The suite (Vitest, Vue Test Utils and happy-dom) pins each component's public contract: props, events, `v-model`, slots and the classes it renders for each colour. Class snapshots live in `tests/components/__snapshots__`. A change to them is a change to how components look, so review the diff before updating with `npx vitest run -u`.
+
+Known bugs are recorded as `it.fails(...)` tests, which pass while the bug exists. When you fix one, that test starts failing: change `it.fails` to `it` and it becomes an ordinary regression test.

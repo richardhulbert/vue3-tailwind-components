@@ -1,0 +1,165 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`TwRollout > class contract > aligned right 1`] = `
+[
+  "absolute",
+  "bg-primary-100",
+  "dark:bg-primary-900",
+  "h-fit",
+  "min-h-screen",
+  "right-0",
+  "shadow-xl",
+  "w-1/4",
+  "z-20",
+]
+`;
+
+exports[`TwRollout > class contract > danger 1`] = `
+{
+  "close": [
+    "absolute",
+    "cursor-pointer",
+    "fa-stub",
+    "hover:scale-110",
+    "right-4",
+    "text-danger-500",
+    "top-4",
+    "transition-transform",
+  ],
+  "panel": [
+    "absolute",
+    "bg-danger-100",
+    "dark:bg-danger-900",
+    "h-fit",
+    "min-h-screen",
+    "shadow-xl",
+    "w-1/4",
+    "z-20",
+  ],
+}
+`;
+
+exports[`TwRollout > class contract > info 1`] = `
+{
+  "close": [
+    "absolute",
+    "cursor-pointer",
+    "fa-stub",
+    "hover:scale-110",
+    "right-4",
+    "text-info-500",
+    "top-4",
+    "transition-transform",
+  ],
+  "panel": [
+    "absolute",
+    "bg-info-100",
+    "dark:bg-info-900",
+    "h-fit",
+    "min-h-screen",
+    "shadow-xl",
+    "w-1/4",
+    "z-20",
+  ],
+}
+`;
+
+exports[`TwRollout > class contract > primary 1`] = `
+{
+  "close": [
+    "absolute",
+    "cursor-pointer",
+    "fa-stub",
+    "hover:scale-110",
+    "right-4",
+    "text-primary-500",
+    "top-4",
+    "transition-transform",
+  ],
+  "panel": [
+    "absolute",
+    "bg-primary-100",
+    "dark:bg-primary-900",
+    "h-fit",
+    "min-h-screen",
+    "shadow-xl",
+    "w-1/4",
+    "z-20",
+  ],
+}
+`;
+
+exports[`TwRollout > class contract > secondary 1`] = `
+{
+  "close": [
+    "absolute",
+    "cursor-pointer",
+    "fa-stub",
+    "hover:scale-110",
+    "right-4",
+    "text-secondary-500",
+    "top-4",
+    "transition-transform",
+  ],
+  "panel": [
+    "absolute",
+    "bg-secondary-100",
+    "dark:bg-secondary-900",
+    "h-fit",
+    "min-h-screen",
+    "shadow-xl",
+    "w-1/4",
+    "z-20",
+  ],
+}
+`;
+
+exports[`TwRollout > class contract > success 1`] = `
+{
+  "close": [
+    "absolute",
+    "cursor-pointer",
+    "fa-stub",
+    "hover:scale-110",
+    "right-4",
+    "text-success-500",
+    "top-4",
+    "transition-transform",
+  ],
+  "panel": [
+    "absolute",
+    "bg-success-100",
+    "dark:bg-success-900",
+    "h-fit",
+    "min-h-screen",
+    "shadow-xl",
+    "w-1/4",
+    "z-20",
+  ],
+}
+`;
+
+exports[`TwRollout > class contract > warning 1`] = `
+{
+  "close": [
+    "absolute",
+    "cursor-pointer",
+    "fa-stub",
+    "hover:scale-110",
+    "right-4",
+    "text-warning-500",
+    "top-4",
+    "transition-transform",
+  ],
+  "panel": [
+    "absolute",
+    "bg-warning-100",
+    "dark:bg-warning-900",
+    "h-fit",
+    "min-h-screen",
+    "shadow-xl",
+    "w-1/4",
+    "z-20",
+  ],
+}
+`;
