@@ -26,60 +26,50 @@
 
 </template>
 
-<script>
-import {TwIcon, TwOption} from "@/components";
+<script setup>
+import { ref, computed, onMounted } from 'vue'
+import { TwIcon } from '@/components'
 
-export default {
-name:'TwCollapse',
-  components: {
-    TwIcon, TwOption
-  },
-  props: {
-    color: {
-      type: String,
-      default: "primary"
-    },
-    label: {
-      type: String,
-      default: "Select"
-    },
-    expanded:{
-      type:Boolean,
-      default:false
-    },
-    disabled:{
-      type:Boolean,
-      default:false
-    }
+defineOptions({ name: 'TwCollapse' })
 
+const props = defineProps({
+  color: {
+    type: String,
+    default: 'primary'
   },
-  data() {
-    return {
-      open: false
-    }
+  label: {
+    type: String,
+    default: 'Select'
   },
-  methods: {
-    toggleSelect() {
-      this.open = !this.open
-    },
+  expanded: {
+    type: Boolean,
+    default: false
+  },
+  disabled: {
+    type: Boolean,
+    default: false
+  }
+})
 
+const open = ref(false)
 
-  },
-  computed: {
-    chevronClass() {
-      return this.open ? "rotate-180 text-" + this.color + '-500 dark:text-' + this.color + '-200' : "text-" + this.color + '-500 dark:text-' + this.color + '-100'
-    },
-    buttonClass() {
-      let op = this.disabled ? ' opacity-50 ' : ''
-      return 'bg-' + this.color + '-200 hover:bg-' + this.color + '-300 text-' + this.color + '-700 dark:bg-' + this.color + '-500 dark:text-' + this.color + '-100 dark:hover:bg-'+this.color+'-600' + op
-    }
-
-  },
-  mounted() {
- this.open=this.expanded
-  },
-
+function toggleSelect() {
+  open.value = !open.value
 }
+
+const chevronClass = computed(() => {
+  const c = props.color
+  return open.value ? 'rotate-180 text-' + c + '-500 dark:text-' + c + '-200' : 'text-' + c + '-500 dark:text-' + c + '-100'
+})
+
+const buttonClass = computed(() => {
+  const c = props.color
+  const op = props.disabled ? ' opacity-50 ' : ''
+  return 'bg-' + c + '-200 hover:bg-' + c + '-300 text-' + c + '-700 dark:bg-' + c + '-500 dark:text-' + c + '-100 dark:hover:bg-' + c + '-600' + op
+})
+
+// Applied after mounting, as before, so the panel appears on the next tick.
+onMounted(() => {
+  open.value = props.expanded
+})
 </script>
-
-
