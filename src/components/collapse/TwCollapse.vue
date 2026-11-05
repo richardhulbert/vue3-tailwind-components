@@ -1,5 +1,5 @@
 <template>
-  <div class="relative ">
+  <div v-bind="toneAttrs" class="relative ">
 
     <button type="button" @click.prevent="toggleSelect" :disabled="disabled"
             :aria-expanded="open ? 'true' : 'false'" :aria-controls="panelId"
@@ -30,6 +30,7 @@
 <script setup>
 import { ref, computed, watch, onMounted, useId } from 'vue'
 import { TwIcon } from '@/components'
+import { useTone } from '@/components/composables/useTone'
 
 defineOptions({ name: 'TwCollapse' })
 
@@ -58,15 +59,13 @@ function toggleSelect() {
   open.value = !open.value
 }
 
-const chevronClass = computed(() => {
-  const c = props.color
-  return open.value ? 'rotate-180 text-' + c + '-500 dark:text-' + c + '-200' : 'text-' + c + '-500 dark:text-' + c + '-100'
-})
+const toneAttrs = useTone(() => props.color)
+
+const chevronClass = computed(() => (open.value ? 'rotate-180 text-[color:var(--c-fg)]' : 'text-[color:var(--c-fg)]'))
 
 const buttonClass = computed(() => {
-  const c = props.color
   const op = props.disabled ? ' opacity-50 ' : ''
-  return 'bg-' + c + '-200 hover:bg-' + c + '-300 text-' + c + '-700 dark:bg-' + c + '-500 dark:text-' + c + '-100 dark:hover:bg-' + c + '-600' + op
+  return 'bg-[color:var(--c-soft)] hover:bg-[color:var(--c-soft-hover)] text-[color:var(--c-on-soft)]' + op
 })
 
 const panelId = useId()

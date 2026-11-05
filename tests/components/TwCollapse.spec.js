@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest'
 import { mount } from '@vue/test-utils'
 import { TwCollapse } from '@/components'
-import { COLORS, classes } from '../helpers'
+import { COLORS, classes, toneOf } from '../helpers'
 
 const collapse = (props = {}) => mount(TwCollapse, { props, slots: { default: '<p class="content">Inside</p>' } })
 const header = (w) => w.get('.cursor-pointer')
@@ -62,9 +62,13 @@ describe('TwCollapse', () => {
     expect(header(w).attributes('disabled')).toBeDefined()
   })
 
+  it.each(COLORS)('takes its tone from color: %s', (color) => {
+    expect(toneOf(collapse({ color }).get('.relative'))).toBe(color)
+  })
+
   describe('class contract', () => {
-    it.each(COLORS)('%s: header and chevron, closed and open', async (color) => {
-      const w = collapse({ color })
+    it('header and chevron, closed and open', async () => {
+      const w = collapse()
       const closed = { header: classes(header(w)), chevron: classes(w.get('[data-icon]')) }
       await header(w).trigger('click')
       expect({ closed, open: { header: classes(header(w)), chevron: classes(w.get('[data-icon]')) } }).toMatchSnapshot()
