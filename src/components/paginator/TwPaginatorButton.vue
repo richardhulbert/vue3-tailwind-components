@@ -4,49 +4,47 @@
   </li>
 </template>
 
-<script>
-export default {
-name:'TwPaginatorButton',
-  props: {
-    buttonPosition: {
-      type: String,
-      default: 'middle'
-    },
-    color: {
-      type: String,
-      default: 'primary'
-    },
-    selected: {
-      type: Boolean,
-      default: false
-    },
-    disabled: {
-      type: Boolean,
-      default: false
-    },
+<script setup>
+import { computed } from 'vue'
 
+defineOptions({ name: 'TwPaginatorButton' })
 
+// `click` is not declared: TwPaginator's listener falls through to the <li>.
+const props = defineProps({
+  buttonPosition: {
+    type: String,
+    default: 'middle'
   },
-  computed: {
-    positionClass() {
-     switch (this.buttonPosition){
-       case 'first': return ' rounded-l ';
-       case 'last':return ' rounded-r ';
-       default:return '';
-     }
-    },
-
-    finalClass(){
-      if(this.disabled){
-        return ' border-'+this.color+'-200 dark:border-'+this.color+'-700 text-'+this.color+'-400 '+this.positionClass
-      }
-      if(this.selected){
-        return ' bg-'+this.color+'-200  dark:bg-'+this.color+'-500 dark:border-'+this.color+'-700'+this.positionClass
-      }
-      return  ' hover:bg-'+this.color+'-300 dark:hover:bg-'+this.color+'-500 border-'+this.color+'-300  dark:border-'+this.color+'-700 text-'+this.color+'-500 dark:text-'+this.color+'-200 '+ this.positionClass
-    },
+  color: {
+    type: String,
+    default: 'primary'
   },
+  selected: {
+    type: Boolean,
+    default: false
+  },
+  disabled: {
+    type: Boolean,
+    default: false
+  },
+})
 
-}
+const positionClass = computed(() => {
+  switch (props.buttonPosition) {
+    case 'first': return ' rounded-l '
+    case 'last': return ' rounded-r '
+    default: return ''
+  }
+})
+
+const finalClass = computed(() => {
+  const c = props.color
+  if (props.disabled) {
+    return ' border-' + c + '-200 dark:border-' + c + '-700 text-' + c + '-400 ' + positionClass.value
+  }
+  if (props.selected) {
+    return ' bg-' + c + '-200  dark:bg-' + c + '-500 dark:border-' + c + '-700' + positionClass.value
+  }
+  return ' hover:bg-' + c + '-300 dark:hover:bg-' + c + '-500 border-' + c + '-300  dark:border-' + c + '-700 text-' + c + '-500 dark:text-' + c + '-200 ' + positionClass.value
+})
 </script>
-
