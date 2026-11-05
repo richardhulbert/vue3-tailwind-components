@@ -2,13 +2,13 @@
   <div v-if="showing">
     <div class="fixed inset-0 z-30 backdrop-blur-sm" :class="backgroundClass"></div>
     <div class="fixed inset-0 z-40 flex items-center justify-center sm:p-0  animate-in fade-in zoom-in">
-      <div :class="modalClass" class=" rounded-lg   shadow-xl w-full h-auto ">
+      <div role="dialog" aria-modal="true" :aria-labelledby="hideHeader ? undefined : headerId" :class="modalClass" class=" rounded-lg   shadow-xl w-full h-auto ">
 
         <div class="relative  ">
           <tw-icon v-if="!hideClose" @click="closeDialog" set="regular" :class="closeButtonClass"
                    class=" transition-transform hover:scale-110 cursor-pointer absolute top-2 right-2" size="lg"
                    icon="circle-xmark"></tw-icon>
-          <div v-if="!hideHeader" class="flex-1 p-2" :class="headerClass">
+          <div v-if="!hideHeader" :id="headerId" class="flex-1 p-2" :class="headerClass">
             <slot name="header">
               <h1 class="font-bold "> Modal title</h1>
             </slot>
@@ -33,7 +33,8 @@
 </template>
 
 <script setup>
-import { ref, computed, watch } from 'vue'
+import { ref, computed, watch, useId } from 'vue'
+import { useEventListener } from '@vueuse/core'
 import { TwButton, TwIcon } from '../'
 
 defineOptions({ name: 'TwModal' })
@@ -103,4 +104,14 @@ function closeDialog() {
   emit('update:modelValue', false)
   emit('closed')
 }
+
+const headerId = useId()
+
+// Escape closes the dialog, as the close icon does. A modal whose close icon
+// is hidden must be closed deliberately, so Escape leaves it open.
+useEventListener(document, 'keydown', (event) => {
+  if (showing.value && !props.hideClose && event.key === 'Escape') {
+    closeDialog()
+  }
+})
 </script>

@@ -57,16 +57,36 @@ describe('TwModal', () => {
     expect(TwModal.props.size.validator('xl')).toBe(false)
   })
 
-  it.fails('is announced as a modal dialog (known bug: no role or aria-modal)', () => {
-    const w = shown()
-    expect(w.find('[role="dialog"][aria-modal="true"]').exists()).toBe(true)
+  it('is announced as a modal dialog, labelled by its header', () => {
+    const w = shown({}, { header: '<h2>Title</h2>' })
+    const dialog = w.get('[role="dialog"][aria-modal="true"]')
+    const header = w.get(`#${CSS.escape(dialog.attributes('aria-labelledby'))}`)
+    expect(header.text()).toBe('Title')
   })
 
-  it.fails('closes on Escape (known bug: no keyboard close)', async () => {
+  it('has no label reference when the header is hidden', () => {
+    expect(shown({ hideHeader: true }).get('[role="dialog"]').attributes('aria-labelledby')).toBeUndefined()
+  })
+
+  it('closes on Escape', async () => {
     const w = mount(TwModal, { props: { modelValue: true }, attachTo: document.body })
     document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true }))
     await w.vm.$nextTick()
     expect(w.emitted('update:modelValue')).toEqual([[false]])
+  })
+
+  it('stays open on Escape when its close icon is hidden', async () => {
+    const w = mount(TwModal, { props: { modelValue: true, hideClose: true }, attachTo: document.body })
+    document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true }))
+    await w.vm.$nextTick()
+    expect(w.emitted('update:modelValue')).toBeUndefined()
+  })
+
+  it('ignores Escape while closed', async () => {
+    const w = mount(TwModal, { attachTo: document.body })
+    document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true }))
+    await w.vm.$nextTick()
+    expect(w.emitted('update:modelValue')).toBeUndefined()
   })
 
   describe('class contract', () => {
