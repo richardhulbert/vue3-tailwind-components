@@ -1,6 +1,7 @@
 <script setup>
 import { computed, watch, onBeforeUnmount } from 'vue'
 import { TwIcon } from '@/components'
+import { useTone } from '@/components/composables/useTone'
 
 defineOptions({ name: 'TwNotification' })
 
@@ -50,7 +51,9 @@ function closeNotification() {
   emit('update:modelValue', false)
 }
 
-const closeButtonClass = computed(() => 'text-' + props.color + '-500 dark:text-' + props.color + '-200')
+const toneAttrs = useTone(() => props.color)
+
+const closeButtonClass = computed(() => 'text-[color:var(--c-fg)]')
 
 const positionClass = computed(() => {
   switch (props.position) {
@@ -66,8 +69,7 @@ const positionClass = computed(() => {
 })
 
 const notificationClass = computed(() => {
-  const c = props.color
-  return 'bg-' + c + '-200 dark:bg-' + c + '-600 dark:text-' + c + '-200 text-' + c + '-700' + positionClass.value
+  return 'bg-[color:var(--c-soft)] text-[color:var(--c-on-soft)]' + positionClass.value
 })
 
 watch(() => props.modelValue, (showing) => {
@@ -81,7 +83,7 @@ onBeforeUnmount(clearTimer)
 </script>
 
 <template>
-    <div v-if="modelValue" :class="notificationClass"
+    <div v-if="modelValue" v-bind="toneAttrs" :class="notificationClass"
          class="fixed flex  ml-2 h-fit rounded-lg shadow-lg opacity-95  animate-in zoom-in" role="alert">
      <div  class="flex items-center  p-4  space-x-4 ">
        <tw-icon :icon="icon" beat-fade></tw-icon>

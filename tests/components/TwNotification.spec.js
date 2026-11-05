@@ -1,7 +1,7 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
 import { mount } from '@vue/test-utils'
 import { TwNotification } from '@/components'
-import { COLORS, classes, vueWarnings } from '../helpers'
+import { COLORS, classes, toneOf, vueWarnings } from '../helpers'
 
 beforeEach(() => vi.useFakeTimers())
 afterEach(() => vi.useRealTimers())
@@ -73,9 +73,13 @@ describe('TwNotification', () => {
     expect(vi.getTimerCount()).toBe(0)
   })
 
+  it.each(COLORS)('takes its tone from color: %s', (color) => {
+    expect(toneOf(mount(TwNotification, { props: { modelValue: true, color } }).get('[role="alert"]'))).toBe(color)
+  })
+
   describe('class contract', () => {
-    it.each(COLORS)('%s', (color) => {
-      const w = mount(TwNotification, { props: { modelValue: true, color } })
+    it('alert and close icon', () => {
+      const w = mount(TwNotification, { props: { modelValue: true } })
       expect({ alert: classes(w.get('[role="alert"]')), close: classes(closeIcon(w)) }).toMatchSnapshot()
     })
 
