@@ -1,6 +1,5 @@
 <script setup xmlns:tw-button-group="http://www.w3.org/1999/html">
 import {computed, ref} from "vue";
-import _ from 'lodash'
 import {faker} from '@faker-js/faker';
 import {
   TwTable,
@@ -160,8 +159,8 @@ function createProducts() {
   for (let i = 0; i < numOfProducts.value; i++) {
     let product = {
       icon: 'box',
-      code: faker.random.alpha(10),
-      name: faker.name.firstName(),
+      code: faker.string.alpha(10),
+      name: faker.person.firstName(),
       link: faker.internet.url(),
       id: i
     }
@@ -193,7 +192,7 @@ function notify() {
 }
 
 function selectRow(id) {
-  selectedRow.value = _.findIndex(products.value, ['id', id])
+  selectedRow.value = products.value.findIndex((product) => product.id === id)
 }
 
 function handleChangedFile(file) {

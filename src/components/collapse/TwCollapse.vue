@@ -27,8 +27,7 @@
 </template>
 
 <script>
-import {TwCollapse, TwIcon, TwOption} from "@/components";
-import {_} from 'lodash';
+import {TwIcon, TwOption} from "@/components";
 
 export default {
 name:'TwCollapse',

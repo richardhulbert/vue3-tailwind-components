@@ -37,6 +37,8 @@ give you some idea as to how they look and behave. Please feel free to email me 
 npm i vue3-tailwind-components --save
 ```
 
+The library needs Vue 3.5 or later, which your project provides: it is a peer dependency, not bundled.
+
 Edit `tailwind.config.js` to look like this. Be especially careful to include this line
 `"./node_modules/vue3-tailwind-components/dist/vue3-tailwind-components.es.js"` it tells Tailwind to that we want to use
 classes that are computed in the components.

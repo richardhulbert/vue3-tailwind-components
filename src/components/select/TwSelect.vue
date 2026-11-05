@@ -28,7 +28,6 @@
 <script setup>
 import { ref, computed, watch } from 'vue'
 import { TwIcon, TwOption } from "@/components";
-import _ from 'lodash'
 import { onClickOutside } from "@vueuse/core"
 
 const emit = defineEmits(['changed', 'update:model-value'])
@@ -135,7 +134,7 @@ watch(
 watch(
   () => props.modelValue,
   (newVal) => {
-    selectedItemIndex.value = _.findIndex(props.items, ['value', newVal])
+    selectedItemIndex.value = props.items.findIndex((item) => item.value === newVal)
     if (selectedItemIndex.value >= 0) {
       dLabel.value = props.items[selectedItemIndex.value].label
       dIcon.value = props.items[selectedItemIndex.value].icon
@@ -150,7 +149,7 @@ watch(
 watch(
   () => props.items,
   (newVal) => {
-    selectedItemIndex.value = _.findIndex(newVal, ['value', props.modelValue])
+    selectedItemIndex.value = newVal.findIndex((item) => item.value === props.modelValue)
     if (selectedItemIndex.value >= 0) {
       dLabel.value = newVal[selectedItemIndex.value].label
       dIcon.value = newVal[selectedItemIndex.value].icon
