@@ -17,7 +17,7 @@ export default class ColorUtils {
         g= this._sanitiseRGB(g+factor);
         b= this._sanitiseRGB(b+factor);
 
-        return '#'+r.toString(16)+g.toString(16)+b.toString(16)
+        return '#' + [r, g, b].map((v) => v.toString(16).padStart(2, '0')).join('')
     }
     _sanitiseRGB(val){
         if(val<=0) return 0;
