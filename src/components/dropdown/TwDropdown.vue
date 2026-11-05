@@ -1,7 +1,7 @@
 <template>
   <div v-click-outside="hideMenu">
     <div  class="flex justify-left">
-      <tw-button @click="showMenu" :color="color" outline :menu="!outline" >{{ label }}
+      <tw-button type="button" @click="showMenu" :color="color" outline :menu="!outline" >{{ label }}
         <tw-icon class="ml-2" icon="caret-down"></tw-icon>
       </tw-button>
     </div>

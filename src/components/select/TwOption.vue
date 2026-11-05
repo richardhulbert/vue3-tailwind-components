@@ -1,5 +1,5 @@
 <template>
-<button @click="sendClick" :class="buttonClass" class="flex w-full pl-3 p-1 transition-colors  ">
+<button type="button" @click="sendClick" :class="buttonClass" class="flex w-full pl-3 p-1 transition-colors  ">
   <tw-icon v-if="icon" class="my-1 mx-2" :icon="icon"></tw-icon>
   {{label}}
 </button>

@@ -22,7 +22,7 @@
           <div v-show="!hideFooter" class="p-2 border-t " :class="footerClass">
           <slot name="footer">
             <div class=" flex justify-end gap-2">
-              <tw-button :color="color" outline @click="closeDialog">OK</tw-button>
+              <tw-button type="button" :color="color" outline @click="closeDialog">OK</tw-button>
             </div>
           </slot>
         </div>
