@@ -32,98 +32,75 @@
   </div>
 </template>
 
-<script>
-import {TwButton, TwIcon} from "../";
+<script setup>
+import { ref, computed, watch } from 'vue'
+import { TwButton, TwIcon } from '../'
 
-export default {
-name:'TwModal',
-  props: {
-    modelValue: {
-      type: Boolean,
-      default: false
-    },
-    size: {
-      type: String,
-      default: 'md',
-      validator(value) {
-        // The value must match one of these strings
-        return ['sm', 'md', 'lg'].includes(value)
-      }
-    },
-    color: {
-      type: String,
-      default: 'primary'
-    },
-    backgroundColor: {
-      type: String,
-      default: 'primary'
-    },
-    hideHeader:{
-      type:Boolean,
-      default:false
-    },
-    hideClose:{
-      type:Boolean,
-      default:false
-    },
-    hideFooter:{
-      type:Boolean,
-      default:false
-    },
-  },
-  data() {
-    return {
-      showing: false
-    }
-  },
-  components: {
-    TwButton, TwIcon
-  },
-  computed: {
-    modalClass() {
-      let cls= ' bg-white dark:bg-'+this.color+'-900'
-      switch (this.size) {
-        case 'sm':
-          return ' md:w-1/3 '+ cls
-        case 'md':
-          return ' md:w-2/3 '+ cls
-        case 'lg':
-          return ' md:w-4/5  '+ cls
-        default:
-          return ' md:w-2/3 '+ cls
+defineOptions({ name: 'TwModal' })
 
-      }
-    },
-    closeButtonClass() {
-      return 'text-' + this.color + '-700'
-    },
-    backgroundClass() {
-      return ' bg-'+this.backgroundColor+'-700/50 '
-    },
-    headerClass(){
-      return 'bg-'+this.color+'-200 + text-'+this.color+'-700'
-    },
-    footerClass(){
-      return 'border-'+this.color+'-200'
+const props = defineProps({
+  modelValue: {
+    type: Boolean,
+    default: false
+  },
+  size: {
+    type: String,
+    default: 'md',
+    validator(value) {
+      return ['sm', 'md', 'lg'].includes(value)
     }
   },
-  watch: {
-    modelValue: {
-      handler(neval) {
-        this.showing = neval
-      },
-      // force eager callback execution
-      immediate: true
-    }
+  color: {
+    type: String,
+    default: 'primary'
   },
-  methods: {
-    closeDialog() {
-      this.showing = false
-      this.$emit('update:modelValue', false)
-      this.$emit('closed')
-    }
+  backgroundColor: {
+    type: String,
+    default: 'primary'
   },
+  hideHeader: {
+    type: Boolean,
+    default: false
+  },
+  hideClose: {
+    type: Boolean,
+    default: false
+  },
+  hideFooter: {
+    type: Boolean,
+    default: false
+  },
+})
+
+const emit = defineEmits(['update:modelValue', 'closed'])
+
+const showing = ref(false)
+
+const modalClass = computed(() => {
+  const cls = ' bg-white dark:bg-' + props.color + '-900'
+  switch (props.size) {
+    case 'sm': return ' md:w-1/3 ' + cls
+    case 'md': return ' md:w-2/3 ' + cls
+    case 'lg': return ' md:w-4/5  ' + cls
+    default: return ' md:w-2/3 ' + cls
+  }
+})
+
+const closeButtonClass = computed(() => 'text-' + props.color + '-700')
+
+const backgroundClass = computed(() => ' bg-' + props.backgroundColor + '-700/50 ')
+
+const headerClass = computed(() => 'bg-' + props.color + '-200 + text-' + props.color + '-700')
+
+const footerClass = computed(() => 'border-' + props.color + '-200')
+
+watch(() => props.modelValue, (value) => {
+  showing.value = value
+}, { immediate: true })
+
+function closeDialog() {
+  showing.value = false
+  emit('update:modelValue', false)
+  emit('closed')
 }
 </script>
-
-
