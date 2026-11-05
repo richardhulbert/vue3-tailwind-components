@@ -1,5 +1,6 @@
 <script setup>
 import { ref, computed, watch } from 'vue'
+import { useFieldId } from '@/components/composables/useFieldId'
 
 defineOptions({ name: 'TwTextarea' })
 
@@ -33,13 +34,15 @@ const props = defineProps({
   },
   formNameAndId: {
     type: String,
-    default: (Math.random() + 1).toString(36).substring(5)
+    default: ''
   },
   labelPosition: {
     type: String,
     default: 'block'
   }
 })
+
+const fieldId = useFieldId(props)
 
 const emit = defineEmits(['changed', 'update:modelValue'])
 
@@ -71,10 +74,10 @@ const labelClass = computed(() => 'text-' + props.color + '-500 dark:text-' + pr
 </script>
 
 <template>
-  <label  :for="formNameAndId" :class="labelClass" class="my-1">
+  <label  :for="fieldId" :class="labelClass" class="my-1">
     <slot></slot>
   </label>
-  <textarea @input="handleChange" :name="formNameAndId" :id="formNameAndId"  v-model="inputVal" :placeholder="placeholder" :class="inputClass"  class="w-full border focus:shadow-inner py-1 px-2 rounded  outline-none  disabled:cursor-not-allowed">{{modelValue}}</textarea>
+  <textarea @input="handleChange" :name="fieldId" :id="fieldId"  v-model="inputVal" :placeholder="placeholder" :class="inputClass"  class="w-full border focus:shadow-inner py-1 px-2 rounded  outline-none  disabled:cursor-not-allowed">{{modelValue}}</textarea>
   <div v-if="hasError" class="m-1 text-sm text-danger-500">{{error}}</div>
   <div v-else :class="descriptionClass" class="m-1 text-sm">{{description}}</div>
 </template>

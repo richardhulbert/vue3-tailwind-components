@@ -1,7 +1,7 @@
 import { describe, it, expect, vi } from 'vitest'
 import { mount } from '@vue/test-utils'
 import { TwInput } from '@/components'
-import { COLORS, classes } from '../helpers'
+import { COLORS, classes, idsOfTwo } from '../helpers'
 
 const id = 'field-1'
 
@@ -65,12 +65,14 @@ describe('TwInput', () => {
     expect(validator('checkbox')).toBe(false)
   })
 
-  it.fails('gives each instance its own id (known bug: the default is computed once)', () => {
-    // Every TwInput on a page shares one id, so <label for> points at the first
-    // one. Fix: a per-instance default, ideally Vue's useId(). Then change it.fails to it.
-    const a = mount(TwInput).get('input').attributes('id')
-    const b = mount(TwInput).get('input').attributes('id')
+  it('gives each instance on a page its own id', () => {
+    const [a, b] = idsOfTwo(TwInput, 'input', {})
+    expect(a).toBeTruthy()
     expect(a).not.toBe(b)
+  })
+
+  it('uses formNameAndId when given', () => {
+    expect(mount(TwInput, { props: { formNameAndId: 'given' } }).get('input').attributes('id')).toBe('given')
   })
 
   it.fails('forwards listeners to the input (known bug: two root elements drop them)', async () => {

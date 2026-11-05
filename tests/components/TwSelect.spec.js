@@ -1,7 +1,7 @@
 import { describe, it, expect, vi } from 'vitest'
 import { mount } from '@vue/test-utils'
 import { TwSelect, TwOption } from '@/components'
-import { COLORS, classes } from '../helpers'
+import { COLORS, classes, idsOfTwo } from '../helpers'
 
 const items = [
   { label: 'Apple', value: 'a' },
@@ -93,10 +93,14 @@ describe('TwSelect', () => {
     expect(select.element.value).toBe('c')
   })
 
-  it('gives each instance its own id', () => {
-    const a = mount(TwSelect, { props: { items } }).get('select').attributes('id')
-    const b = mount(TwSelect, { props: { items } }).get('select').attributes('id')
+  it('gives each instance on a page its own id', () => {
+    const [a, b] = idsOfTwo(TwSelect, 'select', { items })
+    expect(a).toBeTruthy()
     expect(a).not.toBe(b)
+  })
+
+  it('uses formNameAndId when given', () => {
+    expect(mount(TwSelect, { props: { items, formNameAndId: 'given' } }).get('select').attributes('id')).toBe('given')
   })
 
   it('shows an error message', () => {

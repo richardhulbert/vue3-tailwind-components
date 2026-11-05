@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest'
 import { mount } from '@vue/test-utils'
 import { TwSwitch } from '@/components'
-import { COLORS, classes } from '../helpers'
+import { COLORS, classes, idsOfTwo } from '../helpers'
 
 const parts = (w) => {
   const [back, knob] = w.findAll('.relative > div')
@@ -49,10 +49,14 @@ describe('TwSwitch', () => {
     expect(mount(TwSwitch).attributes('tabindex')).toBe('0')
   })
 
-  it.fails('gives each instance its own id (known bug: the default is computed once)', () => {
-    const a = mount(TwSwitch).get('input').attributes('id')
-    const b = mount(TwSwitch).get('input').attributes('id')
+  it('gives each instance on a page its own id', () => {
+    const [a, b] = idsOfTwo(TwSwitch, 'input', {})
+    expect(a).toBeTruthy()
     expect(a).not.toBe(b)
+  })
+
+  it('uses formNameAndId when given', () => {
+    expect(mount(TwSwitch, { props: { formNameAndId: 'given' } }).get('input').attributes('id')).toBe('given')
   })
 
   it.fails('announces itself as a switch (known bug: no role or checked state)', () => {

@@ -1,6 +1,6 @@
 <template>
   <div ref="selectRef" class="relative " @keydown.prevent="handleKey">
-    <select class="hidden" :name="formNameAndId" :id="formNameAndId" :value="calculatedValue">
+    <select class="hidden" :name="fieldId" :id="fieldId" :value="calculatedValue">
       <option v-for="(item,index) in items" :key="index" :value="item.value">{{ item.label }}</option>
     </select>
     <button :disabled="disabled" @click="toggleSelect" type="button"
@@ -29,6 +29,7 @@
 import { ref, computed, watch } from 'vue'
 import { TwIcon, TwOption } from "@/components";
 import { onClickOutside } from "@vueuse/core"
+import { useFieldId } from '@/components/composables/useFieldId'
 
 const emit = defineEmits(['changed', 'update:model-value'])
 
@@ -52,7 +53,7 @@ const props = defineProps({
   },
   formNameAndId: {
     type: String,
-    default: () => (Math.random() + 1).toString(36).substring(5)
+    default: ''
   },
   size:{
     type:String,
@@ -64,6 +65,8 @@ const props = defineProps({
     default: ''
   }
 })
+
+const fieldId = useFieldId(props)
 
 const open = ref(false)
 const selectedItemIndex = ref(-1)

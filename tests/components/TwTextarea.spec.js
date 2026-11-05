@@ -1,7 +1,7 @@
 import { describe, it, expect, vi } from 'vitest'
 import { mount } from '@vue/test-utils'
 import { TwTextarea } from '@/components'
-import { COLORS, classes } from '../helpers'
+import { COLORS, classes, idsOfTwo } from '../helpers'
 
 const id = 'notes-1'
 
@@ -33,10 +33,14 @@ describe('TwTextarea', () => {
     expect(w.text()).not.toContain('Help')
   })
 
-  it.fails('gives each instance its own id (known bug: the default is computed once)', () => {
-    const a = mount(TwTextarea).get('textarea').attributes('id')
-    const b = mount(TwTextarea).get('textarea').attributes('id')
+  it('gives each instance on a page its own id', () => {
+    const [a, b] = idsOfTwo(TwTextarea, 'textarea', {})
+    expect(a).toBeTruthy()
     expect(a).not.toBe(b)
+  })
+
+  it('uses formNameAndId when given', () => {
+    expect(mount(TwTextarea, { props: { formNameAndId: 'given' } }).get('textarea').attributes('id')).toBe('given')
   })
 
   it.fails('forwards listeners to the textarea (known bug: two root elements drop them)', async () => {

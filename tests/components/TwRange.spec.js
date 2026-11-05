@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest'
 import { mount } from '@vue/test-utils'
 import { TwRange } from '@/components'
-import { COLORS, classes, vueWarnings } from '../helpers'
+import { COLORS, classes, idsOfTwo, vueWarnings } from '../helpers'
 
 describe('TwRange', () => {
   it('passes min, max, step and disabled to the native range input', () => {
@@ -31,10 +31,14 @@ describe('TwRange', () => {
     expect(vueWarnings(() => mount(TwRange, { props: { modelValue: 5 } }))).toEqual([])
   })
 
-  it.fails('gives each instance its own id (known bug: the default is computed once)', () => {
-    const a = mount(TwRange).get('input').attributes('id')
-    const b = mount(TwRange).get('input').attributes('id')
+  it('gives each instance on a page its own id', () => {
+    const [a, b] = idsOfTwo(TwRange, 'input', {})
+    expect(a).toBeTruthy()
     expect(a).not.toBe(b)
+  })
+
+  it('uses formNameAndId when given', () => {
+    expect(mount(TwRange, { props: { formNameAndId: 'given' } }).get('input').attributes('id')).toBe('given')
   })
 
   describe('class contract', () => {

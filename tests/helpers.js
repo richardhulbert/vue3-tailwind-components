@@ -1,4 +1,6 @@
 import { vi } from 'vitest'
+import { h } from 'vue'
+import { mount } from '@vue/test-utils'
 
 // The colour aliases every consumer is told to configure. Class snapshots
 // cover each one, because the class strings are built per colour.
@@ -20,4 +22,11 @@ export function vueWarnings(fn) {
 // the set of classes rather than the order they were concatenated in.
 export function classes(wrapper) {
   return (wrapper.attributes('class') ?? '').split(/\s+/).filter(Boolean).sort()
+}
+
+// The ids two instances of `component` get when they share one Vue app, as
+// they do on a page. `selector` finds the element carrying the id.
+export function idsOfTwo(component, selector, props = {}) {
+  const w = mount({ render: () => [h(component, props), h(component, props)] })
+  return w.findAll(selector).map((el) => el.attributes('id'))
 }
