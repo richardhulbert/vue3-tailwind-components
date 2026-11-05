@@ -39,154 +39,110 @@ npm i vue3-tailwind-components --save
 
 The library needs Vue 3.5 or later, which your project provides: it is a peer dependency, not bundled.
 
-Edit `tailwind.config.js` to look like this. Be especially careful to include this line
-`"./node_modules/vue3-tailwind-components/dist/vue3-tailwind-components.es.js"` it tells Tailwind to that we want to use
-classes that are computed in the components.
+### Tailwind CSS 3
 
-Here is a boilerplate tailwind config:
+Point Tailwind's `content` at the library, so it generates the classes the components use, and add the library's plugin, which publishes your theme colours as the CSS variables the components read. There is no safelist.
 
 ```javascript
 const colors = require('tailwindcss/colors')
 module.exports = {
   darkMode: 'class',
   content: [
-    "./index.html",
-    "./src/**/*.{js,ts,jsx,vue}",
-  ],
-  safelist: [
-    {
-      pattern: /bg-(primary|secondary|warning|success|danger|info)-(\d00)/,
-      variants:  ['hover', 'focus', 'file','dark', 'dark:hover'],
-    },
-    {
-      pattern: /border-(primary|secondary|warning|success|danger|info)-(\d00)/,
-      variants:  ['dark', 'dark:hover'],
-    },
-    {
-      pattern: /divide-(primary|secondary|warning|success|danger|info)-(\d00)/,
-      variants:  ['dark', 'dark:hover'],
-    },
-    {
-      pattern: /text-(\w+)-(\d00)/,
-      variants:['file','dark']
-    },
-    {
-      pattern: /accent-(\w+)-(\d00)/,
-      variants:['file','dark']
-    },
-    {
-      pattern: /placeholder-(\w+)-(\d00)/,
-    },
-
+    './index.html',
+    './src/**/*.{js,ts,jsx,vue}',
+    './node_modules/vue3-tailwind-components/dist/vue3-tailwind-components.es.js',
   ],
   theme: {
     extend: {
-      colors:{
-        primary:colors.slate,
-        secondary:colors.lime,
-        warning:colors.amber,
-        success:colors.green,
-        danger:colors.red,
-        info:colors.indigo
-      }
+      colors: {
+        primary: colors.slate,
+        secondary: colors.lime,
+        warning: colors.amber,
+        success: colors.green,
+        danger: colors.red,
+        info: colors.indigo,
+      },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [
+    require('tailwindcss-animate'),
+    require('vue3-tailwind-components/tailwind')(),
+  ],
 }
 ```
 
-You can then just import the ones you want to use like this:
+The plugin publishes the six theme colours above. To use other palette names as a `color`, list them: `require('vue3-tailwind-components/tailwind')({ colors: ['primary', 'secondary', 'warning', 'success', 'danger', 'info', 'teal'] })`.
+
+### UnoCSS, or your own setup
+
+The components need two things from the page:
+
+1. **Palette variables** on `:root`, one per colour and shade, named `--{colour}-{shade}` for shades 50 to 900: `--primary-500: #64748b;` and so on. Content Head already publishes these from its theme. With UnoCSS, a preflight can write them from `theme.colors`.
+2. **The utility classes the components use**, all of the form `bg-[color:var(--c-soft)]`. UnoCSS's wind preset and Tailwind generate these when they scan the library's `dist` file, or, with the UnoCSS runtime, from the page itself.
+
+### Using the components
+
+Import the ones you want:
 
 ```vue
-
-
 <tw-button>My Button</tw-button>
 <script setup>
-  import {TwButton} from "vue3-tailwind-components"
+  import { TwButton } from 'vue3-tailwind-components'
 </script>
 ```
 
-### Colors
+### Colours
 
-I expect that if you use this library you will already understand how to use Tailwind generally. It comes with a
-generous
-color pallet of gradated colors. In the background Tailwind strips out the classes it does not see directly in your code
-to keep your css small
-but this creates a problem for us. It cannot see computed (concatenated strings). In order to use our components you
-will need to edit your.
-`tailwind.config.js` file in the root of your project.
+Every component takes a `color`:
 
-If you want to use every color that Tailwind supply in their default theme you could use this safe list:
+- **A theme colour name**: `primary`, `secondary`, `warning`, `success`, `danger`, `info`, or any name the page publishes as `--{name}-{shade}` variables.
+- **Any CSS colour**: `#7c3aed`, `rgb(...)`. The components mix a full set of shades from it.
 
-```javascript
- ...
-safelist: [
-  {
-    pattern: /bg-(primary|secondary|warning|success|danger|info)-(\d00)/,
-    variants:  ['hover', 'focus', 'file','dark', 'dark:hover'],
-  },
-  {
-    pattern: /border-(primary|secondary|warning|success|danger|info)-(\d00)/,
-    variants:  ['dark', 'dark:hover'],
-  },
-  {
-    pattern: /divide-(primary|secondary|warning|success|danger|info)-(\d00)/,
-    variants:  ['dark', 'dark:hover'],
-  },
-  {
-    pattern: /text-(\w+)-(\d00)/,
-    variants:['file','dark']
-  },
-  {
-    pattern: /accent-(\w+)-(\d00)/,
-    variants:['file','dark']
-  },
-  {
-    pattern: /placeholder-(\w+)-(\d00)/,
-  },
-
-],
-
+```vue
+<tw-button color="success">Save</tw-button>
+<tw-badge color="#7c3aed">Beta</tw-badge>
 ```
 
-This tells Tailwind - Do not remove any color classes for background, border or text (that is over 2000!) from the CSS.
+A component never builds class names from its colour. Instead, `color` gives it a *tone*: a ramp of shades, `--t-50` to `--t-900`, set inline on the component. A stylesheet the library adds to the page once maps that ramp to semantic *slots*, which the components' classes use:
 
-A more optimal solution is to use color aliases. Those who have used Bootstrap css will be familiar with color aliasing.
-The advantage of this approach is that we can control the color of all components from one place.
+| Slot | Role | Light | Dark |
+|---|---|---|---|
+| `solid`, `solid-hover` | filled controls | 500, 700 | 500, 700 |
+| `on-solid` | text on solid | white | white |
+| `soft`, `soft-hover` | tinted areas | 200, 300 | 600, 500 |
+| `on-soft` | text on soft | 700 | 200 |
+| `subtle` | faint tints, hovers | 100 | 800 |
+| `surface` | panels and fields | white | 900 |
+| `line`, `line-muted` | borders, dividers | 500, 200 | 500, 700 |
+| `fg`, `fg-strong`, `fg-muted` | text | 500, 700, 400 | 200, 100, 400 |
+| `accent` | native control accents | 600 | 400 |
+| `backdrop` | overlays | 700 at 50% | 700 at 50% |
+| `selected`, `selected-hover`, `on-selected` | selection | as soft | as soft |
+
+**Selection** looks the same everywhere: a selected outline button, button-group item, page number or option uses the `selected` slots, in the component's own tone.
+
+**Text on solid fills** is white. A theme can change it per colour, for example `--success-on-solid: #111;` on `:root`.
+
+**Your own elements** can use a tone too: `useTone()` and `tone()` are exported.
+
+```vue
+<div v-bind="toneAttrs" class="bg-[color:var(--c-soft)] text-[color:var(--c-on-soft)]">...</div>
+<script setup>
+  import { useTone } from 'vue3-tailwind-components'
+  const toneAttrs = useTone('info')
+</script>
+```
 
 ### Dark mode
 
-All the components have dark mode styling. if that is your bag
+Every component has dark-mode colours. The slots switch to their dark values inside an element with the `dark` class, normally `<html class="dark">`, matching Tailwind's `darkMode: 'class'`.
 
-Color aliases in `tailwind.config.js` like this:
+### Upgrading to 1.0
 
-```javascript
-...
-theme: {
-    extend: {
-        colors:{
-            primary:colors.slate,
-                secondary
-        :
-            colors.lime,
-                warning
-        :
-            colors.amber,
-                success
-        :
-            colors.green,
-                danger
-        :
-            colors.red,
-                info
-        :
-            colors.indigo
-        }
-    }
-,
-}
-...
-```
+- Remove the regex safelist from your Tailwind config and add the plugin, as above.
+- `TwButton`'s `selectedColor` is deprecated and has no effect: a selected button uses its own `color`. Make toggles `outline` buttons.
+- `TwTable` has a single `color` for its body. `headingColor` still sets the heading. `borderColor`, `stripeColor`, `hoverColor` and `selectColor` are deprecated and have no effect.
+- Shades now follow the slot table, so some colours shift slightly, mostly in dark mode.
 
 ## Running this project locally
 
