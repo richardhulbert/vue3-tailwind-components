@@ -31,8 +31,13 @@ const props=defineProps({
 
 })
 
+// Font Awesome's class prefix for each set. Brands is 'fa-brands', not
+// 'fa-brand'. Brand icons still need the brands pack registered, which this
+// library does not do yet: it would add ~220 kB gzipped to every page.
+const PREFIXES = { solid: 'fa-solid', regular: 'fa-regular', brand: 'fa-brands' }
+
 const icon=computed(()=>{
-  return 'fa-' +props.set+' fa-'+ props.icon
+  return PREFIXES[props.set] + ' fa-' + props.icon
 })
 
 

@@ -33,8 +33,15 @@ describe('TwIcon', () => {
     expect(validator('light')).toBe(false)
   })
 
+  it('asks for the brands set with the fa-brands prefix', () => {
+    const stubbed = mount(TwIcon, { props: { icon: 'github', set: 'brand' } })
+    expect(stubbed.get('i').attributes('data-icon')).toBe('fa-brands fa-github')
+  })
+
   it.fails('renders a brand icon when set="brand" (known bug: the brands pack is never loaded)', () => {
-    // The prefix is also wrong: Font Awesome expects fa-brands, not fa-brand.
+    // Deferred to the icon tree-shaking work: registering the whole brands
+    // pack would add ~220 kB gzipped to every page. Font Awesome logs a
+    // "Could not find one or more icon(s)" error while this bug exists.
     expect(real({ icon: 'github', set: 'brand' }).find('svg').exists()).toBe(true)
   })
 })
