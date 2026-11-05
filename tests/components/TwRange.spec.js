@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest'
 import { mount } from '@vue/test-utils'
 import { TwRange } from '@/components'
-import { COLORS, classes, idsOfTwo, vueWarnings } from '../helpers'
+import { COLORS, classes, idsOfTwo, vueWarnings, toneOf } from '../helpers'
 
 describe('TwRange', () => {
   it('passes min, max, step and disabled to the native range input', () => {
@@ -41,9 +41,14 @@ describe('TwRange', () => {
     expect(mount(TwRange, { props: { formNameAndId: 'given' } }).get('input').attributes('id')).toBe('given')
   })
 
+  it.each(COLORS)('takes its tone from color: %s', (color) => {
+    expect(toneOf(mount(TwRange, { props: { color } }))).toBe(color)
+  })
+
   describe('class contract', () => {
-    it.each(COLORS)('%s', (color) => {
-      expect(classes(mount(TwRange, { props: { color } }).get('input'))).toMatchSnapshot()
+    it('input and labels', () => {
+      const w = mount(TwRange)
+      expect({ input: classes(w.get('input')), label: classes(w.get('span')) }).toMatchSnapshot()
     })
   })
 })

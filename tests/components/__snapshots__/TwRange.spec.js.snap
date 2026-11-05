@@ -1,55 +1,18 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`TwRange > class contract > danger 1`] = `
-[
-  "accent-danger-600",
-  "dark:accent-danger-400",
-  "range",
-  "w-full",
-]
-`;
-
-exports[`TwRange > class contract > info 1`] = `
-[
-  "accent-info-600",
-  "dark:accent-info-400",
-  "range",
-  "w-full",
-]
-`;
-
-exports[`TwRange > class contract > primary 1`] = `
-[
-  "accent-primary-600",
-  "dark:accent-primary-400",
-  "range",
-  "w-full",
-]
-`;
-
-exports[`TwRange > class contract > secondary 1`] = `
-[
-  "accent-secondary-600",
-  "dark:accent-secondary-400",
-  "range",
-  "w-full",
-]
-`;
-
-exports[`TwRange > class contract > success 1`] = `
-[
-  "accent-success-600",
-  "dark:accent-success-400",
-  "range",
-  "w-full",
-]
-`;
-
-exports[`TwRange > class contract > warning 1`] = `
-[
-  "accent-warning-600",
-  "dark:accent-warning-400",
-  "range",
-  "w-full",
-]
+exports[`TwRange > class contract > input and labels 1`] = `
+{
+  "input": [
+    "accent-[color:var(--c-accent)]",
+    "range",
+    "w-full",
+  ],
+  "label": [
+    "-bottom-6",
+    "absolute",
+    "start-0",
+    "text-[color:var(--c-fg)]",
+    "text-sm",
+  ],
+}
 `;
