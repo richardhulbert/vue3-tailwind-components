@@ -1,194 +1,60 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`TwTextarea > class contract > danger 1`] = `
-{
-  "label": [
-    "dark:text-danger-100",
-    "my-1",
-    "text-danger-500",
-  ],
-  "textarea": [
-    "border",
-    "border-danger-500",
-    "dark:bg-danger-900",
-    "dark:text-danger-100",
-    "disabled:cursor-not-allowed",
-    "focus:shadow-inner",
-    "outline-none",
-    "placeholder-danger-300",
-    "placeholder:italic",
-    "px-2",
-    "py-1",
-    "rounded",
-    "text-danger-500",
-    "w-full",
-  ],
-}
-`;
-
 exports[`TwTextarea > class contract > error and disabled states 1`] = `
 {
   "disabled": [
+    "bg-[color:var(--c-surface)]",
     "border",
-    "border-primary-500",
-    "dark:bg-primary-900",
-    "dark:text-primary-100",
+    "border-[color:var(--c-line)]",
     "disabled:cursor-not-allowed",
     "focus:shadow-inner",
     "opacity-50",
     "outline-none",
-    "placeholder-primary-300",
     "placeholder:italic",
+    "placeholder:text-[color:var(--c-fg-muted)]",
     "px-2",
     "py-1",
     "rounded",
-    "text-primary-500",
+    "text-[color:var(--c-fg)]",
     "w-full",
   ],
   "error": [
+    "bg-[color:var(--c-surface)]",
     "border",
-    "border-danger-500",
-    "dark:bg-primary-900",
-    "dark:text-primary-100",
+    "border-[color:var(--c-line)]",
     "disabled:cursor-not-allowed",
     "focus:shadow-inner",
     "outline-none",
-    "placeholder-primary-300",
     "placeholder:italic",
+    "placeholder:text-[color:var(--c-fg-muted)]",
     "px-2",
     "py-1",
     "rounded",
-    "text-danger-500",
+    "text-[color:var(--c-fg)]",
     "w-full",
   ],
 }
 `;
 
-exports[`TwTextarea > class contract > info 1`] = `
+exports[`TwTextarea > class contract > label and textarea 1`] = `
 {
   "label": [
-    "dark:text-info-100",
     "my-1",
-    "text-info-500",
+    "text-[color:var(--c-fg)]",
   ],
   "textarea": [
+    "bg-[color:var(--c-surface)]",
     "border",
-    "border-info-500",
-    "dark:bg-info-900",
-    "dark:text-info-100",
+    "border-[color:var(--c-line)]",
     "disabled:cursor-not-allowed",
     "focus:shadow-inner",
     "outline-none",
-    "placeholder-info-300",
     "placeholder:italic",
+    "placeholder:text-[color:var(--c-fg-muted)]",
     "px-2",
     "py-1",
     "rounded",
-    "text-info-500",
-    "w-full",
-  ],
-}
-`;
-
-exports[`TwTextarea > class contract > primary 1`] = `
-{
-  "label": [
-    "dark:text-primary-100",
-    "my-1",
-    "text-primary-500",
-  ],
-  "textarea": [
-    "border",
-    "border-primary-500",
-    "dark:bg-primary-900",
-    "dark:text-primary-100",
-    "disabled:cursor-not-allowed",
-    "focus:shadow-inner",
-    "outline-none",
-    "placeholder-primary-300",
-    "placeholder:italic",
-    "px-2",
-    "py-1",
-    "rounded",
-    "text-primary-500",
-    "w-full",
-  ],
-}
-`;
-
-exports[`TwTextarea > class contract > secondary 1`] = `
-{
-  "label": [
-    "dark:text-secondary-100",
-    "my-1",
-    "text-secondary-500",
-  ],
-  "textarea": [
-    "border",
-    "border-secondary-500",
-    "dark:bg-secondary-900",
-    "dark:text-secondary-100",
-    "disabled:cursor-not-allowed",
-    "focus:shadow-inner",
-    "outline-none",
-    "placeholder-secondary-300",
-    "placeholder:italic",
-    "px-2",
-    "py-1",
-    "rounded",
-    "text-secondary-500",
-    "w-full",
-  ],
-}
-`;
-
-exports[`TwTextarea > class contract > success 1`] = `
-{
-  "label": [
-    "dark:text-success-100",
-    "my-1",
-    "text-success-500",
-  ],
-  "textarea": [
-    "border",
-    "border-success-500",
-    "dark:bg-success-900",
-    "dark:text-success-100",
-    "disabled:cursor-not-allowed",
-    "focus:shadow-inner",
-    "outline-none",
-    "placeholder-success-300",
-    "placeholder:italic",
-    "px-2",
-    "py-1",
-    "rounded",
-    "text-success-500",
-    "w-full",
-  ],
-}
-`;
-
-exports[`TwTextarea > class contract > warning 1`] = `
-{
-  "label": [
-    "dark:text-warning-100",
-    "my-1",
-    "text-warning-500",
-  ],
-  "textarea": [
-    "border",
-    "border-warning-500",
-    "dark:bg-warning-900",
-    "dark:text-warning-100",
-    "disabled:cursor-not-allowed",
-    "focus:shadow-inner",
-    "outline-none",
-    "placeholder-warning-300",
-    "placeholder:italic",
-    "px-2",
-    "py-1",
-    "rounded",
-    "text-warning-500",
+    "text-[color:var(--c-fg)]",
     "w-full",
   ],
 }

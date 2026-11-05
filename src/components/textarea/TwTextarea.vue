@@ -1,6 +1,7 @@
 <script setup>
-import { ref, computed, watch, useTemplateRef } from 'vue'
+import { ref, computed, watch, useTemplateRef, mergeProps } from 'vue'
 import { useFieldId } from '@/components/composables/useFieldId'
+import { useTone, errorSlots } from '@/components/composables/useTone'
 
 // Two root elements (label and field), so attributes and listeners such as
 // @keyup, @blur or autocomplete would otherwise be dropped. They go to the
@@ -69,26 +70,30 @@ watch(() => props.modelValue, (value) => {
 }, { immediate: true })
 
 const inputClass = computed(() => {
-  const c = props.error ? props.errorColor : props.color
   const op = props.disabled ? ' opacity-50' : ''
-  return 'border-' + c + '-500  text-' + c + '-500' + op + ' placeholder:italic placeholder-' + props.color + '-300 dark:bg-' + props.color + '-900 dark:text-' + props.color + '-100'
+  return 'border-[color:var(--c-line)] text-[color:var(--c-fg)] bg-[color:var(--c-surface)]' + op + ' placeholder:italic placeholder:text-[color:var(--c-fg-muted)]'
 })
 
 const hasError = computed(() => props.error.length > 0)
 
-const descriptionClass = computed(() => {
-  const c = props.error ? props.errorColor + '-300' : props.color + '-500'
-  return 'text-' + c
-})
+// Two root elements, so the label and the field wrapper each carry the tone.
+// An error recolours the field's border and text, keeping its surface.
+const toneAttrs = useTone(() => props.color)
+const fieldToneAttrs = computed(() => ({
+  ...toneAttrs.value,
+  style: { ...toneAttrs.value.style, ...(hasError.value ? errorSlots(props.errorColor) : {}) },
+}))
 
-const labelClass = computed(() => 'text-' + props.color + '-500 dark:text-' + props.color + '-100')
+const descriptionClass = computed(() => 'text-[color:var(--c-fg)]')
+
+const labelClass = computed(() => 'text-[color:var(--c-fg)]')
 </script>
 
 <template>
-  <label  :for="fieldId" :class="labelClass" class="my-1">
+  <label v-bind="toneAttrs" :for="fieldId" :class="labelClass" class="my-1">
     <slot></slot>
   </label>
-  <textarea ref="fieldEl" v-bind="$attrs" @input="handleChange" :name="fieldId" :id="fieldId"  v-model="inputVal" :placeholder="placeholder" :class="inputClass"  class="w-full border focus:shadow-inner py-1 px-2 rounded  outline-none  disabled:cursor-not-allowed">{{modelValue}}</textarea>
-  <div v-if="hasError" class="m-1 text-sm text-danger-500">{{error}}</div>
-  <div v-else :class="descriptionClass" class="m-1 text-sm">{{description}}</div>
+  <textarea ref="fieldEl" v-bind="mergeProps($attrs, fieldToneAttrs)" @input="handleChange" :name="fieldId" :id="fieldId"  v-model="inputVal" :placeholder="placeholder" :class="inputClass"  class="w-full border focus:shadow-inner py-1 px-2 rounded  outline-none  disabled:cursor-not-allowed">{{modelValue}}</textarea>
+  <div v-if="hasError" v-bind="fieldToneAttrs" class="m-1 text-sm text-[color:var(--c-fg)]">{{error}}</div>
+  <div v-else v-bind="toneAttrs" :class="descriptionClass" class="m-1 text-sm">{{description}}</div>
 </template>
