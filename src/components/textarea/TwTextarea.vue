@@ -1,8 +1,11 @@
 <script setup>
-import { ref, computed, watch } from 'vue'
+import { ref, computed, watch, useTemplateRef } from 'vue'
 import { useFieldId } from '@/components/composables/useFieldId'
 
-defineOptions({ name: 'TwTextarea' })
+// Two root elements (label and field), so attributes and listeners such as
+// @keyup, @blur or autocomplete would otherwise be dropped. They go to the
+// native field instead.
+defineOptions({ name: 'TwTextarea', inheritAttrs: false })
 
 const props = defineProps({
   color: {
@@ -48,6 +51,14 @@ const emit = defineEmits(['changed', 'update:modelValue'])
 
 const inputVal = ref('')
 
+const field = useTemplateRef('fieldEl')
+
+function focus() {
+  field.value?.focus()
+}
+
+defineExpose({ focus })
+
 function handleChange() {
   emit('update:modelValue', inputVal.value)
   emit('changed', inputVal.value)
@@ -77,7 +88,7 @@ const labelClass = computed(() => 'text-' + props.color + '-500 dark:text-' + pr
   <label  :for="fieldId" :class="labelClass" class="my-1">
     <slot></slot>
   </label>
-  <textarea @input="handleChange" :name="fieldId" :id="fieldId"  v-model="inputVal" :placeholder="placeholder" :class="inputClass"  class="w-full border focus:shadow-inner py-1 px-2 rounded  outline-none  disabled:cursor-not-allowed">{{modelValue}}</textarea>
+  <textarea ref="fieldEl" v-bind="$attrs" @input="handleChange" :name="fieldId" :id="fieldId"  v-model="inputVal" :placeholder="placeholder" :class="inputClass"  class="w-full border focus:shadow-inner py-1 px-2 rounded  outline-none  disabled:cursor-not-allowed">{{modelValue}}</textarea>
   <div v-if="hasError" class="m-1 text-sm text-danger-500">{{error}}</div>
   <div v-else :class="descriptionClass" class="m-1 text-sm">{{description}}</div>
 </template>

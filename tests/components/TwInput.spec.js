@@ -1,7 +1,7 @@
 import { describe, it, expect, vi } from 'vitest'
 import { mount } from '@vue/test-utils'
 import { TwInput } from '@/components'
-import { COLORS, classes, idsOfTwo } from '../helpers'
+import { COLORS, classes, idsOfTwo, vueWarnings } from '../helpers'
 
 const id = 'field-1'
 
@@ -59,6 +59,15 @@ describe('TwInput', () => {
     expect(w.get('input').attributes('disabled')).toBeDefined()
   })
 
+  it('forwards other attributes to the input, without Vue warnings', () => {
+    const warnings = vueWarnings(() => {
+      const input = mount(TwInput, { attrs: { autocomplete: 'email', class: 'w-16', 'data-test': 'x' } }).get('input')
+      expect(input.attributes()).toMatchObject({ autocomplete: 'email', 'data-test': 'x' })
+      expect(input.classes()).toContain('w-16')
+    })
+    expect(warnings).toEqual([])
+  })
+
   it('accepts only the supported input types', () => {
     const { validator } = TwInput.props.type
     expect(['text', 'number', 'password', 'email', 'tel', 'search', 'color', 'date', 'file'].every(validator)).toBe(true)
@@ -75,18 +84,16 @@ describe('TwInput', () => {
     expect(mount(TwInput, { props: { formNameAndId: 'given' } }).get('input').attributes('id')).toBe('given')
   })
 
-  it.fails('forwards listeners to the input (known bug: two root elements drop them)', async () => {
-    // Content Head binds @keyup.enter and @blur on tw-input; both are silently
-    // dropped. Fix: inheritAttrs: false and v-bind="$attrs" on the <input>.
+  it('forwards listeners to the input', async () => {
+    // Content Head binds @keyup.enter and @blur on tw-input.
     const onKeyup = vi.fn()
     const w = mount(TwInput, { attrs: { onKeyup } })
     await w.get('input').trigger('keyup')
     expect(onKeyup).toHaveBeenCalled()
   })
 
-  it.fails('exposes focus() (known bug: Content Head calls it through a ref)', () => {
-    // ConfirmsPassword.vue calls passwordInput.value.focus(), which throws.
-    // Fix: defineExpose({ focus }). Then change it.fails to it.
+  it('exposes focus(), which focuses the input', () => {
+    // Content Head's ConfirmsPassword.vue calls passwordInput.value.focus().
     const w = mount(TwInput, { attachTo: document.body })
     w.vm.focus()
     expect(document.activeElement).toBe(w.get('input').element)

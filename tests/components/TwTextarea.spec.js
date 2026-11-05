@@ -43,11 +43,17 @@ describe('TwTextarea', () => {
     expect(mount(TwTextarea, { props: { formNameAndId: 'given' } }).get('textarea').attributes('id')).toBe('given')
   })
 
-  it.fails('forwards listeners to the textarea (known bug: two root elements drop them)', async () => {
+  it('forwards listeners to the textarea', async () => {
     const onBlur = vi.fn()
     const w = mount(TwTextarea, { attrs: { onBlur } })
     await w.get('textarea').trigger('blur')
     expect(onBlur).toHaveBeenCalled()
+  })
+
+  it('exposes focus(), which focuses the textarea', () => {
+    const w = mount(TwTextarea, { attachTo: document.body })
+    w.vm.focus()
+    expect(document.activeElement).toBe(w.get('textarea').element)
   })
 
   describe('class contract', () => {
