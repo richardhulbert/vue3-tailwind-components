@@ -2,15 +2,15 @@
 
 <!--  <div class="hidden focus:border-info-700"></div>-->
 
-  <label  :for="fieldId" :class="labelClass" class="my-1">
+  <label v-bind="toneAttrs" :for="fieldId" :class="labelClass" class="my-1">
     <slot></slot>
   </label>
-  <div class="relative">
+  <div v-bind="fieldToneAttrs" class="relative">
   <div v-show="hasIcon" :class="iconClass" class="absolute py-1 px-2  left-0 pointer-events-none rounded-l border-t border-l border-b" v-if="hasIcon">
     <tw-icon :icon="icon"></tw-icon>
   </div>
   <input ref="fieldEl" v-bind="$attrs" @input="handleChange" :name="fieldId" :id="fieldId"  v-model="inputVal" :placeholder="placeholder" :class="inputClass" class="w-full border focus:shadow-inner py-1 px-2 rounded  outline-none disabled:cursor-not-allowed" :type="type" :disabled="disabled" :accept="accept"/>
-  <div v-if="hasError" class="m-1 text-sm text-danger-500">{{error}}</div>
+  <div v-if="hasError" class="m-1 text-sm text-[color:var(--c-fg)]">{{error}}</div>
   <div v-else :class="descriptionClass" class="m-1 text-sm">{{description}}</div>
   </div>
 
@@ -20,6 +20,7 @@
 import { ref, computed, watch, useTemplateRef } from 'vue'
 import { TwIcon } from '@/components'
 import { useFieldId } from '@/components/composables/useFieldId'
+import { useTone, errorSlots } from '@/components/composables/useTone'
 
 // Two root elements (label and field), so attributes and listeners such as
 // @keyup, @blur or autocomplete would otherwise be dropped. They go to the
@@ -120,26 +121,29 @@ watch(() => props.modelValue, (value) => {
 
 const hasError = computed(() => props.error.length > 0)
 
+// Two root elements, so the label and the field wrapper each carry the tone.
+// An error recolours the field's border and text, keeping its surface.
+const toneAttrs = useTone(() => props.color)
+const fieldToneAttrs = computed(() => ({
+  ...toneAttrs.value,
+  style: { ...toneAttrs.value.style, ...(hasError.value ? errorSlots(props.errorColor) : {}) },
+}))
+
 const hasIcon = computed(() => props.icon.length > 0)
 
 const inputClass = computed(() => {
-  const c = props.error ? props.errorColor : props.color
   const lm = hasIcon.value ? ' pl-8 ' : ''
   const op = props.disabled ? ' opacity-50' : ''
-  const f = props.type === 'file' ? ' file:bg-' + props.color + '-300 file:text-sm file:border-0 file:rounded file:text-' + props.color + '-700' : ''
-  return 'border-' + c + '-500  text-' + c + '-500' + lm + op + ' placeholder:italic placeholder-' + props.color + '-300 dark:bg-' + props.color + '-900 dark:text-' + props.color + '-100' + f
+  const f = props.type === 'file' ? ' file:bg-[color:var(--c-soft)] file:text-sm file:border-0 file:rounded file:text-[color:var(--c-on-soft)]' : ''
+  return 'border-[color:var(--c-line)] text-[color:var(--c-fg)] bg-[color:var(--c-surface)]' + lm + op + ' placeholder:italic placeholder:text-[color:var(--c-fg-muted)]' + f
 })
 
 const iconClass = computed(() => {
-  const c = props.error ? props.errorColor : props.color
   const op = props.disabled ? ' opacity-50' : ''
-  return 'border-' + c + '-500 text-' + c + '-300' + op
+  return 'border-[color:var(--c-line)] text-[color:var(--c-fg-muted)]' + op
 })
 
-const descriptionClass = computed(() => {
-  const c = props.error ? props.errorColor + '-300' : props.color + '-500'
-  return 'text-' + c
-})
+const descriptionClass = computed(() => 'text-[color:var(--c-fg)]')
 
-const labelClass = computed(() => 'text-' + props.color + '-500 dark:text-' + props.color + '-100')
+const labelClass = computed(() => 'text-[color:var(--c-fg)]')
 </script>

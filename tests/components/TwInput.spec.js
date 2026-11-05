@@ -1,7 +1,7 @@
 import { describe, it, expect, vi } from 'vitest'
 import { mount } from '@vue/test-utils'
 import { TwInput } from '@/components'
-import { COLORS, classes, idsOfTwo, vueWarnings } from '../helpers'
+import { COLORS, classes, idsOfTwo, vueWarnings, toneOf } from '../helpers'
 
 const id = 'field-1'
 
@@ -99,9 +99,27 @@ describe('TwInput', () => {
     expect(document.activeElement).toBe(w.get('input').element)
   })
 
+  it.each(COLORS)('takes its tone from color: %s', (color) => {
+    const w = mount(TwInput, { props: { color } })
+    expect(toneOf(w.get('label'))).toBe(color)
+    expect(toneOf(w.get('.relative'))).toBe(color)
+  })
+
+  it('recolours the field, not the label, from errorColor on an error', () => {
+    const w = mount(TwInput, { props: { color: 'info', error: 'Required', errorColor: 'warning' } })
+    const field = w.get('.relative').element.style
+    expect(field.getPropertyValue('--c-line')).toBe('var(--warning-500, warning)')
+    expect(field.getPropertyValue('--c-surface')).toBe('')
+    expect(toneOf(w.get('label'))).toBe('info')
+  })
+
+  it('has no error overrides without an error', () => {
+    expect(mount(TwInput).get('.relative').element.style.getPropertyValue('--c-line')).toBe('')
+  })
+
   describe('class contract', () => {
-    it.each(COLORS)('%s', (color) => {
-      const w = mount(TwInput, { props: { color, formNameAndId: id, description: 'Help' } })
+    it('label, input and description', () => {
+      const w = mount(TwInput, { props: { formNameAndId: id, description: 'Help' } })
       expect({
         label: classes(w.get('label')),
         input: classes(w.get('input')),
