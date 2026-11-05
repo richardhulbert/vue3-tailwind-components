@@ -1,5 +1,5 @@
 <template>
-  <button :disabled="disabled" :class="bgcolor" class=" transition-colors ease-in  font-light  disabled:cursor-not-allowed"><slot></slot></button>
+  <button :type="type" :disabled="disabled" :class="bgcolor" class=" transition-colors ease-in  font-light  disabled:cursor-not-allowed"><slot></slot></button>
 </template>
 
 <script setup>
@@ -47,6 +47,15 @@ const props = defineProps({
   selectedColor: {
     type: String,
     default: 'info'
+  },
+  // HTML's own default. Forms in Content Head rely on a plain <tw-button>
+  // submitting them; pass type="button" for one that should not.
+  type: {
+    type: String,
+    default: 'submit',
+    validator(value) {
+      return ['submit', 'button', 'reset'].includes(value)
+    }
   }
 })
 

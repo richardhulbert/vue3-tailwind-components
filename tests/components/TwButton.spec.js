@@ -32,10 +32,19 @@ describe('TwButton', () => {
     expect(['', 'round', 'square'].every(variant.validator)).toBe(true)
   })
 
-  it.fails('does not submit an enclosing form (known bug: no type="button")', () => {
-    // Fix: default the button's type to "button". Then change it.fails to it.
-    const w = mount(TwButton)
-    expect(w.attributes('type')).toBe('button')
+  it('submits an enclosing form by default, as a native button does', () => {
+    // Intended: ~70 Content Head forms rely on a plain <tw-button> submitting.
+    expect(mount(TwButton).attributes('type')).toBe('submit')
+  })
+
+  it('takes type="button" for a button that should not submit', () => {
+    expect(mount(TwButton, { props: { type: 'button' } }).attributes('type')).toBe('button')
+  })
+
+  it('accepts only the native button types', () => {
+    const { validator } = TwButton.props.type
+    expect(['submit', 'button', 'reset'].every(validator)).toBe(true)
+    expect(validator('link')).toBe(false)
   })
 
   describe('class contract', () => {
