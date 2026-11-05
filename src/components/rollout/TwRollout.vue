@@ -11,91 +11,60 @@
   </div>
 </template>
 
-<script>
-import {TwButton, TwIcon} from "@/components";
+<script setup>
+import { computed } from 'vue'
+import { TwIcon } from '@/components'
 
-export default {
-  name: "TwRollout",
+defineOptions({ name: 'TwRollout' })
 
-  components: {
-    TwButton, TwIcon
+const props = defineProps({
+  modelValue: {
+    type: Boolean,
+    default: false
   },
-  props: {
-    modelValue: {
-      type: Boolean,
-      default: false
-    },
-    alignRight:{
-      type:Boolean,
-      default:false
-    },
-
-    width: {
-      type: String,
-      default: 'w-1/4'
-    },
-
-    zIndex: {
-      type: String,
-      default: "20"
-    },
-    color: {
-      type: String,
-      default: 'primary'
-    },
-    blur:{
-      type:Boolean,
-      default:true
-    }
+  alignRight: {
+    type: Boolean,
+    default: false
   },
-  methods: {
-    handleInput() {
-
-      this.$emit('update:modelValue', this.modelValue)
-
-    },
-    closeDialog() {
-      this.$emit('update:modelValue', false)
-    }
+  width: {
+    type: String,
+    default: 'w-1/4'
   },
-  computed: {
-    compClass() {
-      let zIndex = ' z-' + this.zIndex + ' '
-      let widthClass = this.width
-      let bgColor = ' bg-' + this.color + '-100 shadow-xl dark:bg-' + this.color + '-900'
-      let panelPos = this.alignRight? ' right-0 ':''
-      return bgColor + zIndex + ' ' + widthClass+panelPos
-    },
-    transformClass() {
-      if(this.alignRight) return this.modelValue ? '-translate-y-0 z-' + this.zIndex : ' -translate-y-full -top-20 z-' + this.zIndex
-
-        return this.modelValue ? 'translate-x-0 z-' + this.zIndex : ' -translate-x-full -left-20 z-' + this.zIndex
-
-
-    },
-
-    closeButtonClass() {
-      return 'text-' + this.color + '-500'
-    },
-
-    backgroundClass(){
-      return this.blur?'backdrop-blur-sm':''
-    }
-
-
+  zIndex: {
+    type: String,
+    default: '20'
   },
-  watch: {
-    modelValue: {
-      handler(neval) {
-        this.checked = neval
-      },
-      // force eager callback execution
-      immediate: true
-    }
+  color: {
+    type: String,
+    default: 'primary'
   },
+  blur: {
+    type: Boolean,
+    default: true
+  }
+})
+
+const emit = defineEmits(['update:modelValue'])
+
+function closeDialog() {
+  emit('update:modelValue', false)
 }
+
+const compClass = computed(() => {
+  const zIndex = ' z-' + props.zIndex + ' '
+  const bgColor = ' bg-' + props.color + '-100 shadow-xl dark:bg-' + props.color + '-900'
+  const panelPos = props.alignRight ? ' right-0 ' : ''
+  return bgColor + zIndex + ' ' + props.width + panelPos
+})
+
+const transformClass = computed(() => {
+  if (props.alignRight) {
+    return props.modelValue ? '-translate-y-0 z-' + props.zIndex : ' -translate-y-full -top-20 z-' + props.zIndex
+  }
+  return props.modelValue ? 'translate-x-0 z-' + props.zIndex : ' -translate-x-full -left-20 z-' + props.zIndex
+})
+
+const closeButtonClass = computed(() => 'text-' + props.color + '-500')
+
+const backgroundClass = computed(() => (props.blur ? 'backdrop-blur-sm' : ''))
 </script>
-
-<style scoped lang="scss">
-
-</style>
