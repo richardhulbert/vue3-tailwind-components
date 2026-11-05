@@ -13,7 +13,8 @@
     "url": "git+https://github.com/richardhulbert/vue3-tailwind-components.git"
   },
   "files": [
-    "dist"
+    "dist",
+    "plugin"
   ],
   "main": "./dist/vue3-tailwind-components.umd.js",
   "module": "./dist/vue3-tailwind-components.es.js",
@@ -21,7 +22,8 @@
     ".": {
       "import": "./dist/vue3-tailwind-components.es.js",
       "require": "./dist/vue3-tailwind-components.umd.js"
-    }
+    },
+    "./tailwind": "./plugin/tailwind.cjs"
   },
   "scripts": {
     "dev": "vite",

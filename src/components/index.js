@@ -23,3 +23,4 @@ export {default as TwButtonGroup} from './buttonGroup/TwButtonGroup.vue'
 
 
 
+export { tone, toneStyles, useTone } from './composables/useTone'

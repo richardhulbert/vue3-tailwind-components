@@ -22,5 +22,8 @@ it('exports the public components', () => {
     'TwSwitch',
     'TwTable',
     'TwTextarea',
+    'tone',
+    'toneStyles',
+    'useTone',
   ])
 })
