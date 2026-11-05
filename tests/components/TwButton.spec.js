@@ -1,7 +1,7 @@
 import { describe, it, expect, vi } from 'vitest'
 import { mount } from '@vue/test-utils'
 import { TwButton } from '@/components'
-import { COLORS, classes } from '../helpers'
+import { COLORS, classes, toneOf, vueWarnings } from '../helpers'
 
 describe('TwButton', () => {
   it('renders its default slot inside a native button', () => {
@@ -47,24 +47,46 @@ describe('TwButton', () => {
     expect(validator('link')).toBe(false)
   })
 
+  it.each(COLORS)('takes its tone from color: %s', (color) => {
+    expect(toneOf(mount(TwButton, { props: { color } }))).toBe(color)
+  })
+
+  it('marks outline and menu buttons as toggles with aria-pressed', () => {
+    expect(mount(TwButton, { props: { outline: true } }).attributes('aria-pressed')).toBe('false')
+    expect(mount(TwButton, { props: { outline: true, selected: true } }).attributes('aria-pressed')).toBe('true')
+    expect(mount(TwButton).attributes('aria-pressed')).toBeUndefined()
+  })
+
+  it('warns that selectedColor is deprecated', () => {
+    const warnings = vueWarnings(() => mount(TwButton, { props: { outline: true, selected: true, selectedColor: 'success' } }))
+    expect(warnings.join()).toContain('selectedColor is deprecated')
+  })
+
+  it('ignores selected on a solid button, with a warning', () => {
+    let w
+    const warnings = vueWarnings(() => { w = mount(TwButton, { props: { selected: true } }) })
+    expect(warnings.join()).toContain('selected applies to outline and menu buttons only')
+    expect(classes(w)).toEqual(classes(mount(TwButton)))
+  })
+
   describe('class contract', () => {
-    it.each(COLORS)('%s: solid, outline and menu', (color) => {
+    it('solid, outline and menu, resting and selected', () => {
       expect({
-        solid: classes(mount(TwButton, { props: { color } })),
-        outline: classes(mount(TwButton, { props: { color, outline: true } })),
-        menu: classes(mount(TwButton, { props: { color, outline: true, menu: true } })),
+        solid: classes(mount(TwButton)),
+        outline: classes(mount(TwButton, { props: { outline: true } })),
+        outlineSelected: classes(mount(TwButton, { props: { outline: true, selected: true } })),
+        menu: classes(mount(TwButton, { props: { outline: true, menu: true } })),
+        menuSelected: classes(mount(TwButton, { props: { outline: true, menu: true, selected: true } })),
       }).toMatchSnapshot()
     })
 
-    it('sizes, variants, disabled and selected', () => {
+    it('sizes, variants and disabled', () => {
       expect({
         sm: classes(mount(TwButton, { props: { size: 'sm' } })),
         lg: classes(mount(TwButton, { props: { size: 'lg' } })),
         round: classes(mount(TwButton, { props: { variant: 'round' } })),
         square: classes(mount(TwButton, { props: { variant: 'square' } })),
         disabled: classes(mount(TwButton, { props: { disabled: true } })),
-        selected: classes(mount(TwButton, { props: { selected: true } })),
-        selectedOutline: classes(mount(TwButton, { props: { selected: true, outline: true, selectedColor: 'success' } })),
       }).toMatchSnapshot()
     })
   })

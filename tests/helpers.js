@@ -30,3 +30,12 @@ export function idsOfTwo(component, selector, props = {}) {
   const w = mount({ render: () => [h(component, props), h(component, props)] })
   return w.findAll(selector).map((el) => el.attributes('id'))
 }
+
+// The palette name a tone root reads, from its inline --t-500 variable:
+// 'success' for var(--success-500, ...). Takes the element carrying the tone,
+// or a wrapper whose root carries it.
+export function toneOf(wrapperOrEl) {
+  const el = wrapperOrEl.element ?? wrapperOrEl
+  const value = el.style.getPropertyValue('--t-500')
+  return value.match(/^var\(--([\w-]+)-500/)?.[1] ?? value
+}

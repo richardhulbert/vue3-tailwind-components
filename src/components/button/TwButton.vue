@@ -1,9 +1,10 @@
 <template>
-  <button :type="type" :disabled="disabled" :class="bgcolor" class=" transition-colors ease-in  font-light  disabled:cursor-not-allowed"><slot></slot></button>
+  <button v-bind="toneAttrs" :type="type" :disabled="disabled" :aria-pressed="pressed" :class="bgcolor" class=" transition-colors ease-in  font-light  disabled:cursor-not-allowed"><slot></slot></button>
 </template>
 
 <script setup>
-import { computed } from 'vue'
+import { computed, warn } from 'vue'
+import { useTone } from '@/components/composables/useTone'
 
 defineOptions({ name: 'TwButton' })
 
@@ -44,9 +45,10 @@ const props = defineProps({
     type: Boolean,
     default: false
   },
+  // Deprecated in 1.0: a selected button stays in its own tone.
   selectedColor: {
     type: String,
-    default: 'info'
+    default: undefined
   },
   // HTML's own default. Forms in Content Head rely on a plain <tw-button>
   // submitting them; pass type="button" for one that should not.
@@ -76,16 +78,29 @@ const variantClass = computed(() => {
   }
 })
 
+const toneAttrs = useTone(() => props.color)
+
+if (props.selectedColor !== undefined) {
+  warn('TwButton: selectedColor is deprecated and has no effect. A selected button uses its own color.')
+}
+if (props.selected && !props.outline) {
+  warn('TwButton: selected applies to outline and menu buttons only. Use outline for a toggle.')
+}
+
+// Toggles are outline or menu buttons; a solid button is never shown selected.
+const isSelected = computed(() => props.selected && props.outline)
+
+// aria-pressed marks a toggle, so only outline and menu buttons carry it.
+const pressed = computed(() => (props.outline ? (isSelected.value ? 'true' : 'false') : undefined))
+
 const bgcolor = computed(() => {
   const op = props.disabled ? ' opacity-50' : ''
-  const bgColor = props.selected ? props.selectedColor : props.color
-  let cls = 'bg-' + bgColor + '-500 hover:bg-' + bgColor + '-700 text-white border-' + bgColor + '-500 border border-' + bgColor + '-500 '
+  let cls = 'bg-[color:var(--c-solid)] hover:bg-[color:var(--c-solid-hover)] text-[color:var(--c-on-solid)] border border-[color:var(--c-solid)] '
   if (props.outline) {
-    if (props.menu) {
-      cls = 'hover:bg-' + bgColor + '-500 text-' + bgColor + '-500 hover:text-white'
-    } else {
-      cls = 'border-' + bgColor + '-500 hover:bg-' + bgColor + '-500 text-' + bgColor + '-500 hover:text-white border'
-    }
+    const border = props.menu ? '' : ' border border-[color:var(--c-line)]'
+    cls = isSelected.value
+      ? 'bg-[color:var(--c-selected)] hover:bg-[color:var(--c-selected-hover)] text-[color:var(--c-on-selected)]' + border
+      : 'text-[color:var(--c-fg)] hover:bg-[color:var(--c-subtle)]' + border
   }
   return cls + sizeClass.value + op + variantClass.value
 })
