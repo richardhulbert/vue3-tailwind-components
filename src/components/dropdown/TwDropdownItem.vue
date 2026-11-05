@@ -26,10 +26,8 @@ const emit = defineEmits(['selected'])
 
 const showIcon = computed(() => Object.prototype.hasOwnProperty.call(props.item, 'icon'))
 
-const itemClass = computed(() => {
-  const c = props.color
-  return 'text-' + c + '-500 dark:text-' + c + '-200 hover:bg-' + c + '-200 dark:hover:bg-' + c + '-500'
-})
+// Colours come from the enclosing TwDropdown's tone; color is kept for compatibility.
+const itemClass = computed(() => 'text-[color:var(--c-fg)] hover:bg-[color:var(--c-subtle)]')
 
 function sendAction() {
   emit('selected', props.item)

@@ -1,12 +1,12 @@
 <template>
-  <div v-click-outside="hideMenu">
+  <div v-click-outside="hideMenu" v-bind="toneAttrs">
     <div  class="flex justify-left">
       <tw-button type="button" @click="showMenu" :color="color" outline :menu="!outline" >{{ label }}
         <tw-icon class="ml-2" icon="caret-down"></tw-icon>
       </tw-button>
     </div>
     <div v-show="showing" :class="panelBoarderClass"
-         class=" min-w-fit bg-white absolute border rounded  mt-2 shadow-lg">
+         class=" min-w-fit absolute border rounded  mt-2 shadow-lg">
 
       <tw-dropdown-item @selected="selected"  :item="item" :color="color" v-for="(item,index) in items" :key="index"> </tw-dropdown-item>
 
@@ -21,6 +21,7 @@ import { ref, computed } from 'vue'
 import { TwButton, TwIcon } from '@/components'
 import TwDropdownItem from '@/components/dropdown/TwDropdownItem.vue'
 import clickOutside from 'click-outside-vue3'
+import { useTone } from '@/components/composables/useTone'
 
 defineOptions({ name: 'TwDropdown' })
 
@@ -48,11 +49,12 @@ const props = defineProps({
 
 const emit = defineEmits(['selected'])
 
+const toneAttrs = useTone(() => props.color)
+
 const showing = ref(false)
 
 const panelBoarderClass = computed(() => {
-  const c = props.color
-  return 'border-' + c + '-300 dark:bg-' + c + '-900 dark:border-' + c + '-500'
+  return 'bg-[color:var(--c-surface)] border-[color:var(--c-line-muted)]'
 })
 
 function showMenu() {
