@@ -1,5 +1,5 @@
 <template>
-  <div :class="transformClass" class="absolute transition-transform duration-300 top-0 left-0 right-0 bottom-0">
+  <div v-bind="toneAttrs" :class="transformClass" class="absolute transition-transform duration-300 top-0 left-0 right-0 bottom-0">
     <div :class="backgroundClass" class="fixed inset-0" @click="closeDialog"></div>
 
     <div :class="compClass" class="absolute min-h-screen h-fit">
@@ -14,6 +14,7 @@
 <script setup>
 import { computed } from 'vue'
 import { TwIcon } from '@/components'
+import { useTone } from '@/components/composables/useTone'
 
 defineOptions({ name: 'TwRollout' })
 
@@ -50,9 +51,11 @@ function closeDialog() {
   emit('update:modelValue', false)
 }
 
+const toneAttrs = useTone(() => props.color)
+
 const compClass = computed(() => {
   const zIndex = ' z-' + props.zIndex + ' '
-  const bgColor = ' bg-' + props.color + '-100 shadow-xl dark:bg-' + props.color + '-900'
+  const bgColor = ' bg-[color:var(--c-subtle)] shadow-xl'
   const panelPos = props.alignRight ? ' right-0 ' : ''
   return bgColor + zIndex + ' ' + props.width + panelPos
 })
@@ -64,7 +67,7 @@ const transformClass = computed(() => {
   return props.modelValue ? 'translate-x-0 z-' + props.zIndex : ' -translate-x-full -left-20 z-' + props.zIndex
 })
 
-const closeButtonClass = computed(() => 'text-' + props.color + '-500')
+const closeButtonClass = computed(() => 'text-[color:var(--c-fg)]')
 
 const backgroundClass = computed(() => (props.blur ? 'backdrop-blur-sm' : ''))
 </script>

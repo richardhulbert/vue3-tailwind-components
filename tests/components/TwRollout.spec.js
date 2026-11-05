@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest'
 import { mount } from '@vue/test-utils'
 import { TwRollout } from '@/components'
-import { COLORS, classes } from '../helpers'
+import { COLORS, classes, toneOf } from '../helpers'
 
 const rollout = (props = {}) => mount(TwRollout, { props, slots: { default: '<p class="content">Panel</p>' } })
 const panel = (w) => w.get('.min-h-screen')
@@ -43,9 +43,13 @@ describe('TwRollout', () => {
     expect(rollout({ blur: false }).get('.fixed').classes()).not.toContain('backdrop-blur-sm')
   })
 
+  it.each(COLORS)('takes its tone from color: %s', (color) => {
+    expect(toneOf(rollout({ color }))).toBe(color)
+  })
+
   describe('class contract', () => {
-    it.each(COLORS)('%s', (color) => {
-      const w = rollout({ color, modelValue: true })
+    it('panel and close icon', () => {
+      const w = rollout({ modelValue: true })
       expect({ panel: classes(panel(w)), close: classes(w.get('[data-icon]')) }).toMatchSnapshot()
     })
 
