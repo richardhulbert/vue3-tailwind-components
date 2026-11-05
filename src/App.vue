@@ -366,30 +366,27 @@ function handleChangeTheme() {
     </section>
     <section class="p-4">
       <h1 class="my-4 text-2xl">Buttons</h1>
-      <div class="bg-slate-100 dark:bg-slate-700 p-4 flex flex-row">
+      <div class="bg-slate-100 dark:bg-slate-700 p-4 flex flex-row gap-2">
 
         <tw-switch size="sm" v-model="buttonOutline">Outline?</tw-switch>
         <tw-switch size="sm" v-model="buttonSquare">Square buttons?</tw-switch>
       </div>
-      <div class="flex w-full justify-between py-2 ">
+      <div class="flex w-full justify-between py-2 gap-2 ">
         <div>
           <tw-button :color="accentColor" :outline="buttonOutline" :variant="buttonVariant" size="sm"> Small
-            button
           </tw-button>
         </div>
         <div>
           <tw-button :color="accentColor" :outline="buttonOutline" :variant="buttonVariant" size="md"> Medium
-            button
           </tw-button>
         </div>
         <div>
           <tw-button :color="accentColor" :outline="buttonOutline" :variant="buttonVariant" size="lg"> large
-            button
           </tw-button>
         </div>
         <div>
           <tw-button :color="accentColor" :outline="buttonOutline" variant="round">
-            Rounded button
+            Rounded
           </tw-button>
         </div>
         <div>
