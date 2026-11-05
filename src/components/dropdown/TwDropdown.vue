@@ -16,65 +16,55 @@
 
 </template>
 
-<script>
-import {defineComponent} from 'vue'
-import {TwButton, TwIcon} from "@/components";
-import TwDropdownItem from "@/components/dropdown/TwDropdownItem.vue";
-import vClickOutside from 'click-outside-vue3'
+<script setup>
+import { ref, computed } from 'vue'
+import { TwButton, TwIcon } from '@/components'
+import TwDropdownItem from '@/components/dropdown/TwDropdownItem.vue'
+import clickOutside from 'click-outside-vue3'
 
-export default defineComponent({
-  name: "TwDropdown",
-  components: {TwDropdownItem, TwButton, TwIcon},
-  directives: {
-    clickOutside: vClickOutside.directive
+defineOptions({ name: 'TwDropdown' })
+
+// Local directive: `vClickOutside` is used in the template as v-click-outside.
+const vClickOutside = clickOutside.directive
+
+const props = defineProps({
+  label: {
+    type: String,
+    default: 'Menu'
   },
-  props: {
-    label: {
-      type: String,
-      default: "Menu"
-    },
-    color: {
-      type: String,
-      default: 'primary'
-    },
-    items: {
-      type: Array,
-      default: [
-      ]
-    },
-    outline:{
-      type:Boolean,
-      default:false
-    }
+  color: {
+    type: String,
+    default: 'primary'
   },
-  data() {
-    return {
-      showing: false
-    }
+  items: {
+    type: Array,
+    default: () => []
   },
-  computed: {
-    panelBoarderClass() {
-      return 'border-' + this.color + '-300 dark:bg-'+this.color+'-900 dark:border-'+this.color+'-500';
-    }
-  },
-  methods: {
-    showMenu() {
-      this.showing = true;
-    },
-    hideMenu(){
-      this.showing = false;
-    },
-    selected(action){
-     this.$emit('selected',action)
-      this.hideMenu()
-    }
-  },
-
-
-
-
-
+  outline: {
+    type: Boolean,
+    default: false
+  }
 })
+
+const emit = defineEmits(['selected'])
+
+const showing = ref(false)
+
+const panelBoarderClass = computed(() => {
+  const c = props.color
+  return 'border-' + c + '-300 dark:bg-' + c + '-900 dark:border-' + c + '-500'
+})
+
+function showMenu() {
+  showing.value = true
+}
+
+function hideMenu() {
+  showing.value = false
+}
+
+function selected(action) {
+  emit('selected', action)
+  hideMenu()
+}
 </script>
-
-
