@@ -111,11 +111,27 @@ describe('TwSelect', () => {
     expect(mount(TwSelect, { props: { items, disabled: true } }).get('button').attributes('disabled')).toBeDefined()
   })
 
-  it.fails('lets Tab move focus away (known bug: every keydown is prevented)', () => {
-    // The root has @keydown.prevent, which also blocks Tab: a keyboard trap.
-    // Fix: prevent only the keys the select handles. Then change it.fails to it.
+  it('lets Tab move focus away, closing the panel', async () => {
+    // A blanket @keydown.prevent once blocked Tab: a keyboard trap.
     const w = mount(TwSelect, { props: { items } })
+    await open(w)
     const event = new KeyboardEvent('keydown', { code: 'Tab', key: 'Tab', bubbles: true, cancelable: true })
+    w.get('button').element.dispatchEvent(event)
+    await w.vm.$nextTick()
+    expect(event.defaultPrevented).toBe(false)
+    expect(w.findAllComponents(TwOption)).toHaveLength(0)
+  })
+
+  it.each(['Enter', 'ArrowDown', 'ArrowUp', 'Escape'])('prevents the default action of %s, which it handles', (code) => {
+    const w = mount(TwSelect, { props: { items } })
+    const event = new KeyboardEvent('keydown', { code, key: code, bubbles: true, cancelable: true })
+    w.get('button').element.dispatchEvent(event)
+    expect(event.defaultPrevented).toBe(true)
+  })
+
+  it('leaves other keys alone', () => {
+    const w = mount(TwSelect, { props: { items } })
+    const event = new KeyboardEvent('keydown', { code: 'KeyA', key: 'a', bubbles: true, cancelable: true })
     w.get('button').element.dispatchEvent(event)
     expect(event.defaultPrevented).toBe(false)
   })

@@ -1,5 +1,5 @@
 <template>
-  <div ref="selectRef" class="relative " @keydown.prevent="handleKey">
+  <div ref="selectRef" class="relative " @keydown="handleKey">
     <select class="hidden" :name="fieldId" :id="fieldId" :value="calculatedValue">
       <option v-for="(item,index) in items" :key="index" :value="item.value">{{ item.label }}</option>
     </select>
@@ -83,7 +83,12 @@ function toggleSelect() {
   open.value = !open.value
 }
 
+// Only the keys the select handles have their default prevented. Tab must
+// still move focus on, so it only closes the panel.
+const HANDLED_KEYS = ['Enter', 'ArrowDown', 'ArrowUp', 'Escape']
+
 function handleKey(e) {
+  if (HANDLED_KEYS.includes(e.code)) e.preventDefault()
   switch (e.code) {
     case 'Enter':
       if (selectedItemIndex.value >= 0) {
@@ -107,6 +112,7 @@ function handleKey(e) {
       }
       break
     case 'Escape':
+    case 'Tab':
       open.value = false
       break
   }
