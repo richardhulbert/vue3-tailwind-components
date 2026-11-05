@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest'
 import { defineComponent, h, ref } from 'vue'
 import { mount } from '@vue/test-utils'
-import { tone, toneStyles, ensureToneStyles, useTone, SHADES, SLOTS } from '@/components/composables/useTone'
+import { tone, toneStyles, ensureToneStyles, useTone, errorSlots, SHADES, SLOTS } from '@/components/composables/useTone'
 
 describe('tone()', () => {
   it('reads the palette variables for a theme colour name', () => {
@@ -89,5 +89,21 @@ describe('useTone()', () => {
     color.value = 'info'
     await w.vm.$nextTick()
     expect(w.element.style.getPropertyValue('--t-500')).toBe('var(--info-500, info)')
+  })
+})
+
+describe('errorSlots()', () => {
+  it("recolours a field's border and text from the error colour", () => {
+    expect(errorSlots('danger')).toEqual({
+      '--c-line': 'var(--danger-500, danger)',
+      '--c-fg': 'var(--danger-500, danger)',
+      '--c-fg-strong': 'var(--danger-500, danger)',
+      '--c-fg-muted': 'var(--danger-400, color-mix(in oklab, danger 80%, white))',
+    })
+  })
+
+  it('leaves the surface and tints alone', () => {
+    expect(Object.keys(errorSlots('danger'))).not.toContain('--c-surface')
+    expect(Object.keys(errorSlots('danger'))).not.toContain('--c-subtle')
   })
 })

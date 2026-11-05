@@ -101,3 +101,19 @@ export function useTone(color) {
   ensureToneStyles()
   return computed(() => ({ 'data-tone': '', style: tone(toValue(color)) }))
 }
+
+/**
+ * Inline slot overrides that recolour a field's border and text for an error
+ * state, keeping its own surface: a field tinted with the error colour's
+ * darkest shade would turn deep red in dark mode. Spread it over the field's
+ * tone attributes' style, or onto any element inside the tone.
+ */
+export function errorSlots(color) {
+  const t = tone(color)
+  return {
+    '--c-line': t['--t-500'],
+    '--c-fg': t['--t-500'],
+    '--c-fg-strong': t['--t-500'],
+    '--c-fg-muted': t['--t-400'],
+  }
+}
