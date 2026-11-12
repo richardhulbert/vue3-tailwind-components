@@ -22,7 +22,7 @@ describe('TwDropdown', () => {
   it('lists every item, with its icon when it has one', () => {
     const w = mount(TwDropdown, { props: { items } })
     expect(w.findAllComponents(TwDropdownItem).map((i) => i.text())).toEqual(['Edit', 'Delete'])
-    expect(w.findAll('[data-icon="fa-solid fa-pen"]')).toHaveLength(1)
+    expect(w.findAll('[data-icon="fas pen"]')).toHaveLength(1)
   })
 
   it('emits selected with the whole item and closes', async () => {

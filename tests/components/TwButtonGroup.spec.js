@@ -16,7 +16,7 @@ describe('TwButtonGroup', () => {
   it('renders one item per entry, with its icon when it has one', () => {
     const w = group()
     expect(parts(w).map((i) => i.text())).toEqual(['Light', 'Dark', 'System'])
-    expect(w.findAll('[data-icon="fa-solid fa-sun"]')).toHaveLength(1)
+    expect(w.findAll('[data-icon="fas sun"]')).toHaveLength(1)
   })
 
   it('emits update:modelValue with the value clicked', async () => {

@@ -1,6 +1,6 @@
 {
   "name": "vue3-tailwind-components",
-  "version": "1.0.1",
+  "version": "2.0.0",
   "description": "A library of Vue 3 components that use Tailwind",
   "keywords": [
     "vue3",
@@ -16,12 +16,20 @@
     "dist",
     "plugin"
   ],
-  "main": "./dist/vue3-tailwind-components.umd.js",
+  "main": "./dist/vue3-tailwind-components.cjs.js",
   "module": "./dist/vue3-tailwind-components.es.js",
   "exports": {
     ".": {
       "import": "./dist/vue3-tailwind-components.es.js",
-      "require": "./dist/vue3-tailwind-components.umd.js"
+      "require": "./dist/vue3-tailwind-components.cjs.js"
+    },
+    "./icons": {
+      "import": "./dist/icons.es.js",
+      "require": "./dist/icons.cjs.js"
+    },
+    "./icons/all": {
+      "import": "./dist/icons-all.es.js",
+      "require": "./dist/icons-all.cjs.js"
     },
     "./tailwind": "./plugin/tailwind.cjs"
   },
@@ -35,19 +43,29 @@
     "prepublishOnly": "npm test && npm run build"
   },
   "dependencies": {
+    "@vueuse/core": "^13.7.0",
+    "click-outside-vue3": "^4.0.1"
+  },
+  "peerDependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.2.1",
     "@fortawesome/free-brands-svg-icons": "^6.2.1",
     "@fortawesome/free-regular-svg-icons": "^6.2.1",
     "@fortawesome/free-solid-svg-icons": "^6.2.1",
     "@fortawesome/vue-fontawesome": "^3.0.2",
-    "@vueuse/core": "^13.7.0",
-    "click-outside-vue3": "^4.0.1"
-  },
-  "peerDependencies": {
     "vue": "^3.5.0"
+  },
+  "peerDependenciesMeta": {
+    "@fortawesome/free-brands-svg-icons": {
+      "optional": true
+    }
   },
   "devDependencies": {
     "@faker-js/faker": "^10.6.0",
+    "@fortawesome/fontawesome-svg-core": "^6.2.1",
+    "@fortawesome/free-brands-svg-icons": "^6.2.1",
+    "@fortawesome/free-regular-svg-icons": "^6.2.1",
+    "@fortawesome/free-solid-svg-icons": "^6.2.1",
+    "@fortawesome/vue-fontawesome": "^3.0.2",
     "@vitejs/plugin-vue": "^6.0.10",
     "@vue/test-utils": "^2.5.1",
     "autoprefixer": "^10.4.13",

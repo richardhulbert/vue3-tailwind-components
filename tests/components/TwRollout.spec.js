@@ -23,7 +23,7 @@ describe('TwRollout', () => {
 
   it('closes from the close icon', async () => {
     const w = rollout({ modelValue: true })
-    await w.get('[data-icon="fa-regular fa-circle-xmark"]').trigger('click')
+    await w.get('[data-icon="far circle-xmark"]').trigger('click')
     expect(w.emitted('update:modelValue')).toEqual([[false]])
   })
 

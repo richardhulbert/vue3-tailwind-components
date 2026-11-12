@@ -14,8 +14,9 @@ const props = defineProps({
     type: String,
     default: 'primary'
   },
+  // A name, or a Font Awesome definition (faUser). See TwIcon.
   icon: {
-    type: String,
+    type: [String, Object],
     default: 'circle-info'
   },
   message: {

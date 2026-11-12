@@ -27,3 +27,24 @@ it('exports the public components', () => {
     'useTone',
   ])
 })
+
+it('exports the icon registry from vue3-tailwind-components/icons', async () => {
+  const icons = await import('@/icons')
+  expect(Object.keys(icons).sort()).toEqual([
+    'createPackLoader',
+    'isIconDefinition',
+    'loadIcon',
+    'registerIcons',
+    'resolveIcon',
+    'setIconLoader',
+  ])
+})
+
+it('registers every solid and regular icon from vue3-tailwind-components/icons/all', async () => {
+  const { resolveIcon } = await import('@/icons')
+  expect(resolveIcon('solid', 'gauge')).toBeUndefined()
+  await import('@/icons/all')
+  expect(resolveIcon('solid', 'gauge')?.iconName).toBe('gauge')
+  expect(resolveIcon('regular', 'bell')?.prefix).toBe('far')
+  expect(resolveIcon('brand', 'github')).toBeUndefined()
+})

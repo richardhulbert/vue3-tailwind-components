@@ -1,5 +1,6 @@
 import { describe, it, expect, vi } from 'vitest'
 import { mount } from '@vue/test-utils'
+import { faGauge } from '@fortawesome/free-solid-svg-icons'
 import { TwSelect, TwOption } from '@/components'
 import { COLORS, classes, idsOfTwo, toneOf } from '../helpers'
 
@@ -22,7 +23,14 @@ describe('TwSelect', () => {
   it('shows the label and icon of the model value', () => {
     const w = mount(TwSelect, { props: { items, modelValue: 'b' } })
     expect(w.get('button').text()).toBe('Banana')
-    expect(w.find('button [data-icon="fa-solid fa-star"]').exists()).toBe(true)
+    expect(w.find('button [data-icon="fas star"]').exists()).toBe(true)
+  })
+
+  it('shows an item icon given as a definition', async () => {
+    const w = mount(TwSelect, { props: { items: [{ label: 'Gauge', value: 'g', icon: faGauge }], modelValue: 'g' } })
+    expect(w.find('button [data-icon="fas gauge"]').exists()).toBe(true)
+    const [option] = await open(w)
+    expect(option.find('[data-icon="fas gauge"]').exists()).toBe(true)
   })
 
   it('falls back to its label when the model value is not in the items', () => {
@@ -154,7 +162,7 @@ describe('TwSelect', () => {
       await open(w)
       expect({
         button: classes(w.get('button')),
-        chevron: classes(w.get('[data-icon="fa-solid fa-chevron-down"]')),
+        chevron: classes(w.get('[data-icon="fas chevron-down"]')),
         panel: classes(w.get('.z-50')),
         option: classes(w.findAllComponents(TwOption)[1]),
         selectedOption: classes(w.findAllComponents(TwOption)[0]),
@@ -184,6 +192,6 @@ describe('TwOption', () => {
   it('renders its label and icon', () => {
     const w = mount(TwOption, { props: { label: 'Apple', icon: 'star' } })
     expect(w.text()).toBe('Apple')
-    expect(w.find('[data-icon="fa-solid fa-star"]').exists()).toBe(true)
+    expect(w.find('[data-icon="fas star"]').exists()).toBe(true)
   })
 })

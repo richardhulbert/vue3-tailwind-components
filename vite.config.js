@@ -14,18 +14,22 @@ export default defineConfig({
 
     build: {
     lib: {
-      entry: path.resolve(__dirname, 'src/components/index.js'),
-      name: 'Vue3TWComp',
-      fileName: (format) => `vue3-tailwind-components.${format}.js`,
+      // Three entries share one icon registry, so each format is split into
+      // chunks rather than bundled per entry. UMD can't do that; CommonJS can.
+      entry: {
+        'vue3-tailwind-components': path.resolve(__dirname, 'src/components/index.js'),
+        icons: path.resolve(__dirname, 'src/icons/index.js'),
+        'icons-all': path.resolve(__dirname, 'src/icons/all.js'),
+      },
+      formats: ['es', 'cjs'],
+      fileName: (format, entryName) => `${entryName}.${format}.js`,
     },
     rollupOptions: {
-      external: ['vue'],
+      // Vue and Font Awesome come from the consumer. Importing single icons
+      // from an external pack lets the consumer's bundler drop the rest.
+      external: ['vue', /^@fortawesome\//],
       output: {
-        // Provide global variables to use in the UMD build
-        // Add external deps here
-        globals: {
-          vue: 'Vue',
-        },
+        chunkFileNames: '[name]-[hash].[format].js',
       },
     },
   },

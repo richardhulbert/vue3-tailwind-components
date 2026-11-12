@@ -1,5 +1,6 @@
 import { describe, it, expect, vi } from 'vitest'
 import { mount } from '@vue/test-utils'
+import { faGauge } from '@fortawesome/free-solid-svg-icons'
 import { TwInput } from '@/components'
 import { COLORS, classes, idsOfTwo, vueWarnings, toneOf } from '../helpers'
 
@@ -49,7 +50,13 @@ describe('TwInput', () => {
 
   it('renders an icon and indents the input for it', () => {
     const w = mount(TwInput, { props: { icon: 'user' } })
-    expect(w.find('[data-icon="fa-solid fa-user"]').exists()).toBe(true)
+    expect(w.find('[data-icon="fas user"]').exists()).toBe(true)
+    expect(w.get('input').classes()).toContain('pl-8')
+  })
+
+  it('renders an icon given as a definition', () => {
+    const w = mount(TwInput, { props: { icon: faGauge } })
+    expect(w.find('[data-icon="fas gauge"]').exists()).toBe(true)
     expect(w.get('input').classes()).toContain('pl-8')
   })
 

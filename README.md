@@ -37,7 +37,13 @@ give you some idea as to how they look and behave. Please feel free to email me 
 npm i vue3-tailwind-components --save
 ```
 
-The library needs Vue 3.5 or later, which your project provides: it is a peer dependency, not bundled.
+The library needs Vue 3.5 or later and Font Awesome, which your project provides: they are peer dependencies, not bundled. npm 7 and later installs them for you. The brands icon pack is optional: install it if you use brand icons.
+
+```shell
+npm i @fortawesome/fontawesome-svg-core @fortawesome/vue-fontawesome @fortawesome/free-solid-svg-icons @fortawesome/free-regular-svg-icons
+```
+
+The components use a handful of icons and register them themselves. To use other icons by name, register them or install a loader: see [Icons](./src/components/icons/README.md).
 
 ### Tailwind CSS 3
 
@@ -136,6 +142,19 @@ A component never builds class names from its colour. Instead, `color` gives it 
 ### Dark mode
 
 Every component has dark-mode colours. The slots switch to their dark values inside an element with the `dark` class, normally `<html class="dark">`, matching Tailwind's `darkMode: 'class'`.
+
+### Upgrading to 2.0
+
+Font Awesome is no longer bundled, and the library no longer registers every icon. The ES build drops from 1.25 MB to under 60 kB.
+
+1. Install Font Awesome's core, its Vue component and the icon packs you use, as above.
+2. Choose how `tw-icon` finds icons, as [Icons](./src/components/icons/README.md) describes:
+   - pass definitions, `:icon="faUser"` (smallest);
+   - `registerIcons(faUser, faTrash, …)` at startup and keep using names;
+   - `setIconLoader(createPackLoader({ … }))` to load any icon on demand;
+   - `import 'vue3-tailwind-components/icons/all'` for the 1.x behaviour, and the 1.x size.
+3. `set="brand"` now works, with the loader or with brand icons registered.
+4. The UMD build is gone. `require('vue3-tailwind-components')` loads a CommonJS build instead; there is no build for a `<script>` tag.
 
 ### Upgrading to 1.0
 

@@ -6,7 +6,7 @@ import { COLORS, classes, toneOf, vueWarnings } from '../helpers'
 beforeEach(() => vi.useFakeTimers())
 afterEach(() => vi.useRealTimers())
 
-const closeIcon = (w) => w.get('[data-icon="fa-regular fa-circle-xmark"]')
+const closeIcon = (w) => w.get('[data-icon="far circle-xmark"]')
 
 describe('TwNotification', () => {
   it('renders nothing while closed', () => {
@@ -16,7 +16,7 @@ describe('TwNotification', () => {
   it('shows its message and icon as an alert', () => {
     const w = mount(TwNotification, { props: { modelValue: true, message: 'Saved', icon: 'check' } })
     expect(w.get('[role="alert"]').text()).toContain('Saved')
-    expect(w.find('[data-icon="fa-solid fa-check"]').exists()).toBe(true)
+    expect(w.find('[data-icon="fas check"]').exists()).toBe(true)
   })
 
   it('closes itself once after its lifetime', () => {
@@ -69,7 +69,7 @@ describe('TwNotification', () => {
 
   it('cancels its timer when closed by hand', async () => {
     const w = mount(TwNotification, { props: { modelValue: true, lifetime: 5 } })
-    await w.get('[data-icon="fa-regular fa-circle-xmark"]').trigger('click')
+    await w.get('[data-icon="far circle-xmark"]').trigger('click')
     expect(vi.getTimerCount()).toBe(0)
   })
 

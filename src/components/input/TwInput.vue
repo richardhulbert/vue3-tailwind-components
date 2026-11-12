@@ -43,8 +43,9 @@ const props = defineProps({
     type: String,
     default: 'danger'
   },
+  // A name, or a Font Awesome definition (faUser). See TwIcon.
   icon: {
-    type: String,
+    type: [String, Object],
     default: ''
   },
   description: {
@@ -127,7 +128,7 @@ const fieldToneAttrs = computed(() => ({
   style: { ...toneAttrs.value.style, ...(hasError.value ? errorSlots(props.errorColor) : {}) },
 }))
 
-const hasIcon = computed(() => props.icon.length > 0)
+const hasIcon = computed(() => Boolean(props.icon))
 
 const inputClass = computed(() => {
   const lm = hasIcon.value ? ' pl-8 ' : ''

@@ -4,7 +4,7 @@ import { TwModal, TwButton } from '@/components'
 import { COLORS, classes, toneOf } from '../helpers'
 
 const shown = (props = {}, slots = {}) => mount(TwModal, { props: { modelValue: true, ...props }, slots })
-const closeIcon = (w) => w.get('[data-icon="fa-regular fa-circle-xmark"]')
+const closeIcon = (w) => w.get('[data-icon="far circle-xmark"]')
 
 describe('TwModal', () => {
   it('renders nothing while closed', () => {
@@ -49,7 +49,7 @@ describe('TwModal', () => {
   it('can hide the header, close icon and footer', () => {
     const w = shown({ hideHeader: true, hideClose: true, hideFooter: true })
     expect(w.text()).not.toContain('Modal title')
-    expect(w.find('[data-icon="fa-regular fa-circle-xmark"]').exists()).toBe(false)
+    expect(w.find('[data-icon="far circle-xmark"]').exists()).toBe(false)
     expect(w.get('.border-t').attributes('style')).toContain('display: none')
   })
 

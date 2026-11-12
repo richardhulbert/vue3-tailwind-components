@@ -16,8 +16,9 @@ const props = defineProps({
     type: String,
     default: 'no data'
   },
+  // A name, or a Font Awesome definition (faUser). See TwIcon.
   icon: {
-    type: String,
+    type: [String, Object],
     default: ''
   },
   color: {
