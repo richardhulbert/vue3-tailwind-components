@@ -58,6 +58,15 @@ the browser: when rendering on the server, an unregistered name renders the box,
 Leave out any set you don't use. You can also write your own loader: `setIconLoader((set, name) => …)` returns a
 promise of a definition, or of `undefined` when there is no such icon.
 
+**Combining 2 and 3?** Import the icons you register from their own modules, not from the pack:
+
+```javascript
+import { definition as faUser } from '@fortawesome/free-solid-svg-icons/faUser'
+```
+
+If anything imports a pack (`'@fortawesome/free-solid-svg-icons'`) statically, your bundler can't split that pack
+into its own chunk, and the whole pack ends up in your main bundle. The library's own icons follow this rule.
+
 **4. Everything, as in 1.x.** One import registers every solid and regular icon (not brands), and adds them all to
 your bundle:
 

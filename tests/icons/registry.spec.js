@@ -22,7 +22,8 @@ describe('registerIcons', () => {
   it('keys by prefix, so the same name in two sets stays apart', () => {
     registerIcons(faCircleXmarkSolid)
     expect(resolveIcon('solid', 'circle-xmark')).toBe(faCircleXmarkSolid)
-    expect(resolveIcon('regular', 'circle-xmark')).toBe(faCircleXmark)
+    // Registered by the library from its own per-icon module: same data, not the same object.
+    expect(resolveIcon('regular', 'circle-xmark')).toEqual(faCircleXmark)
     expect(resolveIcon('brand', 'circle-xmark')).toBeUndefined()
   })
 

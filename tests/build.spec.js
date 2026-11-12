@@ -43,17 +43,19 @@ it('compiles no Font Awesome code or icon data into the bundle', () => {
   }
 })
 
-it('imports only the internal icons, by name, from the external packs', () => {
-  const imported = new Set()
-  for (const code of Object.values(files)) {
-    for (const [, names] of code.matchAll(/import\s*\{([^}]*)\}\s*from\s*["']@fortawesome\/free-[\w-]+["']/g)) {
-      for (const name of names.split(',')) imported.add(name.trim().split(/\s+as\s+/)[0])
+it('imports the internal icons one module each, never a pack index', () => {
+  // A consumer's pack loader imports a pack index dynamically. Their bundler
+  // can only split it into its own chunk if nothing imports it statically,
+  // so outside icons/all the library must use the per-icon modules.
+  const perIcon = new Set()
+  for (const [name, code] of Object.entries(files)) {
+    for (const [, pack] of code.matchAll(/from\s*["']@fortawesome\/(free-[\w-]+)["']/g)) {
+      expect(name, `${name} imports the ${pack} index`).toMatch(/^icons-all\./)
     }
+    for (const [, icon] of code.matchAll(/(?:from|require\()\s*["']@fortawesome\/free-[\w-]+\/(\w+)["']/g)) perIcon.add(icon)
   }
-  expect([...imported].sort()).toEqual([
+  expect([...perIcon].sort()).toEqual([
     'faCaretDown', 'faChevronDown', 'faCircleInfo', 'faCircleXmark', 'faSkullCrossbones',
-    // icons/all, which registers the packs on purpose.
-    'far', 'fas',
   ])
 })
 

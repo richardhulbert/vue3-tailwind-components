@@ -3,8 +3,14 @@
 // wholesale here, so the consumer's bundler can drop every icon nobody uses.
 // Names that aren't registered can come from an optional async loader.
 
-import { faCaretDown, faChevronDown, faCircleInfo, faSkullCrossbones } from '@fortawesome/free-solid-svg-icons'
-import { faCircleXmark } from '@fortawesome/free-regular-svg-icons'
+// One module per icon, never a pack's index. A consumer that installs the pack
+// loader imports the index dynamically, and their bundler can only split it
+// into a chunk of its own if nothing imports it statically.
+import { definition as faCaretDown } from '@fortawesome/free-solid-svg-icons/faCaretDown'
+import { definition as faChevronDown } from '@fortawesome/free-solid-svg-icons/faChevronDown'
+import { definition as faCircleInfo } from '@fortawesome/free-solid-svg-icons/faCircleInfo'
+import { definition as faSkullCrossbones } from '@fortawesome/free-solid-svg-icons/faSkullCrossbones'
+import { definition as faCircleXmark } from '@fortawesome/free-regular-svg-icons/faCircleXmark'
 
 // TwIcon's `set` prop to Font Awesome's prefix.
 export const SET_PREFIXES = { solid: 'fas', regular: 'far', brand: 'fab' }

@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.0.1 (unreleased)
+
+### Fixed
+
+- The internal icons are imported one module each (`@fortawesome/free-solid-svg-icons/faCaretDown`) instead of from the pack index. Importing the index statically stopped a consumer's bundler splitting the pack loader's packs into their own chunks, so the whole solid and regular packs stayed in the main bundle. (VT-9)
+
 ## 2.0.0 (unreleased)
 
 ### Breaking
