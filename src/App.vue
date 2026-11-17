@@ -232,8 +232,8 @@ function handleChangeTheme() {
     <section class=" p-4">
       <h1 class="my-2 text-2xl">Select with Icons</h1>
 <div class="flex gap-4">
-  <tw-select label="Align" :items="alignMenu"  :color="accentColor" :size="buttonGroupSize"></tw-select>
-  <tw-select :items="buttonGroupSizes" v-model="buttonGroupSize" class="w-32" :size="buttonGroupSize"></tw-select>
+  <tw-select label="Align" :items="alignMenu"  :color="accentColor" :size="buttonGroupSize">With icons</tw-select>
+  <tw-select :items="buttonGroupSizes" v-model="buttonGroupSize" class="w-32" :size="buttonGroupSize">Sizes</tw-select>
 
 </div>
 

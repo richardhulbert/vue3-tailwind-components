@@ -1,5 +1,9 @@
 <template>
   <div ref="selectRef" v-bind="toneAttrs" class="relative " @keydown="handleKey">
+    <label v-bind="toneAttrs"  class="my-1 text-[color:var(--c-fg)]">
+      <slot/>
+    </label>
+
     <select class="hidden" :name="fieldId" :id="fieldId" :value="calculatedValue">
       <option v-for="(item,index) in items" :key="index" :value="item.value">{{ item.label }}</option>
     </select>

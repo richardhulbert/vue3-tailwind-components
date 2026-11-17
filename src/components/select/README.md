@@ -18,7 +18,7 @@ the label of the select to the model
 
 ```vue
 
-<tw-select :items="items" color="secondary" v-model="a_reactive_variable" :error="some.form.error"></tw-select>
+<tw-select :items="items" color="secondary" v-model="a_reactive_variable" :error="some.form.error">A label</tw-select>
 
 ```
 ## Properties
